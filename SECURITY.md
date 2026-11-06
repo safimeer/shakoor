@@ -10,7 +10,7 @@ To report a vulnerability, contact the company privately (see the website's cont
 | --- | --- |
 | Architecture | Next.js 16 / React 19 / TypeScript, Node.js app on Hostinger, deployed from GitHub `safimeer/shakoor` → `main` |
 | Attack surface | One server endpoint, `POST /api/enquiry` (contact form). No database, no login, no sessions or cookies, no file uploads |
-| Third parties | Resend (email), code-ready but not configured |
+| Third parties | Resend (email), configured November 2026: domain verified, send-only key |
 | Secrets in repo | **None.** All commits and all file versions scanned; only the `re_xxxx…` placeholder in `.env.example`. No `.env` file ever committed. **No credentials need rotating.** |
 | TLS | Let's Encrypt certificate for apex and `www`, valid to 23 Jan 2027. TLS 1.0/1.1 refused; TLS 1.2/1.3 with strong AEAD ciphers. HTTP → HTTPS 301 |
 | Sensitive files | `.env*`, `.git/*`, `.htaccess` → 403; source, build output, `node_modules` → 404; no directory listings |
@@ -31,7 +31,7 @@ To report a vulnerability, contact the company privately (see the website's cont
 | L5 | Low | Rate-limit memory never pruned | **Fixed:** stale entries pruned, size bounded |
 | L6 | Low (dev only) | `minimatch` advisory in ESLint tooling | **Open:** no upstream fix yet; Dependabot will propose it |
 | L7 | Info | Bot protection is a honeypot plus a form timer | **Open:** optional Cloudflare Turnstile (§9) |
-| E1 | Medium | Resend not verified for the domain (no DKIM), so the form can't send | **Open:** needs DNS records (§6) |
+| E1 | Medium | Resend not verified for the domain (no DKIM), so the form couldn't send | **Fixed:** domain verified (DKIM, return-path SPF/MX); live test delivered to info@ |
 | E2 | Low | DMARC is `p=none` with no reporting address | **Open:** tighten after email works (§6) |
 
 OWASP review: no SQL/NoSQL (no database); output escaped by React and in email HTML; no SSRF (the server only calls the fixed Resend URL); no access-control or session surface; no uploads; errors return generic messages with no stack traces (verified live); no secrets in client code (only `NEXT_PUBLIC_SITE_URL`, a public URL, reaches the browser).
@@ -75,7 +75,9 @@ The GitHub CLI isn't signed in on the build PC, so these weren't changed automat
 
 ## 6. Email (Resend) setup
 
-Current DNS: MX → Hostinger Mail; SPF `v=spf1 include:_spf.mail.hostinger.com ~all`; DMARC `v=DMARC1; p=none`; no Resend DKIM.
+**Status: done.** Resend domain verified (EU region, sending only). Added DNS records: TXT `resend._domainkey` (DKIM), MX and TXT on `send` (bounce return-path with SPF `include:amazonses.com`), CNAME `rsend`. Unchanged: root MX → Hostinger Mail, root SPF, Hostinger DKIM, DMARC `p=none`. Website emails come from `noreply@shakoorsolutions.com` to `info@shakoorsolutions.com`, with Reply-To set to the visitor. DMARC passes through DKIM alignment.
+
+Original setup steps, for reference:
 
 1. Resend → **Domains → Add domain** → `shakoorsolutions.com` (or a subdomain like `mail.shakoorsolutions.com` to keep it separate from Hostinger Mail).
 2. Add exactly the records Resend shows (DKIM TXT, plus MX and SPF TXT on its `send` subdomain) in hPanel → Domains → DNS. These don't affect existing Hostinger mailboxes. **Don't** replace the root SPF record.
@@ -90,10 +92,10 @@ The API key is used only server-side (`app/api/enquiry/route.ts`), never sent to
 | Variable | Where | Type | Status |
 | --- | --- | --- | --- |
 | `NEXT_PUBLIC_SITE_URL` | Hostinger | Public, **build-time** | **Configured and verified** (sitemap and canonical URLs live) |
-| `RESEND_API_KEY` | Hostinger | Secret, runtime | Not set (needs Resend) |
-| `ENQUIRY_TO_EMAIL` | Hostinger | Runtime | Not set |
-| `ENQUIRY_FROM_EMAIL` | Hostinger | Runtime, verified domain | Not set |
-| `ENQUIRY_SEND_CONFIRMATION` | Hostinger | Optional, runtime | Not set (off) |
+| `RESEND_API_KEY` | Hostinger | Secret, runtime | **Configured and tested** (send-only, restricted to shakoorsolutions.com) |
+| `ENQUIRY_TO_EMAIL` | Hostinger | Runtime | **Configured and tested** (info@shakoorsolutions.com) |
+| `ENQUIRY_FROM_EMAIL` | Hostinger | Runtime, verified domain | **Configured and tested** (noreply@shakoorsolutions.com) |
+| `ENQUIRY_SEND_CONFIRMATION` | Hostinger | Optional, runtime | Set to `false` (off) |
 
 No GitHub Actions secrets are needed: Hostinger builds the site. Details are in [ENVIRONMENT_SETUP.md](ENVIRONMENT_SETUP.md). Enter secrets only in hPanel. The Hostinger API **replaces the whole variable set**, so keep `NEXT_PUBLIC_SITE_URL` when editing.
 
