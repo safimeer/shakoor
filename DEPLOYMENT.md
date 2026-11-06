@@ -32,7 +32,9 @@ Use hPanel's **Node.js** web app deployment from GitHub (a plan that supports No
 | Start command | `npm start` (runs `next start`, which listens on the `PORT` Hostinger provides) |
 | Environment variables | See [ENVIRONMENT_SETUP.md](ENVIRONMENT_SETUP.md). Set `NEXT_PUBLIC_SITE_URL` before the first build. |
 
-The build tools (Tailwind CSS, TypeScript, type definitions) are in `dependencies` rather than `devDependencies`, so the build works even if the host installs in production mode. Only ESLint stays a dev dependency; it isn't needed to build.
+`npm run build` runs `next build --webpack`. Turbopack, the default bundler, failed on Hostinger with "node process exited before we could connect to it": it runs PostCSS/Tailwind in a separate Node process that the hosting environment doesn't allow. Webpack runs it in-process. Tailwind is set up through `postcss.config.mjs`, which both bundlers read, so local `npm run dev` still uses Turbopack.
+
+The build tools (Tailwind CSS, PostCSS, TypeScript, type definitions) are in `dependencies` rather than `devDependencies`, so the build works even if the host installs in production mode. Only ESLint stays a dev dependency; it isn't needed to build.
 
 ## Cleaning up the old deployment
 
