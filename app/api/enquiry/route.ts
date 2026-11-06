@@ -1,3 +1,4 @@
+import { createHash } from "node:crypto";
 import { getService } from "@/data/services";
 import { site } from "@/data/site";
 import { normaliseEnquiry, validateEnquiry, type EnquiryValues } from "@/lib/enquiry";
@@ -132,12 +133,21 @@ ${rows.map(([k, val]) => `<tr><td style="${cell}width:150px;color:#4a5e75;font-w
   return { subject, text, html };
 }
 
-async function sendEmail(apiKey: string, payload: Record<string, unknown>) {
+async function sendEmail(apiKey: string, payload: Record<string, unknown>, idempotencyKey: string) {
   const res = await fetch("https://api.resend.com/emails", {
     method: "POST",
-    headers: { Authorization: `Bearer ${apiKey}`, "Content-Type": "application/json" },
+    headers: {
+      Authorization: `Bearer ${apiKey}`,
+      "Content-Type": "application/json",
+      "Idempotency-Key": idempotencyKey,
+    },
     body: JSON.stringify(payload),
   });
+  // 409: this idempotency key was already used (a retry or double submit), so the email is sent or in flight.
+  if (res.status === 409) {
+    console.warn("[enquiry] Duplicate submission ignored (idempotency key already used).");
+    return;
+  }
   if (!res.ok) throw new Error(`Email provider responded ${res.status}: ${await res.text()}`);
 }
 
@@ -217,15 +227,22 @@ export async function POST(request: Request) {
 
   const recipients = to.split(",").map((s) => s.trim());
   const { subject, text, html } = companyEmail(values);
+  // The same submission always yields the same key, so a retried request (e.g. by the hosting
+  // proxy) or a double click is delivered once: Resend ignores repeats of a key for 24 hours.
+  const idempotencyKey = `enquiry-${createHash("sha256").update(JSON.stringify(values)).digest("hex").slice(0, 40)}`;
   try {
-    await sendEmail(apiKey, {
-      from,
-      to: recipients,
-      reply_to: values.email,
-      subject,
-      text,
-      html,
-    });
+    await sendEmail(
+      apiKey,
+      {
+        from,
+        to: recipients,
+        reply_to: values.email,
+        subject,
+        text,
+        html,
+      },
+      idempotencyKey,
+    );
   } catch (err) {
     console.error("[enquiry] Delivery failed:", err);
     return Response.json(
@@ -239,14 +256,18 @@ export async function POST(request: Request) {
   // from this domain to any address they enter.
   if (process.env.ENQUIRY_SEND_CONFIRMATION === "true") {
     try {
-      await sendEmail(apiKey, {
-        from,
-        to: [values.email],
-        // Customers who reply reach the business inbox, not the sending address.
-        reply_to: recipients[0],
-        subject: `We've received your enquiry — ${site.shortName} Integrated Solutions`,
-        text: `Hello,\n\nThank you for contacting ${site.name}. We've received your enquiry and our team will reply soon.\n\nIf you didn't send this enquiry, you can ignore this email.\n\nThis is an automatic confirmation.`,
-      });
+      await sendEmail(
+        apiKey,
+        {
+          from,
+          to: [values.email],
+          // Customers who reply reach the business inbox, not the sending address.
+          reply_to: recipients[0],
+          subject: `We've received your enquiry — ${site.shortName} Integrated Solutions`,
+          text: `Hello,\n\nThank you for contacting ${site.name}. We've received your enquiry and our team will reply soon.\n\nIf you didn't send this enquiry, you can ignore this email.\n\nThis is an automatic confirmation.`,
+        },
+        `${idempotencyKey}-confirmation`,
+      );
     } catch (err) {
       console.error("[enquiry] Confirmation email failed:", err);
     }
