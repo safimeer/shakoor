@@ -1,0 +1,18 @@
+# Dependabot: opens pull requests for dependency updates.
+# Security updates also need "Dependabot security updates" turned on in
+# GitHub → Settings → Code security. Merging a PR into main redeploys the live site.
+version: 2
+updates:
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 5
+    groups:
+      # Patch/minor updates in one PR to keep review simple.
+      minor-and-patch:
+        update-types: ["minor", "patch"]
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "monthly"

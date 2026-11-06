@@ -9,17 +9,57 @@ import { normaliseEnquiry, validateEnquiry, type EnquiryValues } from "@/lib/enq
  */
 
 const MIN_FILL_MS = 3000; // Faster than this is almost certainly automated.
+const MAX_BODY_BYTES = 32 * 1024; // A full enquiry is well under 10 KB.
 const WINDOW_MS = 10 * 60 * 1000;
 const MAX_PER_WINDOW = 5;
+const GLOBAL_WINDOW_MS = 60 * 60 * 1000;
+const GLOBAL_MAX_SENDS = 30;
+const MAX_TRACKED_CLIENTS = 1000;
 
-// Best-effort, per-instance rate limit. Use a shared store (e.g. Redis) if deployed across many instances.
+/*
+ * Rate limiting (best-effort, per server instance).
+ * - Per client: keyed on the forwarded client address. Proxies let clients prepend their
+ *   own X-Forwarded-For values, so this is a courtesy limit, not a guarantee.
+ * - Site-wide: a hard cap on emails sent per hour that no request header can bypass.
+ *   It bounds inbox flooding and email-provider usage even if the per-client key is spoofed.
+ */
 const hits = new Map<string, number[]>();
+let sends: number[] = [];
 
 function rateLimited(ip: string, now: number) {
+  if (hits.size > MAX_TRACKED_CLIENTS) {
+    for (const [key, times] of hits) {
+      if (times.every((t) => now - t >= WINDOW_MS)) hits.delete(key);
+    }
+    if (hits.size > MAX_TRACKED_CLIENTS) hits.clear();
+  }
   const recent = (hits.get(ip) ?? []).filter((t) => now - t < WINDOW_MS);
   recent.push(now);
   hits.set(ip, recent);
   return recent.length > MAX_PER_WINDOW;
+}
+
+function globalCapReached(now: number) {
+  sends = sends.filter((t) => now - t < GLOBAL_WINDOW_MS);
+  return sends.length >= GLOBAL_MAX_SENDS;
+}
+
+/** Hosts this site is served from, for the same-origin check. */
+function allowedHosts(request: Request) {
+  const hosts = new Set<string>();
+  for (const h of [request.headers.get("host"), request.headers.get("x-forwarded-host")]) {
+    if (h) hosts.add(h.split(",")[0].trim().toLowerCase());
+  }
+  if (site.url) {
+    const host = new URL(site.url).host.toLowerCase();
+    hosts.add(host);
+    hosts.add(host.startsWith("www.") ? host.slice(4) : `www.${host}`);
+  }
+  return hosts;
+}
+
+function reject(status: number, error: string, message: string) {
+  return Response.json({ error, message }, { status });
 }
 
 function escapeHtml(s: string) {
@@ -60,11 +100,36 @@ export async function POST(request: Request) {
   const now = Date.now();
   const ip = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown";
 
+  // Only JSON from this site's own pages. Blocks cross-site "simple" form posts (text/plain, form-encoded).
+  if (!request.headers.get("content-type")?.toLowerCase().startsWith("application/json")) {
+    return reject(415, "unsupported_media_type", "The request could not be read.");
+  }
+  const origin = request.headers.get("origin");
+  if (origin) {
+    let originHost = "";
+    try {
+      originHost = new URL(origin).host.toLowerCase();
+    } catch {}
+    if (!allowedHosts(request).has(originHost)) {
+      return reject(403, "forbidden_origin", "Enquiries can only be sent from this website.");
+    }
+  }
+
+  // Bound the body before parsing it.
+  if (Number(request.headers.get("content-length") ?? 0) > MAX_BODY_BYTES) {
+    return reject(413, "too_large", "Your enquiry is too long. Please shorten the message and try again.");
+  }
   let body: Record<string, unknown>;
   try {
-    body = await request.json();
+    const raw = await request.text();
+    if (raw.length > MAX_BODY_BYTES) {
+      return reject(413, "too_large", "Your enquiry is too long. Please shorten the message and try again.");
+    }
+    const parsed: unknown = JSON.parse(raw);
+    if (!parsed || typeof parsed !== "object" || Array.isArray(parsed)) throw new Error("not an object");
+    body = parsed as Record<string, unknown>;
   } catch {
-    return Response.json({ error: "invalid_request", message: "The request could not be read." }, { status: 400 });
+    return reject(400, "invalid_request", "The request could not be read.");
   }
 
   // Spam checks: hidden honeypot field and minimum time on the form.
@@ -99,6 +164,12 @@ export async function POST(request: Request) {
     );
   }
 
+  if (globalCapReached(now)) {
+    console.error("[enquiry] Hourly site-wide sending cap reached; enquiry rejected.");
+    return reject(429, "busy", "We're receiving a lot of enquiries right now. Please try again later.");
+  }
+  sends.push(now);
+
   const { text, html } = companyEmail(values);
   try {
     await sendEmail(apiKey, {
@@ -118,13 +189,15 @@ export async function POST(request: Request) {
   }
 
   // Optional confirmation to the visitor. A failure here doesn't undo the delivered enquiry.
+  // Fixed wording only: echoing visitor-typed text would let anyone send their own content
+  // from this domain to any address they enter.
   if (process.env.ENQUIRY_SEND_CONFIRMATION === "true") {
     try {
       await sendEmail(apiKey, {
         from,
         to: [values.email],
         subject: `We've received your enquiry — ${site.shortName} Integrated Solutions`,
-        text: `Hello ${values.name},\n\nThank you for contacting ${site.name}. We've received your enquiry about "${values.subject}" and our team will reply soon.\n\nThis is an automatic confirmation.`,
+        text: `Hello,\n\nThank you for contacting ${site.name}. We've received your enquiry and our team will reply soon.\n\nIf you didn't send this enquiry, you can ignore this email.\n\nThis is an automatic confirmation.`,
       });
     } catch (err) {
       console.error("[enquiry] Confirmation email failed:", err);

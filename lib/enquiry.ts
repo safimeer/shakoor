@@ -48,17 +48,22 @@ function str(v: unknown, max: number) {
   return typeof v === "string" ? v.trim().slice(0, max) : "";
 }
 
+/** Single-line field: control characters (incl. CR/LF) become spaces, so values can't inject email header lines. */
+function line(v: unknown, max: number) {
+  return str(typeof v === "string" ? v.replace(/[\u0000-\u001f\u007f]+/g, " ") : v, max);
+}
+
 /** Normalises unknown input into EnquiryValues (trimmed, length-capped). */
 export function normaliseEnquiry(input: Record<string, unknown>): EnquiryValues {
   return {
-    name: str(input.name, 100),
-    email: str(input.email, 160),
-    phone: str(input.phone, 24),
-    company: str(input.company, 120),
-    service: str(input.service, 60),
-    subject: str(input.subject, 150),
+    name: line(input.name, 100),
+    email: line(input.email, 160),
+    phone: line(input.phone, 24),
+    company: line(input.company, 120),
+    service: line(input.service, 60),
+    subject: line(input.subject, 150),
     message: str(input.message, 3000),
-    preferredContact: str(input.preferredContact, 10),
+    preferredContact: line(input.preferredContact, 10),
     consent: input.consent === true,
   };
 }
