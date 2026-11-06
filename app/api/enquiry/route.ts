@@ -70,21 +70,66 @@ function serviceName(slug: string) {
   return getService(slug)?.title ?? "Not sure yet / multiple services";
 }
 
+/**
+ * Notification to the company inbox. Deliberately plain for good inbox placement:
+ * a complete HTML document with inline styles, a matching text/plain part, no images,
+ * no links, no tracking and no promotional wording.
+ */
 function companyEmail(v: EnquiryValues) {
   const rows: [string, string][] = [
     ["Name", v.name],
     ["Email", v.email],
-    ["Phone", v.phone || "—"],
-    ["Company", v.company || "—"],
+    ["Phone", v.phone || "Not provided"],
+    ["Company", v.company || "Not provided"],
     ["Service", serviceName(v.service)],
-    ["Preferred contact", v.preferredContact || "—"],
+    ["Preferred contact", v.preferredContact ? v.preferredContact[0].toUpperCase() + v.preferredContact.slice(1) : "No preference"],
     ["Subject", v.subject],
   ];
-  const text = `${rows.map(([k, val]) => `${k}: ${val}`).join("\n")}\n\nMessage:\n${v.message}`;
-  const html = `<h2>New website enquiry</h2><table cellpadding="6">${rows
-    .map(([k, val]) => `<tr><td><strong>${k}</strong></td><td>${escapeHtml(val)}</td></tr>`)
-    .join("")}</table><h3>Message</h3><p style="white-space:pre-wrap">${escapeHtml(v.message)}</p>`;
-  return { text, html };
+  const footer = `This enquiry was submitted through the contact form on shakoorsolutions.com. Reply to this email to respond to ${v.name} directly.`;
+
+  const subject = `Website enquiry from ${v.name}: ${v.subject}`.slice(0, 180);
+
+  const text = [
+    `New website enquiry`,
+    ``,
+    ...rows.map(([k, val]) => `${k}: ${val}`),
+    ``,
+    `Message:`,
+    v.message,
+    ``,
+    `--`,
+    `${site.name}`,
+    footer,
+  ].join("\n");
+
+  const cell = "padding:8px 12px;border-bottom:1px solid #dde6f0;font-size:14px;line-height:1.5;vertical-align:top;";
+  const html = `<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>${escapeHtml(subject)}</title>
+</head>
+<body style="margin:0;padding:0;background:#f4f8fc;font-family:Arial,Helvetica,sans-serif;color:#06182c;">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#f4f8fc;padding:24px 12px;">
+<tr><td align="center">
+<table role="presentation" width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%;background:#ffffff;border:1px solid #dde6f0;border-radius:8px;">
+<tr><td style="background:#071f38;color:#ffffff;padding:18px 24px;border-radius:8px 8px 0 0;font-size:16px;font-weight:bold;letter-spacing:0.5px;">${escapeHtml(site.name)}</td></tr>
+<tr><td style="padding:24px 24px 8px;">
+<h1 style="margin:0 0 16px;font-size:20px;line-height:1.3;color:#06182c;">New website enquiry</h1>
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse;">
+${rows.map(([k, val]) => `<tr><td style="${cell}width:150px;color:#4a5e75;font-weight:bold;">${k}</td><td style="${cell}">${escapeHtml(val)}</td></tr>`).join("\n")}
+</table>
+<h2 style="margin:24px 0 8px;font-size:16px;color:#06182c;">Message</h2>
+<p style="margin:0 0 16px;font-size:14px;line-height:1.6;white-space:pre-wrap;">${escapeHtml(v.message)}</p>
+</td></tr>
+<tr><td style="padding:16px 24px 24px;border-top:1px solid #dde6f0;font-size:12px;line-height:1.5;color:#4a5e75;">${escapeHtml(footer)}</td></tr>
+</table>
+</td></tr>
+</table>
+</body>
+</html>`;
+  return { subject, text, html };
 }
 
 async function sendEmail(apiKey: string, payload: Record<string, unknown>) {
@@ -170,13 +215,14 @@ export async function POST(request: Request) {
   }
   sends.push(now);
 
-  const { text, html } = companyEmail(values);
+  const recipients = to.split(",").map((s) => s.trim());
+  const { subject, text, html } = companyEmail(values);
   try {
     await sendEmail(apiKey, {
       from,
-      to: to.split(",").map((s) => s.trim()),
+      to: recipients,
       reply_to: values.email,
-      subject: `Website enquiry: ${values.subject} (${serviceName(values.service)})`,
+      subject,
       text,
       html,
     });
@@ -196,6 +242,8 @@ export async function POST(request: Request) {
       await sendEmail(apiKey, {
         from,
         to: [values.email],
+        // Customers who reply reach the business inbox, not the sending address.
+        reply_to: recipients[0],
         subject: `We've received your enquiry — ${site.shortName} Integrated Solutions`,
         text: `Hello,\n\nThank you for contacting ${site.name}. We've received your enquiry and our team will reply soon.\n\nIf you didn't send this enquiry, you can ignore this email.\n\nThis is an automatic confirmation.`,
       });
