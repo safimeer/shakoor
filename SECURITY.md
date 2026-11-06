@@ -32,7 +32,9 @@ To report a vulnerability, contact the company privately (see the website's cont
 | L6 | Low (dev only) | `minimatch` advisory in ESLint tooling | **Open:** no upstream fix yet; Dependabot will propose it |
 | L7 | Info | Bot protection is a honeypot plus a form timer | **Open:** optional Cloudflare Turnstile (§9) |
 | E1 | Medium | Resend not verified for the domain (no DKIM), so the form couldn't send | **Fixed:** domain verified (DKIM, return-path SPF/MX); live test delivered to info@ |
-| E2 | Low | DMARC is `p=none` with no reporting address | **Open:** tighten after email works (§6) |
+| E2 | Low | DMARC is `p=none` with no reporting address | **Fixed:** `p=quarantine`, relaxed alignment, aggregate reports to info@ |
+| E3 | Medium | Website emails filed in Junk by Hostinger's Cloudmark filter (auth passes; new-sender reputation) | **Mitigated:** dedicated sender `website@`, clean template; allowlist `website@` in webmail; reputation builds over time |
+| E4 | Low | A single submission could send two emails (retried request) | **Fixed:** Resend idempotency keys; verified live |
 
 OWASP review: no SQL/NoSQL (no database); output escaped by React and in email HTML; no SSRF (the server only calls the fixed Resend URL); no access-control or session surface; no uploads; errors return generic messages with no stack traces (verified live); no secrets in client code (only `NEXT_PUBLIC_SITE_URL`, a public URL, reaches the browser).
 
@@ -75,7 +77,7 @@ The GitHub CLI isn't signed in on the build PC, so these weren't changed automat
 
 ## 6. Email (Resend) setup
 
-**Status: done.** Resend domain verified (EU region, sending only). Added DNS records: TXT `resend._domainkey` (DKIM), MX and TXT on `send` (bounce return-path with SPF `include:amazonses.com`), CNAME `rsend`. Unchanged: root MX → Hostinger Mail, root SPF, Hostinger DKIM, DMARC `p=none`. Website emails come from `noreply@shakoorsolutions.com` to `info@shakoorsolutions.com`, with Reply-To set to the visitor. DMARC passes through DKIM alignment.
+**Status: done.** Resend domain verified (EU region, sending only). Added DNS records: TXT `resend._domainkey` (DKIM), MX and TXT on `send` (bounce return-path with SPF `include:amazonses.com`), CNAME `rsend`. Unchanged: root MX → Hostinger Mail, root SPF, Hostinger DKIM. DMARC tightened to `v=DMARC1; p=quarantine; adkim=r; aspf=r; rua=mailto:info@shakoorsolutions.com` (safe for Hostinger Mail via aligned SPF/DKIM). Website emails come from `SHAKOOR Integrated Solutions <website@shakoorsolutions.com>` to `info@shakoorsolutions.com`, with Reply-To set to the visitor. DMARC passes through DKIM alignment.
 
 Original setup steps, for reference:
 
@@ -94,7 +96,7 @@ The API key is used only server-side (`app/api/enquiry/route.ts`), never sent to
 | `NEXT_PUBLIC_SITE_URL` | Hostinger | Public, **build-time** | **Configured and verified** (sitemap and canonical URLs live) |
 | `RESEND_API_KEY` | Hostinger | Secret, runtime | **Configured and tested** (send-only, restricted to shakoorsolutions.com) |
 | `ENQUIRY_TO_EMAIL` | Hostinger | Runtime | **Configured and tested** (info@shakoorsolutions.com) |
-| `ENQUIRY_FROM_EMAIL` | Hostinger | Runtime, verified domain | **Configured and tested** (noreply@shakoorsolutions.com) |
+| `ENQUIRY_FROM_EMAIL` | Hostinger | Runtime, verified domain | **Configured and tested** (website@shakoorsolutions.com, dedicated sender) |
 | `ENQUIRY_SEND_CONFIRMATION` | Hostinger | Optional, runtime | Set to `false` (off) |
 
 No GitHub Actions secrets are needed: Hostinger builds the site. Details are in [ENVIRONMENT_SETUP.md](ENVIRONMENT_SETUP.md). Enter secrets only in hPanel. The Hostinger API **replaces the whole variable set**, so keep `NEXT_PUBLIC_SITE_URL` when editing.
