@@ -55,6 +55,18 @@ const nextConfig: NextConfig = {
   async headers() {
     return [{ source: "/:path*", headers: securityHeaders }];
   },
+  // One canonical host: www.shakoorsolutions.com permanently redirects to shakoorsolutions.com,
+  // so search engines index a single copy of every page.
+  async redirects() {
+    return [
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "www.shakoorsolutions.com" }],
+        destination: "https://shakoorsolutions.com/:path*",
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default nextConfig;

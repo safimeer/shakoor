@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { Hero } from "@/components/home/Hero";
 import { ServicesShowcase } from "@/components/services/ServicesShowcase";
 import { AboutIntro } from "@/components/home/AboutIntro";
@@ -11,6 +12,11 @@ import { ButtonLink } from "@/components/ui/Button";
 import { Reveal } from "@/components/ui/Reveal";
 import { processSteps } from "@/data/company";
 import { projectCards } from "@/lib/portfolio";
+
+// The homepage declares itself canonical, resolved against NEXT_PUBLIC_SITE_URL (metadataBase).
+export const metadata: Metadata = {
+  alternates: { canonical: "/" },
+};
 
 export default function HomePage() {
   const featured = projectCards().slice(0, 3);
