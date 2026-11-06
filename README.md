@@ -43,6 +43,12 @@ Enquiries are sent through [Resend](https://resend.com) from `app/api/enquiry/ro
 
 Without these, the form validates normally but reports that the message was not sent; it never pretends to deliver. Spam protection uses a honeypot field, a minimum time on the form and a per-server rate limit.
 
+Full details: [ENVIRONMENT_SETUP.md](ENVIRONMENT_SETUP.md).
+
+## Deployment
+
+The site runs as a Node.js server (`npm run build`, then `npm start`) and cannot be a static export. Hostinger settings, the cause of the earlier 403 and troubleshooting are in [DEPLOYMENT.md](DEPLOYMENT.md).
+
 ## Structure
 
 ```
