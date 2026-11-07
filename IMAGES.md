@@ -33,7 +33,7 @@ Each card has a crop focus (`cardPosition`, `heroPosition`, `image.position`) so
 | Small and medium-sized businesses | `images/industries/small-medium-businesses.png` | The card currently uses an intentional navy icon layout. Add an `image` entry in `data/industries.ts` to switch it to a photo card. |
 | Homepage About section (optional) | `images/about/about-team.png` | Currently reuses the corporate-office photo, which also appears in the Industries grid. A team or company photo would avoid the repeat. |
 | Portfolio (7 sample entries) | `images/portfolio/sample-*.png` | Only needed if the sample entries stay. Replace them with photos from genuine projects. |
-| IoT & Smart Automation | `images/services/iot/iot-smart-automation.png` | **Path already wired up**; save the file there and it appears. Prompt: *engineer in a navy polo checking live sensor readings on a tablet beside an automated drip-irrigation line in a green field, with a weatherproof sensor box and solar-powered controller on a pole, plus a smart building and water tank in the soft background; cool blue-hour light.* |
+| ~~IoT & Smart Automation~~ | `images/services/iot/iot-smart-automation.png` | **Done** (IoT Smart Automation Dashboard Montage). |
 | ~~Digital Marketing Solutions~~ | `images/services/digital-marketing/digital-marketing-team.png` | **Done** (Modern Digital Marketing Team Workspace). |
 | Professional Content Writing | `images/services/content-writing/content-writing-workspace.png` | **Path already wired up.** Prompt: *professional writer at a clean desk drafting website copy on a laptop, with a notebook and printed page layouts, bright editorial workspace with blue accents; no installation equipment or technicians.* |
 

@@ -540,7 +540,9 @@ export const services: Service[] = [
     relatedServices: ["software-development", "access-control", "it-support"],
     cardImage: "/images/services/iot/iot-smart-automation.png",
     heroImage: "/images/services/iot/iot-smart-automation.png",
-    imageAlt: "Engineer checking live sensor readings on a tablet beside an automated irrigation system",
+    imageAlt: "Montage of IoT applications: a solar-powered sensor over an irrigated crop field, a laptop dashboard showing soil moisture, irrigation, temperature and humidity, a smart office entrance, a connected home and an industrial pump room",
+    cardPosition: "35% 55%",
+    heroPosition: "40% 50%",
   },
   {
     slug: "digital-marketing",
