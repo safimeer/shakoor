@@ -35,7 +35,7 @@ Each card has a crop focus (`cardPosition`, `heroPosition`, `image.position`) so
 | Portfolio (7 sample entries) | `images/portfolio/sample-*.png` | Only needed if the sample entries stay. Replace them with photos from genuine projects. |
 | ~~IoT & Smart Automation~~ | `images/services/iot/iot-smart-automation.png` | **Done** (IoT Smart Automation Dashboard Montage). |
 | ~~Digital Marketing Solutions~~ | `images/services/digital-marketing/digital-marketing-team.png` | **Done** (Modern Digital Marketing Team Workspace). |
-| Professional Content Writing | `images/services/content-writing/content-writing-workspace.png` | **Path already wired up.** Prompt: *professional writer at a clean desk drafting website copy on a laptop, with a notebook and printed page layouts, bright editorial workspace with blue accents; no installation equipment or technicians.* |
+| ~~Professional Content Writing~~ | `images/services/content-writing/content-writing-workspace.png` | **Done** (Professional Content Writing Workspace). |
 
 ## Logo
 

@@ -654,7 +654,9 @@ export const services: Service[] = [
     relatedServices: ["digital-marketing", "website-development", "software-development"],
     cardImage: "/images/services/content-writing/content-writing-workspace.png",
     heroImage: "/images/services/content-writing/content-writing-workspace.png",
-    imageAlt: "Content writer drafting website copy on a laptop in a bright editorial workspace",
+    imageAlt: "Content writer at a laptop in a bright office, beside a screen listing website content, blog articles, SEO content, product descriptions and marketing copy",
+    cardPosition: "60% 45%",
+    heroPosition: "55% 45%",
   },
 ];
 
