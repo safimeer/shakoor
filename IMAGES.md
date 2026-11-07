@@ -32,10 +32,21 @@ Each card has a crop focus (`cardPosition`, `heroPosition`, `image.position`) so
 | Software Development | `images/services/software-development/software-development-team.png` | Currently borrows the website-development photo. Suggested subject: a developer or small team working on a business dashboard or internal application. Update `cardImage`/`heroImage` and remove `cardZoom` in `data/services.ts` once it's added. |
 | Small and medium-sized businesses | `images/industries/small-medium-businesses.png` | The card currently uses an intentional navy icon layout. Add an `image` entry in `data/industries.ts` to switch it to a photo card. |
 | Homepage About section (optional) | `images/about/about-team.png` | Currently reuses the corporate-office photo, which also appears in the Industries grid. A team or company photo would avoid the repeat. |
-| Portfolio (7 sample entries) | `images/portfolio/sample-*.png` | Only needed if the sample entries stay. Replace them with photos from genuine projects. |
+| Portfolio (4 remaining sample entries) | `images/portfolio/sample-*.webp` | The 3 entries shown on the homepage now have photos (see Image sources below). The other 4 (retail POS, operations dashboard, corporate website, office network) still use placeholders. Replace with genuine project photos when real case studies are added. |
 | ~~IoT & Smart Automation~~ | `images/services/iot/iot-smart-automation.png` | **Done** (IoT Smart Automation Dashboard Montage). |
 | ~~Digital Marketing Solutions~~ | `images/services/digital-marketing/digital-marketing-team.png` | **Done** (Modern Digital Marketing Team Workspace). |
 | ~~Professional Content Writing~~ | `images/services/content-writing/content-writing-workspace.png` | **Done** (Professional Content Writing Workspace). |
+
+### Image sources and licences
+
+| File | Source | Licence |
+| --- | --- | --- |
+| `images/portfolio/office-access-control.jpg` | [Pexels #13657375](https://www.pexels.com/photo/close-up-of-man-holding-access-card-over-reader-13657375/), photo by Susanne Plank | [Pexels licence](https://www.pexels.com/license/): free for commercial use, no attribution required. Don't sell it unaltered or imply the pictured person endorses the company. |
+| `images/portfolio/workforce-attendance-system.jpg` | [Pexels #17155842](https://www.pexels.com/photo/finger-scan-17155842/), photo by panumas nikhomkhai | Pexels licence, as above |
+| `images/portfolio/warehouse-cctv-surveillance.png` | Company-supplied (Modern Warehouse Logistics Operations); also used for the Warehouses industry card | Company-owned |
+| All other images under `public/images/` | Company-supplied | Company-owned |
+
+The portfolio photos illustrate the *type* of work. Those projects stay labelled "Sample layout" until real case studies replace them.
 
 ## Logo
 

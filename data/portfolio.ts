@@ -39,7 +39,8 @@ export type Project = {
   solution: string[];
   implementation: string;
   outcomes: string[] | null;
-  images: { src: string; alt: string }[];
+  /** position: optional CSS object-position keeping the subject in frame when cropped. */
+  images: { src: string; alt: string; position?: string }[];
 };
 
 export const projects: Project[] = [
@@ -55,7 +56,7 @@ export const projects: Project[] = [
     solution: ["Camera plan covering entrances, bays and fence line", "Recorder sized for the agreed retention period", "Remote viewing configured for approved devices"],
     implementation: "Describe the survey, installation stages and how disruption to operations was avoided.",
     outcomes: null,
-    images: [{ src: "/images/portfolio/sample-warehouse-surveillance.webp", alt: "Warehouse exterior with security cameras covering the loading bays" }],
+    images: [{ src: "/images/portfolio/warehouse-cctv-surveillance.png", alt: "Warehouse aisle with pallet racking and CCTV cameras mounted high on the racks, a forklift moving stock in the background", position: "60% 40%" }],
   },
   {
     slug: "sample-office-access-control",
@@ -69,7 +70,7 @@ export const projects: Project[] = [
     solution: ["Card readers on each controlled door", "Permission groups by department", "Administrator training on adding and revoking cards"],
     implementation: "Describe door assessment, hardware fitting and configuration of permission groups.",
     outcomes: null,
-    images: [{ src: "/images/portfolio/sample-office-access-control.webp", alt: "Office corridor with card readers beside glass doors" }],
+    images: [{ src: "/images/portfolio/office-access-control.jpg", alt: "Office worker holding an access card to a wall-mounted card reader in a corridor", position: "55% 50%" }],
   },
   {
     slug: "sample-factory-attendance",
@@ -83,7 +84,7 @@ export const projects: Project[] = [
     solution: ["Biometric terminals at staff entrances", "Shift and overtime rules configured", "Report exports prepared for payroll"],
     implementation: "Describe device placement, employee enrolment and HR training.",
     outcomes: null,
-    images: [{ src: "/images/portfolio/sample-factory-attendance.webp", alt: "Staff entrance with a wall-mounted biometric attendance terminal" }],
+    images: [{ src: "/images/portfolio/workforce-attendance-system.jpg", alt: "Employee pressing a finger on a wall-mounted biometric attendance terminal", position: "60% 55%" }],
   },
   {
     slug: "sample-retail-pos",

@@ -54,7 +54,7 @@ async function ProjectContent({ params }: { params: PageProps<"/portfolio/[slug]
         kicker={category}
         title={project.title}
         intro={<p>{project.summary}</p>}
-        image={cover ? { src: cover.src, alt: cover.alt, icon: Icon } : undefined}
+        image={cover ? { src: cover.src, alt: cover.alt, icon: Icon, position: cover.position } : undefined}
       />
 
       <section className="bg-paper py-16 lg:py-24">
@@ -104,7 +104,7 @@ async function ProjectContent({ params }: { params: PageProps<"/portfolio/[slug]
               <div className="mt-12 grid gap-4 sm:grid-cols-2">
                 {gallery.map((img) => (
                   <div key={img.src} className="relative aspect-[4/3] overflow-hidden rounded-[var(--radius-card)] bg-navy">
-                    <Visual src={img.src} alt={img.alt} icon={Icon} sizes="(min-width:640px) 33vw, 100vw" />
+                    <Visual src={img.src} alt={img.alt} icon={Icon} position={img.position} sizes="(min-width:640px) 33vw, 100vw" />
                   </div>
                 ))}
               </div>

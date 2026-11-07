@@ -11,6 +11,7 @@ export type ProjectCardData = Pick<Project, "slug" | "demo" | "title" | "categor
   image: string | null;
   expectedImage: string;
   imageAlt: string;
+  imagePosition?: string;
 };
 
 /** Pure component so it can render inside the client-side portfolio filter. */
@@ -26,7 +27,14 @@ export function ProjectCard({ project: p }: { project: ProjectCardData }) {
       <div className="relative aspect-[16/10] overflow-hidden bg-navy">
         <div className="absolute inset-0 transition-transform duration-700 ease-[var(--ease-out-soft)] group-hover:scale-[1.04]">
           {p.image ? (
-            <Image src={p.image} alt={p.imageAlt} fill sizes="(min-width:1024px) 33vw, (min-width:640px) 50vw, 100vw" className="object-cover" />
+            <Image
+              src={p.image}
+              alt={p.imageAlt}
+              fill
+              sizes="(min-width:1024px) 33vw, (min-width:640px) 50vw, 100vw"
+              className="object-cover"
+              style={p.imagePosition ? { objectPosition: p.imagePosition } : undefined}
+            />
           ) : (
             <FallbackScene icon={Icon} expected={p.expectedImage} />
           )}

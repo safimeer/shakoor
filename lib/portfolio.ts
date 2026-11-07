@@ -16,6 +16,7 @@ export function projectCards(): ProjectCardData[] {
       image: first ? resolveAsset(first.src) : null,
       expectedImage: first?.src ?? "",
       imageAlt: first?.alt ?? "",
+      imagePosition: first?.position,
     };
   });
 }
