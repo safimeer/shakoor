@@ -5,12 +5,11 @@ import { usePathname } from "next/navigation";
 import { useEffect, useId, useRef, useState } from "react";
 import { ArrowRight, ChevronDown, Menu, Phone, X } from "lucide-react";
 import { mainNav, site, telHref } from "@/data/site";
-import { categoryLabel, services, type ServiceCategory } from "@/data/services";
+import { categoryLabel, categoryOrder, services } from "@/data/services";
 import { serviceIcons } from "@/components/ui/icons";
 import { Logo } from "./Logo";
 import { buttonClass } from "@/components/ui/Button";
 
-const categoryOrder: ServiceCategory[] = ["security", "business", "software", "support"];
 
 function isActive(pathname: string, href: string) {
   return href === "/" ? pathname === "/" : pathname === href || pathname.startsWith(`${href}/`);
@@ -127,10 +126,10 @@ export function Header() {
                     <div
                       id={panelId}
                       hidden={!servicesOpen}
-                      className="absolute left-1/2 top-full w-[min(760px,90vw)] -translate-x-1/2 pt-3"
+                      className="absolute left-1/2 top-full w-[min(940px,94vw)] -translate-x-1/2 pt-3"
                     >
                       <div className="rounded-[var(--radius-panel)] border border-line-strong bg-navy/95 p-6 shadow-[0_30px_80px_-20px_rgb(0_0_0/0.7)] backdrop-blur-xl">
-                        <div className="grid grid-cols-2 gap-x-8 gap-y-6">
+                        <div className="grid grid-cols-3 gap-x-8 gap-y-6">
                           {categoryOrder.map((cat) => (
                             <div key={cat}>
                               <p className="mb-2 text-sm font-semibold text-cyan">{categoryLabel[cat]}</p>

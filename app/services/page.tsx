@@ -9,7 +9,7 @@ import { ButtonLink } from "@/components/ui/Button";
 export const metadata: Metadata = {
   title: "Services",
   description:
-    "CCTV installation, access control, attendance systems, door access, POS systems, software development, website development and IT support.",
+    "CCTV, access control, attendance, door access, POS, software and website development, IT support, IoT and smart automation, digital marketing and content writing.",
   alternates: { canonical: "/services" },
 };
 
@@ -18,8 +18,8 @@ export default function ServicesPage() {
     <>
       <PageHero
         crumbs={[{ label: "Home", href: "/" }, { label: "Services" }]}
-        title="Security, business technology, software and IT support"
-        intro={<p>Eight services, one team. Explore each service below, or tell us what you need and we&apos;ll recommend the right combination.</p>}
+        title="Technology, automation and digital services for business"
+        intro={<p>Security systems, business technology, software, IT support, IoT automation, digital marketing and content writing from one team. Explore each service below, or tell us what you need and we&apos;ll recommend the right combination.</p>}
         actions={
           <ButtonLink href="/contact#enquiry" arrow>
             Request a consultation

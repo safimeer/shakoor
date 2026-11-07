@@ -101,8 +101,8 @@ async function ServiceContent({ params }: { params: PageProps<"/services/[slug]"
             <SectionHeading id="capabilities-title" kicker="Key capabilities" title="What the service can include" intro="Exact scope is confirmed after an assessment of your site and requirements." />
           </Reveal>
           <ul className="mt-12 grid gap-px overflow-hidden rounded-[var(--radius-card)] border border-line-light bg-line-light sm:grid-cols-2 lg:grid-cols-3">
-            {service.features.map((f) => (
-              <li key={f.title} className="bg-white p-7">
+            {service.features.map((f, i, all) => (
+              <li key={f.title} className={`bg-white p-7 ${i === all.length - 1 ? lastCellSpan(all.length) : ""}`}>
                 <Check aria-hidden="true" className="size-6 text-blue" />
                 <h3 className="mt-4 text-lg font-bold text-ink">{f.title}</h3>
                 <p className="mt-2 leading-relaxed text-slate-ink">{f.text}</p>
@@ -211,4 +211,11 @@ async function ServiceContent({ params }: { params: PageProps<"/services/[slug]"
       </section>
     </>
   );
+}
+
+/** Last card stretches to fill its row, so the 2- and 3-column grids never end with an empty cell. */
+function lastCellSpan(count: number) {
+  const sm = count % 2 === 1 ? "sm:col-span-2" : "";
+  const lg = count % 3 === 1 ? "lg:col-span-3" : count % 3 === 2 ? "lg:col-span-2" : sm ? "lg:col-span-1" : "";
+  return `${sm} ${lg}`.trim();
 }

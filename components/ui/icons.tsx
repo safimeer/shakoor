@@ -12,8 +12,11 @@ import {
   Landmark,
   Layers,
   LifeBuoy,
+  Megaphone,
   MonitorSmartphone,
   Network,
+  PenLine,
+  RadioTower,
   ShieldCheck,
   ShoppingCart,
   Store,
@@ -35,6 +38,9 @@ export const serviceIcons: Record<ServiceIconKey, LucideIcon> = {
   software: CodeXml,
   website: MonitorSmartphone,
   support: Headset,
+  marketing: Megaphone,
+  iot: RadioTower,
+  writing: PenLine,
 };
 
 export const industryIcons: Record<IndustryIconKey, LucideIcon> = {

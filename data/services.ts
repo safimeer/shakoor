@@ -6,7 +6,7 @@
  * confirm every capability and integration with the company before removing them.
  */
 
-export type ServiceCategory = "security" | "business" | "software" | "support";
+export type ServiceCategory = "security" | "business" | "software" | "support" | "marketing" | "iot" | "content";
 
 export type ServiceIconKey =
   | "cctv"
@@ -16,7 +16,10 @@ export type ServiceIconKey =
   | "pos"
   | "software"
   | "website"
-  | "support";
+  | "support"
+  | "marketing"
+  | "iot"
+  | "writing";
 
 export type Service = {
   slug: string;
@@ -51,6 +54,9 @@ export const serviceCategories: { id: ServiceCategory | "all"; label: string }[]
   { id: "business", label: "Business technology" },
   { id: "software", label: "Software & web" },
   { id: "support", label: "IT support" },
+  { id: "iot", label: "IoT & automation" },
+  { id: "marketing", label: "Digital marketing" },
+  { id: "content", label: "Content writing" },
 ];
 
 export const categoryLabel: Record<ServiceCategory, string> = {
@@ -58,7 +64,15 @@ export const categoryLabel: Record<ServiceCategory, string> = {
   business: "Business technology",
   software: "Software & web",
   support: "IT support",
+  iot: "IoT & smart automation",
+  marketing: "Digital marketing",
+  content: "Content writing",
 };
+
+/** Display order of categories in menus and the service directory. */
+export const categoryOrder = serviceCategories
+  .map((c) => c.id)
+  .filter((id): id is ServiceCategory => id !== "all");
 
 export const services: Service[] = [
   {
@@ -470,6 +484,173 @@ export const services: Service[] = [
     imageAlt: "IT technician servicing an office desktop computer while a colleague points to a system update on screen",
     cardPosition: "40% 40%",
     heroPosition: "45% 40%",
+  },
+  {
+    slug: "iot-smart-automation",
+    title: "IoT & Smart Automation",
+    category: "iot",
+    icon: "iot",
+    shortDescription:
+      "Connecting devices, systems and environments through intelligent automation, real-time monitoring and connected IoT technologies.",
+    headline: "Sensors, automation and live monitoring for buildings, farms and industry.",
+    overview: [
+      "IoT (Internet of Things) connects physical equipment, such as gates, pumps, tanks, sensors and machines, to software you can check and control from anywhere. Instead of walking a site to read a gauge or switch something on, the information comes to you and routine actions happen automatically.",
+      "We help plan and set up practical IoT solutions: choosing suitable sensors and controllers, installing and connecting them, and building dashboards and alerts around what you need to know. Applications range from smart doors and offices to irrigation, water management, environmental monitoring and industrial equipment. Device choice, connectivity and scope are confirmed after a site assessment.",
+    ],
+    problems: [
+      "Equipment and conditions that can only be checked by someone on site",
+      "Water, energy or inputs wasted because systems run on fixed timers or guesswork",
+      "Problems such as a tank running dry or a machine overheating noticed too late",
+      "Gates, lighting and building systems that need manual operation",
+    ],
+    features: [
+      { title: "Smart door and gate automation", text: "Automated gates and doors with remote, scheduled or access-based control." },
+      { title: "Smart home automation", text: "Lighting, appliances and security controlled from a phone or on a schedule." },
+      { title: "Smart office and building automation", text: "Lighting, climate and access in commercial spaces, managed centrally." },
+      { title: "IoT sensor installation and integration", text: "Sensors selected, installed and connected to monitoring software." },
+      { title: "Smart agriculture and farm monitoring", text: "Field and livestock conditions monitored remotely to support better decisions." },
+      { title: "Automated irrigation and water management", text: "Watering driven by schedules or sensor readings instead of manual valves." },
+      { title: "Soil moisture monitoring", text: "Soil moisture readings so crops are watered when they actually need it." },
+      { title: "Temperature and humidity monitoring", text: "Continuous readings for stores, cold rooms, server rooms and greenhouses." },
+      { title: "Water tank level monitoring", text: "Tank levels visible remotely, with warnings before a tank runs low or overflows." },
+      { title: "Industrial IoT automation", text: "Connecting machines and process equipment for monitoring and control." },
+      { title: "Remote equipment monitoring", text: "Status, run time and fault signals from equipment at distant or unmanned sites." },
+      { title: "Smart energy monitoring", text: "Electricity use measured by area or equipment to find waste and plan savings." },
+      { title: "Custom IoT solutions and dashboards", text: "Dashboards built around your devices, readings and reporting needs." },
+      { title: "Real-time alerts and notifications", text: "Alerts by app, SMS or email when a reading crosses a limit you set, where supported." },
+    ],
+    benefits: [
+      { title: "Visibility from anywhere", text: "Check sites, equipment and conditions without travelling." },
+      { title: "Earlier warnings", text: "Act on alerts before small problems become costly ones." },
+      { title: "Less waste", text: "Use water and energy based on real readings, not guesswork." },
+      { title: "Less manual work", text: "Routine switching and checks handled automatically." },
+    ],
+    useCases: ["Farms and greenhouses", "Water tanks and pumping systems", "Factories and workshops", "Offices and commercial buildings", "Homes and residential compounds", "Cold storage and server rooms"],
+    process: [
+      { title: "Requirements", text: "Understand what needs monitoring or automating, and why." },
+      { title: "Site assessment", text: "Check power, connectivity and placement for devices." },
+      { title: "Design and setup", text: "Select devices, install sensors and controllers, and connect them." },
+      { title: "Dashboards and handover", text: "Configure dashboards and alerts, test, and train your team." },
+    ],
+    faqs: [
+      { q: "Do IoT devices need internet access?", a: "Most remote monitoring needs a connection such as Wi-Fi, mobile data or another network suited to the site. We assess connectivity during the site visit and recommend a suitable option." },
+      { q: "Can you work with sites far from a city?", a: "Remote sites are a common use for IoT. Power and connectivity options for the location are confirmed during assessment." },
+      { q: "Can we start with one system and add more later?", a: "Yes. Many projects start with a single need, such as tank levels or irrigation, and expand once it's working." },
+    ],
+    relatedServices: ["software-development", "access-control", "it-support"],
+    cardImage: "/images/services/iot/iot-smart-automation.png",
+    heroImage: "/images/services/iot/iot-smart-automation.png",
+    imageAlt: "Engineer checking live sensor readings on a tablet beside an automated irrigation system",
+  },
+  {
+    slug: "digital-marketing",
+    title: "Digital Marketing Solutions",
+    category: "marketing",
+    icon: "marketing",
+    shortDescription:
+      "Helping businesses strengthen their online presence, reach targeted audiences, build brand awareness and generate measurable digital growth.",
+    headline: "Reach the right customers online, and see what's working.",
+    overview: [
+      "Customers search, compare and decide online before they get in touch. Digital marketing makes sure your business is visible at those moments, with a clear message, on the channels your customers actually use.",
+      "We plan and run digital marketing around your goals: search engine optimisation, social media, paid advertising, email and lead generation, with reporting that shows what each activity delivers. Search rankings and advertising results depend on competition and budget, so we set realistic targets and report progress honestly rather than promising specific positions or numbers.",
+    ],
+    problems: [
+      "A website that customers can't find on Google",
+      "Social media accounts that are inactive or inconsistent",
+      "Advertising spend with no clear view of what it returns",
+      "Few enquiries coming from online channels",
+    ],
+    features: [
+      { title: "Search engine optimisation (SEO)", text: "Technical, on-page and content improvements that help your site appear in relevant searches." },
+      { title: "Social media marketing", text: "Campaigns that build awareness and engagement on the platforms your customers use." },
+      { title: "Social media management", text: "Planned, consistent posting and community management for your business accounts." },
+      { title: "Google Ads and paid advertising", text: "Search and display campaigns targeted to people looking for what you offer." },
+      { title: "Facebook and Instagram advertising", text: "Targeted social ads by location, interests and audience, with ongoing optimisation." },
+      { title: "Search engine marketing (SEM)", text: "Combining paid search and organic visibility to capture search demand." },
+      { title: "Digital branding and online presence", text: "Consistent branding and business information across your website, profiles and listings." },
+      { title: "Email marketing campaigns", text: "Newsletters and campaigns to customers who have agreed to hear from you." },
+      { title: "Lead generation campaigns", text: "Campaigns and landing pages designed to turn interest into enquiries." },
+      { title: "Marketing analytics and reporting", text: "Tracking set up properly, with clear reports on traffic, leads and campaign results." },
+      { title: "Online reputation management", text: "Monitoring and responding to reviews and mentions professionally." },
+      { title: "Digital marketing strategy and consultation", text: "A practical plan for which channels to use, in what order, and how to measure them." },
+    ],
+    benefits: [
+      { title: "Visibility", text: "Be found when customers search for your services." },
+      { title: "Targeted reach", text: "Spend on the audiences most likely to buy." },
+      { title: "Measurable results", text: "See which activities bring enquiries." },
+      { title: "Consistent brand", text: "A professional, recognisable presence across channels." },
+    ],
+    useCases: ["Service businesses seeking more enquiries", "Retail and e-commerce", "Restaurants and hospitality", "B2B and corporate companies", "New businesses building awareness"],
+    process: [
+      { title: "Discovery", text: "Understand your business, customers, competitors and goals." },
+      { title: "Strategy", text: "Agree channels, priorities, budget and how success is measured." },
+      { title: "Launch and manage", text: "Set up tracking, then run and refine campaigns." },
+      { title: "Report and improve", text: "Regular reporting and adjustments based on results." },
+    ],
+    faqs: [
+      { q: "How long does SEO take?", a: "SEO usually builds over months rather than weeks, depending on your website, competition and content. We report progress regularly and don't promise specific rankings." },
+      { q: "Do you manage the advertising budget?", a: "Advertising budgets are agreed with you and paid to the ad platforms. We plan and manage campaigns within the budget you set." },
+      { q: "Do we need a new website first?", a: "Not always. We review your current site and recommend improvements only where they'll make a real difference." },
+    ],
+    relatedServices: ["content-writing", "website-development", "software-development"],
+    cardImage: "/images/services/digital-marketing/digital-marketing-team.png",
+    heroImage: "/images/services/digital-marketing/digital-marketing-team.png",
+    imageAlt: "Marketing team reviewing campaign analytics and search performance dashboards on a large screen",
+  },
+  {
+    slug: "content-writing",
+    title: "Professional Content Writing",
+    category: "content",
+    icon: "writing",
+    shortDescription:
+      "Delivering clear, engaging and strategically written content that communicates business value, strengthens brand identity and connects with customers.",
+    headline: "Words that explain what you do, and why customers should choose you.",
+    overview: [
+      "Your website, profiles, proposals and campaigns all depend on writing. Clear, well-structured content helps customers understand your offer quickly, builds trust, and supports search visibility.",
+      "Our writing covers websites and SEO, articles, company profiles, marketing and advertising copy, email, technical content and business documents, plus editing and proofreading of material you already have. We start from your business information and goals, write in a consistent voice, and revise with you until it's right.",
+    ],
+    problems: [
+      "Website pages that don't explain your services clearly",
+      "Content written without search intent in mind",
+      "Inconsistent tone across the website, social media and documents",
+      "Proposals and profiles that take too long to prepare in-house",
+    ],
+    features: [
+      { title: "Website content writing", text: "Clear page copy for home, about, service and contact pages." },
+      { title: "SEO content writing", text: "Content planned around what customers search for, written naturally without keyword stuffing." },
+      { title: "Blog and article writing", text: "Informative articles that answer customer questions and support your expertise." },
+      { title: "Business and corporate profile writing", text: "Company profiles that present who you are, what you do and how you work." },
+      { title: "Product and service descriptions", text: "Accurate, persuasive descriptions for catalogues, websites and listings." },
+      { title: "Marketing copywriting", text: "Copy for brochures, landing pages and campaigns with a clear call to action." },
+      { title: "Social media content writing", text: "Post copy suited to each platform and your brand voice." },
+      { title: "Advertising and promotional copy", text: "Concise ad text and promotional messages that respect platform rules." },
+      { title: "Email and newsletter content", text: "Newsletters and campaign emails that people want to read." },
+      { title: "Technical content writing", text: "Clear explanations of technical products, processes and documentation." },
+      { title: "Company proposals and business documents", text: "Structured proposals, capability statements and business documents." },
+      { title: "Editing and proofreading", text: "Corrections for clarity, grammar, consistency and tone in existing content." },
+    ],
+    benefits: [
+      { title: "Clarity", text: "Customers understand your offer faster." },
+      { title: "Credibility", text: "Professional writing builds trust in your business." },
+      { title: "Search support", text: "Well-structured content helps search visibility." },
+      { title: "Time saved", text: "Your team focuses on its work while we write." },
+    ],
+    useCases: ["New or redesigned websites", "Company profiles and capability statements", "Marketing campaigns", "Tender and proposal documents", "Ongoing blogs and newsletters"],
+    process: [
+      { title: "Brief", text: "Collect business information, audience, goals and tone." },
+      { title: "Outline", text: "Agree structure and key messages before writing." },
+      { title: "Write", text: "Draft the content in a consistent voice." },
+      { title: "Review and finalise", text: "Revise with your feedback and deliver final copy." },
+    ],
+    faqs: [
+      { q: "Will the content be original?", a: "Yes. Content is written for your business based on your information, not copied from other sources." },
+      { q: "How many revisions are included?", a: "Revision rounds are agreed in each project's scope before work starts." },
+      { q: "Can you write technical content?", a: "Yes. We work from your technical information and check accuracy with your team before publishing." },
+    ],
+    relatedServices: ["digital-marketing", "website-development", "software-development"],
+    cardImage: "/images/services/content-writing/content-writing-workspace.png",
+    heroImage: "/images/services/content-writing/content-writing-workspace.png",
+    imageAlt: "Content writer drafting website copy on a laptop in a bright editorial workspace",
   },
 ];
 

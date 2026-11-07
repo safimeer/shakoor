@@ -1,15 +1,13 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { categoryLabel, services, type ServiceCategory } from "@/data/services";
+import { categoryLabel, categoryOrder, services } from "@/data/services";
 import { serviceIcons } from "@/components/ui/icons";
-
-const order: ServiceCategory[] = ["security", "business", "software", "support"];
 
 /** Plain, scannable list of every service, grouped by category. */
 export function ServiceDirectory() {
   return (
     <div className="grid gap-10 md:grid-cols-2">
-      {order.map((cat) => (
+      {categoryOrder.map((cat) => (
         <div key={cat}>
           <h3 className="text-lg font-bold text-ink">{categoryLabel[cat]}</h3>
           <ul className="mt-3 divide-y divide-line-light border-y border-line-light">
