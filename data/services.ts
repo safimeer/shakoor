@@ -595,7 +595,9 @@ export const services: Service[] = [
     relatedServices: ["content-writing", "website-development", "software-development"],
     cardImage: "/images/services/digital-marketing/digital-marketing-team.png",
     heroImage: "/images/services/digital-marketing/digital-marketing-team.png",
-    imageAlt: "Marketing team reviewing campaign analytics and search performance dashboards on a large screen",
+    imageAlt: "Marketing team working on laptops showing campaign analytics while a colleague reviews a digital marketing strategy screen covering SEO, social media, Google Ads and email",
+    cardPosition: "55% 45%",
+    heroPosition: "55% 40%",
   },
   {
     slug: "content-writing",
