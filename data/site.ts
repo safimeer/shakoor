@@ -34,8 +34,10 @@ export const site = {
    */
   logo: { src: "/images/brand/shakoor-logo.png", width: 1221, height: 960 } as { src: string; width: number; height: number } | null,
 
-  /** TODO(company): add only official profiles, e.g. { label: "LinkedIn", href: "https://…" }. */
-  social: [] as { label: string; href: string }[],
+  /** Official profiles only. */
+  social: [
+    { label: "LinkedIn", href: "https://www.linkedin.com/company/shakoor-integrated-solutions/" },
+  ] as { label: string; href: string }[],
 };
 
 export const mainNav = [

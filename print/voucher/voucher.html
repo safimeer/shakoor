@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>SHAKOOR Integrated Solutions — Corporate Flyer</title>
+<style>
+  /* Static weights (SIL OFL, see fonts/OFL-LICENSE.txt) so the PDF embeds real font programs. */
+  @font-face { font-family: "Plus Jakarta Sans"; font-weight: 500; src: url("fonts/plus-jakarta-sans-latin-500-normal.woff2") format("woff2"); }
+  @font-face { font-family: "Plus Jakarta Sans"; font-weight: 600; src: url("fonts/plus-jakarta-sans-latin-600-normal.woff2") format("woff2"); }
+  @font-face { font-family: "Plus Jakarta Sans"; font-weight: 700; src: url("fonts/plus-jakarta-sans-latin-700-normal.woff2") format("woff2"); }
+  @font-face { font-family: "Plus Jakarta Sans"; font-weight: 800; src: url("fonts/plus-jakarta-sans-latin-800-normal.woff2") format("woff2"); }
+  @page { size: 303mm 216mm; margin: 0; }
+  :root {
+    --midnight: #041426; --navy: #071f38; --navy2: #0b2a4a; --blue: #0a6fd1; --bright: #087fe5;
+    --cyan: #20b8ff; --mist: #afc2d6; --paper: #f4f8fc; --ink: #06182c; --slate: #4a5e75; --line: #dde6f0;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 303mm; height: 216mm; }
+  body {
+    font-family: "Plus Jakarta Sans", Arial, sans-serif; color: var(--ink); background: var(--paper);
+    -webkit-print-color-adjust: exact; print-color-adjust: exact; position: relative; overflow: hidden;
+  }
+  /* Trim box: 3 mm inside the page edge. Safe area: 8 mm further in. */
+  .trim { position: absolute; left: 3mm; top: 3mm; width: 297mm; height: 210mm; }
+
+  /* Header — runs into the bleed at the top, left and right. */
+  .header {
+    position: absolute; left: 0; top: 0; width: 303mm; height: 47mm; color: #fff; overflow: hidden;
+    background:
+      radial-gradient(60% 140% at 92% 0%, rgba(32,184,255,.30), transparent 60%),
+      radial-gradient(50% 120% at 0% 100%, rgba(10,111,209,.35), transparent 65%),
+      linear-gradient(135deg, var(--navy2) 0%, var(--navy) 45%, var(--midnight) 100%);
+  }
+  .header::after {
+    content: ""; position: absolute; inset: 0; opacity: .5;
+    background-image: linear-gradient(rgba(130,180,230,.07) 1px, transparent 1px), linear-gradient(90deg, rgba(130,180,230,.07) 1px, transparent 1px);
+    background-size: 8mm 8mm;
+  }
+  .header-inner {
+    position: absolute; left: 11mm; right: 11mm; top: 10mm; height: 30mm; z-index: 1;
+    display: flex; align-items: center; justify-content: space-between; gap: 10mm;
+  }
+  .brand { display: flex; align-items: center; gap: 5mm; }
+  .brand img { height: 25mm; width: auto; filter: drop-shadow(0 1.5mm 3mm rgba(0,0,0,.35)); }
+  .brand .name { font-size: 15.5pt; font-weight: 800; letter-spacing: .04em; line-height: 1.15; }
+  .nowrap { white-space: nowrap; }
+  .brand .tagline { margin-top: 2mm; font-size: 9.5pt; font-weight: 500; color: var(--mist); }
+  .brand .rule { margin-top: 2.5mm; width: 18mm; height: .7mm; border-radius: 1mm; background: linear-gradient(90deg, var(--cyan), var(--bright)); }
+  .headline { text-align: right; max-width: 112mm; }
+  .headline .kicker { font-size: 8.5pt; font-weight: 600; color: var(--cyan); letter-spacing: .02em; }
+  .headline h1 { margin-top: 1.5mm; font-size: 22pt; line-height: 1.08; font-weight: 800; letter-spacing: -.01em; }
+
+  /* Service grid */
+  .grid {
+    position: absolute; left: 11mm; right: 11mm; top: 51mm; height: 126mm;
+    display: grid; grid-template-columns: repeat(4, 1fr); grid-template-rows: repeat(2, 1fr); gap: 4mm;
+  }
+  .card {
+    background: #fff; border: .25mm solid var(--line); border-radius: 3mm; overflow: hidden;
+    display: flex; flex-direction: column; box-shadow: 0 .6mm 2mm rgba(4,20,38,.06);
+  }
+  .photo { height: 22mm; flex: none; overflow: hidden; background: var(--navy); }
+  .photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .body { padding: 3mm 3.4mm 2.6mm; flex: 1; }
+  .body h2 {
+    font-size: 9.6pt; font-weight: 800; color: var(--ink); line-height: 1.2;
+    padding-left: 2.6mm; border-left: .8mm solid var(--cyan);
+  }
+  .body ul { list-style: none; margin-top: 2mm; }
+  .body li {
+    position: relative; padding-left: 3mm; font-size: 7.4pt; line-height: 1.32; color: var(--slate); font-weight: 500;
+  }
+  .body li + li { margin-top: .75mm; }
+  .body li::before {
+    content: ""; position: absolute; left: 0; top: 1.25mm; width: 1.2mm; height: 1.2mm; border-radius: .3mm; background: var(--blue);
+  }
+
+  /* Footer — runs into the bleed at the bottom, left and right. */
+  .footer {
+    position: absolute; left: 0; bottom: 0; width: 303mm; height: 36mm; color: #fff;
+    background:
+      radial-gradient(40% 160% at 100% 100%, rgba(32,184,255,.22), transparent 60%),
+      linear-gradient(90deg, var(--midnight), var(--navy) 60%, var(--navy2));
+  }
+  .footer-inner {
+    position: absolute; left: 11mm; right: 11mm; top: 6.5mm; bottom: 11mm;
+    display: flex; align-items: center; justify-content: space-between; gap: 8mm;
+  }
+  .cta { display: flex; align-items: center; gap: 4mm; }
+  .cta .bar { width: 1mm; align-self: stretch; border-radius: 1mm; background: linear-gradient(var(--cyan), var(--blue)); }
+  .cta strong { display: block; font-size: 12.5pt; font-weight: 800; line-height: 1.2; }
+  .cta span { display: block; margin-top: 1.2mm; font-size: 8.4pt; color: var(--mist); font-weight: 500; }
+  .contacts { display: flex; align-items: center; gap: 6mm; }
+  .contacts ul { list-style: none; }
+  /* No ligatures in contact details, so addresses copy correctly from the PDF (e.g. "fi" in safiullah). */
+  .contacts, .phone { font-variant-ligatures: none; font-feature-settings: "liga" 0, "clig" 0; }
+  .contacts li { display: flex; align-items: center; gap: 2mm; font-size: 9.2pt; font-weight: 600; white-space: nowrap; }
+  .contacts li + li { margin-top: 1.4mm; }
+  .contacts svg { color: var(--cyan); flex: none; width: 3.6mm; height: 3.6mm; }
+  .phone {
+    display: flex; align-items: center; gap: 2.4mm; padding: 2.6mm 4.4mm; border-radius: 2.4mm;
+    background: linear-gradient(135deg, var(--blue), var(--bright)); font-size: 12pt; font-weight: 800; white-space: nowrap;
+  }
+  .phone svg { width: 4.2mm; height: 4.2mm; color: #fff; }
+</style>
+</head>
+<body>
+  <header class="header">
+    <div class="header-inner">
+      <div class="brand">
+        <img src="../../public/images/brand/shakoor-logo.png" alt="SHAKOOR logo">
+        <div>
+          <div class="name">SHAKOOR INTEGRATED SOLUTIONS<br><span class="nowrap">(PVT.) LTD.</span></div>
+          <div class="tagline">Integrated Solutions for a Smarter, Safer &amp; Connected World</div>
+          <div class="rule"></div>
+        </div>
+      </div>
+      <div class="headline">
+        <div class="kicker">Security, business technology, IoT and digital services</div>
+        <h1>Your complete integrated solutions partner</h1>
+      </div>
+    </div>
+  </header>
+
+  <main class="grid">
+    <article class="card">
+      <div class="photo"><img src="../../public/images/industries/commercial-buildings-security.png" alt="" style="object-position:28% 50%"></div>
+      <div class="body">
+        <h2>Security &amp; Surveillance</h2>
+        <ul><li>CCTV installation &amp; surveillance systems</li><li>Indoor &amp; outdoor security cameras</li><li>Recording, storage &amp; remote viewing</li><li>Site surveys, integration &amp; maintenance</li></ul>
+      </div>
+    </article>
+    <article class="card">
+      <div class="photo"><img src="../../public/images/portfolio/workforce-attendance-system.jpg" alt="" style="object-position:60% 50%"></div>
+      <div class="body">
+        <h2>Access Control &amp; Attendance</h2>
+        <ul><li>Door access control &amp; electronic locks</li><li>NFC / RFID card, PIN &amp; biometric access</li><li>Fingerprint &amp; face-recognition attendance</li><li>Employee time &amp; attendance reporting</li></ul>
+      </div>
+    </article>
+    <article class="card">
+      <div class="photo"><img src="../../public/images/industries/retail-supermarkets-pos.png" alt="" style="object-position:45% 45%"></div>
+      <div class="body">
+        <h2>Retail &amp; POS Solutions</h2>
+        <ul><li>POS terminals, hardware &amp; software</li><li>Barcode scanners, printers &amp; cash drawers</li><li>Retail &amp; supermarket checkout solutions</li><li>Inventory, billing &amp; sales reporting</li></ul>
+      </div>
+    </article>
+    <article class="card">
+      <div class="photo"><img src="../../public/images/services/it-support/it-support-onsite-workstation.png" alt="" style="object-position:40% 40%"></div>
+      <div class="body">
+        <h2>IT Support &amp; Infrastructure</h2>
+        <ul><li>Computer &amp; IT hardware support</li><li>Software installation &amp; support</li><li>Network troubleshooting &amp; maintenance</li><li>Workstations, servers &amp; backups</li></ul>
+      </div>
+    </article>
+    <article class="card">
+      <div class="photo"><img src="../../public/images/services/website-development/developer-workspace-code-and-website.png" alt="" style="object-position:55% 45%"></div>
+      <div class="body">
+        <h2>Software &amp; Website Development</h2>
+        <ul><li>Business website design &amp; development</li><li>Custom business software</li><li>Web applications &amp; dashboards</li><li>APIs, integrations &amp; workflow automation</li></ul>
+      </div>
+    </article>
+    <article class="card">
+      <div class="photo"><img src="../../public/images/services/iot/iot-smart-automation.png" alt="" style="object-position:30% 55%"></div>
+      <div class="body">
+        <h2>IoT &amp; Smart Automation</h2>
+        <ul><li>Smart door, gate, home &amp; office automation</li><li>Smart agriculture &amp; automated irrigation</li><li>Soil moisture, water level &amp; climate monitoring</li><li>Industrial IoT &amp; remote equipment monitoring</li><li>Smart energy monitoring</li><li>Custom dashboards &amp; real-time alerts</li></ul>
+      </div>
+    </article>
+    <article class="card">
+      <div class="photo"><img src="../../public/images/services/digital-marketing/digital-marketing-team.png" alt="" style="object-position:55% 45%"></div>
+      <div class="body">
+        <h2>Digital Marketing</h2>
+        <ul><li>SEO &amp; search engine marketing</li><li>Social media marketing &amp; management</li><li>Google, Facebook &amp; Instagram advertising</li><li>Email marketing &amp; lead generation</li><li>Digital branding, analytics &amp; reporting</li></ul>
+      </div>
+    </article>
+    <article class="card">
+      <div class="photo"><img src="../../public/images/services/content-writing/content-writing-workspace.png" alt="" style="object-position:62% 45%"></div>
+      <div class="body">
+        <h2>Content Writing</h2>
+        <ul><li>Website &amp; SEO content writing</li><li>Blogs, articles &amp; social media content</li><li>Business profiles &amp; product descriptions</li><li>Marketing &amp; technical copywriting</li><li>Editing &amp; proofreading</li></ul>
+      </div>
+    </article>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="cta">
+        <div class="bar"></div>
+        <div>
+          <strong>Contact us for business enquiries &amp; custom solutions</strong>
+          <span>Consultations, site assessments and solutions planned around your business.</span>
+        </div>
+      </div>
+      <div class="contacts">
+        <div class="phone"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-phone" aria-hidden="true"><path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384"></path></svg><span>0345 9319469</span></div>
+        <ul><li><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-mail" aria-hidden="true"><path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7"></path><rect x="2" y="4" width="20" height="16" rx="2"></rect></svg><span>info@shakoorsolutions.com</span></li><li><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-mail" aria-hidden="true"><path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7"></path><rect x="2" y="4" width="20" height="16" rx="2"></rect></svg><span>safiullah@shakoorsolutions.com</span></li><li><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-globe" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path><path d="M2 12h20"></path></svg><span>shakoorsolutions.com</span></li></ul>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

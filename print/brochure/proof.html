@@ -1,0 +1,113 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><title>Folding proof</title><style>
+
+  @font-face { font-family: "Plus Jakarta Sans"; font-weight: 500; src: url("fonts/plus-jakarta-sans-latin-500-normal.woff2") format("woff2"); }
+  @font-face { font-family: "Plus Jakarta Sans"; font-weight: 600; src: url("fonts/plus-jakarta-sans-latin-600-normal.woff2") format("woff2"); }
+  @font-face { font-family: "Plus Jakarta Sans"; font-weight: 700; src: url("fonts/plus-jakarta-sans-latin-700-normal.woff2") format("woff2"); }
+  @font-face { font-family: "Plus Jakarta Sans"; font-weight: 800; src: url("fonts/plus-jakarta-sans-latin-800-normal.woff2") format("woff2"); }
+  @page { size: 426mm 303mm; margin: 0; }
+  :root { --midnight:#041426; --navy:#071f38; --navy2:#0b2a4a; --blue:#0a6fd1; --bright:#087fe5; --cyan:#20b8ff; --mist:#afc2d6; --silver:#c9d3de; --paper:#f4f8fc; --ink:#06182c; --slate:#4a5e75; --line:#dde6f0; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 426mm; height: 303mm; }
+  body { font-family: "Plus Jakarta Sans", Arial, sans-serif; color: var(--ink); background: #fff; position: relative; overflow: hidden;
+         -webkit-print-color-adjust: exact; print-color-adjust: exact; font-variant-ligatures: none; font-feature-settings: "liga" 0, "clig" 0; }
+
+  body { background:#fff; padding:12mm 16mm; }
+  h1 { font-size:20pt; font-weight:800; } .sub { margin-top:2mm; font-size:9.5pt; color:var(--slate); font-weight:500; }
+  .row { display:grid; grid-template-columns:1fr 1fr; gap:10mm; margin-top:8mm; }
+  .strip-wrap { margin-top:6mm; } .strip-title { font-size:10pt; font-weight:800; margin-bottom:2.5mm; }
+  .strip { position:relative; display:grid; grid-template-columns:repeat(4,1fr); height:25mm; border:.4mm solid var(--ink); }
+  .cell { padding:2.5mm; border-right:.2mm solid var(--line); display:flex; flex-direction:column; gap:.6mm; background:var(--paper); }
+  .cell.dk { background:#e8f0f8; } .cell.hl { background:var(--navy); color:#fff; }
+  .cell b { font-size:12pt; font-weight:800; } .cell span { font-size:8pt; font-weight:700; line-height:1.25; } .cell em { font-style:normal; font-size:7pt; color:var(--slate); }
+  .cell.hl em { color:var(--mist); }
+  .fold { position:absolute; top:-3mm; bottom:-3mm; border-left:.6mm dashed #ff0080; }
+  .fold span { position:absolute; bottom:-5.5mm; left:-15mm; width:30mm; text-align:center; font-size:6.8pt; font-weight:800; color:#ff0080; }
+  .note { margin-top:12mm; font-size:7.6pt; color:var(--slate); font-weight:500; }
+  .box { border:.3mm solid var(--line); border-radius:2mm; padding:5mm; background:var(--paper); }
+  .box h3 { font-size:10.5pt; font-weight:800; margin-bottom:2.5mm; }
+  .box li { font-size:8.2pt; line-height:1.55; margin-left:4mm; color:var(--ink); font-weight:500; }
+  .stack { display:flex; flex-direction:column; gap:1.2mm; margin-top:2mm; }
+  .stack div { font-size:8pt; font-weight:700; padding:1.6mm 3mm; border-radius:1mm; background:#fff; border:.3mm solid var(--line); }
+  .stack div.t { background:var(--navy); color:#fff; } .stack div.b { background:#e8f0f8; }
+  .zig { margin-top:3mm; }
+  .side { margin-top:7mm; border:.3mm solid var(--line); border-radius:2mm; padding:5mm 6mm; display:grid; grid-template-columns:1fr 1.15fr; gap:8mm; align-items:center; }
+  .side h3 { font-size:10.5pt; font-weight:800; margin-bottom:2mm; } .side p { font-size:8.2pt; line-height:1.55; color:var(--slate); font-weight:500; }
+  .side svg { width:100%; height:42mm; display:block; }
+  .warn { margin-top:6mm; padding:4mm 5mm; border-radius:2mm; background:#fff4e5; border:.3mm solid #f5b041; font-size:8.4pt; line-height:1.5; }
+  .warn b { font-weight:800; }
+</style></head><body>
+  <h1>Folding proof — 8-panel Z-fold (accordion) brochure</h1>
+  <div class="sub">SHAKOOR Integrated Solutions (Pvt.) Ltd. · one sheet, printed both sides, 4 equal panels per side, 3 folds · <b>provisional size 420 × 297 mm (105 mm panels) — awaiting printer's K4 specification</b></div>
+
+  
+  <div class="strip-wrap">
+    <div class="strip-title">Side A — OUTSIDE (print side 1), as viewed</div>
+    <div class="strip">
+      <div class="cell"><b>P1</b><span>Back cover</span><em>Contact & enquiries</em></div><div class="cell"><b>P2</b><span>What we do</span><em>Services + how we work</em></div><div class="cell"><b>P3</b><span>Who we are</span><em>Company + industries</em></div><div class="cell hl"><b>P4</b><span>FRONT COVER</span><em>Logo, name, tagline</em></div>
+      <div class="fold" style="left:25%"><span>FOLD 1 · MOUNTAIN</span></div><div class="fold" style="left:50%"><span>FOLD 2 · VALLEY</span></div><div class="fold" style="left:75%"><span>FOLD 3 · MOUNTAIN</span></div>
+    </div>
+    <div class="note">Mountain = fold peak toward you on this side; valley = fold dips away from you on this side.</div>
+  </div>
+
+  
+  <div class="strip-wrap">
+    <div class="strip-title">Side B — INSIDE (print side 2), as viewed after turning the sheet over left-to-right</div>
+    <div class="strip">
+      <div class="cell dk"><b>P5</b><span>Security & surveillance</span><em>behind P4 (front cover)</em></div><div class="cell dk"><b>P6</b><span>Access, attendance & POS</span><em>behind P3</em></div><div class="cell dk"><b>P7</b><span>IT, software & web</span><em>behind P2</em></div><div class="cell dk"><b>P8</b><span>IoT, marketing & content</span><em>behind P1 (back cover)</em></div>
+      <div class="fold" style="left:25%"><span>FOLD 3 · VALLEY</span></div><div class="fold" style="left:50%"><span>FOLD 2 · MOUNTAIN</span></div><div class="fold" style="left:75%"><span>FOLD 1 · VALLEY</span></div>
+    </div>
+    <div class="note">Each fold is the opposite type on this side. Fully opened, the inside reads left to right: P5 → P6 → P7 → P8.</div>
+  </div>
+
+  <div class="row">
+    <div class="box">
+      <h3>Duplex (two-sided) printing</h3>
+      <ul>
+        <li>Turn the sheet on its <b>short edge</b> (left ↔ right), keeping the top edge at the top.</li>
+        <li>Back-to-back pairs: <b>P4 ↔ P5</b>, <b>P3 ↔ P6</b>, <b>P2 ↔ P7</b>, <b>P1 ↔ P8</b>.</li>
+        <li>Fold lines on both sides must line up exactly; panels are equal width (standard for accordion folds).</li>
+        <li>Folding direction: P1|P2 mountain, P2|P3 valley, P3|P4 mountain (seen from the outside).</li>
+      </ul>
+      <h3 style="margin-top:4mm">Folded stack (top to bottom)</h3>
+      <div class="stack">
+        <div class="t">P4 — FRONT COVER (face up)</div>
+        <div>P5 + P6 — revealed when the cover is opened</div>
+        <div>P3 + P2 — next spread (introduction, then overview)</div>
+        <div>P7 + P8 — next spread</div>
+        <div class="b">P1 — BACK COVER (face down)</div>
+      </div>
+    </div>
+    <div class="box">
+      <h3>Reading sequence</h3>
+      <ul>
+        <li><b>Closed:</b> front cover P4 on top, back cover P1 underneath.</li>
+        <li><b>Paging through like a booklet:</b> P4 → P5|P6 → P3|P2 → P7|P8 → P1.</li>
+        <li><b>Fully opened, inside up:</b> all four service panels P5 → P8 in one row.</li>
+        <li><b>Fully opened, outside up:</b> P1 back cover · P2 overview · P3 introduction · P4 front cover.</li>
+      </ul>
+      <div class="warn">
+        <b>To confirm with the printing agency before the print PDF is made:</b><br>
+        1. Exact K4 sheet size (width × height) and whether panels stay equal width.<br>
+        2. Paper stock and weight (e.g. glossy art paper, gsm) and whether creasing is used.<br>
+        3. Bleed (3 mm assumed) and whether crop / fold marks are required.<br>
+        4. Duplex turn: short edge (assumed here) or long edge.<br>
+        5. Colour: whether they accept RGB PDF and convert to CMYK, or require a CMYK/PDF-X file.
+      </div>
+    </div>
+  </div>
+
+  <div class="side">
+    <div>
+      <h3>Side view while folding (looking at the top edge)</h3>
+      <p>The sheet zig-zags like an accordion. Each segment is one panel: each label gives the outside-face panel first and the inside-face panel second. Mountain and valley folds alternate, so all four panels stack flat with the front cover P4 on top.</p>
+      <p style="margin-top:2mm">When fully folded the brochure measures one panel: <b>105 × 297 mm</b> (provisional).</p>
+    </div>
+    <svg viewBox="0 0 560 165" xmlns="http://www.w3.org/2000/svg" font-family="Plus Jakarta Sans, Arial" font-weight="700">
+      <polyline points="20,120 150,40 280,120 410,40 540,120" fill="none" stroke="#071f38" stroke-width="7" stroke-linejoin="round"/>
+      <polyline points="20,120 150,40 280,120 410,40 540,120" fill="none" stroke="#20b8ff" stroke-width="2" stroke-linejoin="round" transform="translate(0,-5)"/>
+      <circle cx="150" cy="40" r="6" fill="#ff0080"/><text x="150" y="24" text-anchor="middle" font-size="11" fill="#ff0080">FOLD 1 · MOUNTAIN</text><circle cx="280" cy="120" r="6" fill="#ff0080"/><text x="280" y="146" text-anchor="middle" font-size="11" fill="#ff0080">FOLD 2 · VALLEY</text><circle cx="410" cy="40" r="6" fill="#ff0080"/><text x="410" y="24" text-anchor="middle" font-size="11" fill="#ff0080">FOLD 3 · MOUNTAIN</text>
+      <rect x="55" y="69" width="60" height="20" rx="10" fill="#fff" stroke="#dde6f0"/><text x="85" y="83" text-anchor="middle" font-size="12" fill="#06182c">P1 / P8</text><rect x="185" y="69" width="60" height="20" rx="10" fill="#fff" stroke="#dde6f0"/><text x="215" y="83" text-anchor="middle" font-size="12" fill="#06182c">P2 / P7</text><rect x="315" y="69" width="60" height="20" rx="10" fill="#fff" stroke="#dde6f0"/><text x="345" y="83" text-anchor="middle" font-size="12" fill="#06182c">P3 / P6</text><rect x="445" y="69" width="60" height="20" rx="10" fill="#fff" stroke="#dde6f0"/><text x="475" y="83" text-anchor="middle" font-size="12" fill="#06182c">P4 / P5</text>
+      <text x="560" y="162" text-anchor="end" font-size="10" fill="#4a5e75" font-weight="500">P1 / P8 = outside face / inside face of the same panel</text>
+    </svg>
+  </div>
+</body></html>

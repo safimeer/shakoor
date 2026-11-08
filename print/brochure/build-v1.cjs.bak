@@ -1,0 +1,479 @@
+/*
+ * SHAKOOR Integrated Solutions — 8-panel Z-fold (accordion) brochure.
+ *
+ * One sheet, printed both sides, four equal vertical panels per side, three folds.
+ *
+ *   OUTSIDE (side A), as printed and viewed:
+ *   | P1 Back cover | P2 Solutions overview | P3 Company introduction | P4 FRONT COVER |
+ *
+ *   INSIDE (side B), as printed and viewed after turning the sheet over left-to-right:
+ *   | P5 Security & CCTV | P6 Access, attendance & POS | P7 IT, software & web | P8 IoT, marketing & content |
+ *
+ * Duplex: turn on the SHORT edge (left-right), so P4 backs onto P5, P3 onto P6, P2 onto P7, P1 onto P8.
+ * Folding (viewed from the outside): P1|P2 mountain, P2|P3 valley, P3|P4 mountain. Folded, P4 is on
+ * top (front cover) and P1 is underneath (back cover).
+ *
+ * Usage:
+ *   node print/brochure/build.cjs                 previews with fold/trim guides (PREVIEW=1 default)
+ *   PREVIEW=0 node print/brochure/build.cjs       print files without guides (after approval)
+ *
+ * SHEET SIZE IS PROVISIONAL until the printer confirms their K4 dimensions. Change PANEL_W / PANEL_H.
+ */
+const fs = require("fs");
+const path = require("path");
+const React = require("react");
+const { renderToStaticMarkup } = require("react-dom/server");
+const { Phone, Mail, Globe, Cctv, KeyRound, ShoppingCart, Wrench, Code, Cpu, Megaphone } = require("lucide-react");
+
+/* ── Physical spec ───────────────────────────────────────────────────────────── */
+const PANEL_W = 105; // mm — PROVISIONAL (420 mm sheet / 4)
+const PANEL_H = 297; // mm — PROVISIONAL
+const BLEED = 3; // mm
+const SAFE = 7; // mm inside the trim / fold lines
+const SHEET_W = PANEL_W * 4;
+const PROVISIONAL = true;
+const PREVIEW = process.env.PREVIEW !== "0";
+
+const ROOT = path.resolve(__dirname, "../..");
+const img = (p) => path.relative(__dirname, path.join(ROOT, "public", p)).split(path.sep).join("/");
+const icon = (Cmp, size = 13) => renderToStaticMarkup(React.createElement(Cmp, { size, strokeWidth: 2, "aria-hidden": true }));
+const esc = (s) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+
+/* ── Content (from the website; no invented claims) ──────────────────────────── */
+const company = {
+  name1: "SHAKOOR INTEGRATED SOLUTIONS",
+  name2: "(PVT.) LTD.",
+  tagline: "Integrated Solutions for a Smarter, Safer & Connected World",
+  phone: "0345 9319469",
+  emails: ["info@shakoorsolutions.com", "safiullah@shakoorsolutions.com"],
+  web: "shakoorsolutions.com",
+};
+
+const intro = {
+  lead: "Shakoor Integrated Solutions brings security systems, business technology, software and IT support together under one team, so businesses can plan, install and maintain the technology they rely on with a single partner.",
+  body: "Many businesses buy cameras from one supplier, a POS from another and call someone else when the network fails. We simplify that by looking at the whole environment and recommending solutions that work together, from consultation and site assessment to installation and ongoing support.",
+  values: [
+    ["Honest advice", "We recommend what a site needs, not the most expensive option."],
+    ["Careful workmanship", "Neat installations, tested before handover."],
+    ["Clear communication", "Plain explanations, agreed scope and no surprises."],
+    ["Long-term thinking", "Solutions planned to be maintained and extended."],
+  ],
+};
+
+const overview = [
+  ["Security & surveillance", "CCTV, door access and monitoring", Cctv],
+  ["Access control & attendance", "Card, PIN, biometric and time recording", KeyRound],
+  ["Retail & POS", "Checkout hardware, software and reporting", ShoppingCart],
+  ["IT support & infrastructure", "Computers, networks, servers and backups", Wrench],
+  ["Software & websites", "Custom business software and websites", Code],
+  ["IoT & smart automation", "Sensors, automation and remote monitoring", Cpu],
+  ["Digital marketing & content", "SEO, social media, ads and writing", Megaphone],
+];
+
+const steps = ["Consultation", "Assessment", "Solution design", "Implementation", "Testing & handover", "Ongoing support"];
+
+const inside = [
+  {
+    image: "/images/portfolio/warehouse-cctv-surveillance.png",
+    position: "55% 30%",
+    groups: [
+      {
+        title: "CCTV & Surveillance",
+        lead: "Camera coverage planned around how your site actually works.",
+        items: [
+          "Site survey and camera placement plan",
+          "Indoor and outdoor security cameras",
+          "Recording, storage and retention sizing",
+          "Secure remote viewing on approved devices",
+          "Neat, labelled cabling and mounting",
+          "Testing, handover and maintenance",
+        ],
+      },
+      {
+        title: "Ideal for",
+        lead: "Sites of every size, indoors and out.",
+        items: ["Offices and commercial buildings", "Retail stores and supermarkets", "Warehouses, yards and campuses"],
+      },
+    ],
+    callout: ["Planning a new site or upgrading cameras?", "Ask us for a site assessment and a coverage plan before you buy equipment."],
+  },
+  {
+    image: "/images/industries/commercial-buildings-security.png",
+    position: "85% 45%",
+    groups: [
+      {
+        title: "Access Control & Door Access",
+        lead: "Control who enters which areas, and when.",
+        items: ["NFC / RFID card, PIN and biometric readers", "Electronic locks, exit buttons and controllers", "Permissions by role, area and time", "Entry logs for review"],
+      },
+      {
+        title: "Attendance Systems",
+        lead: "Accurate time records without manual registers.",
+        items: ["Fingerprint and face-recognition terminals", "RFID card time recording", "Shift, overtime and attendance reports"],
+      },
+      {
+        title: "Retail & POS Systems",
+        lead: "Faster checkout, with stock and sales in one place.",
+        items: ["POS terminals, hardware and software", "Barcode scanners, printers and cash drawers", "Inventory, billing and sales reporting"],
+      },
+    ],
+  },
+  {
+    image: "/images/services/website-development/developer-workspace-code-and-website.png",
+    position: "50% 45%",
+    groups: [
+      {
+        title: "IT Support & Infrastructure",
+        lead: "Keep computers and networks running reliably.",
+        items: ["Computer and IT hardware support", "Network troubleshooting and Wi-Fi", "Workstation and software setup", "Server assistance and backups"],
+      },
+      {
+        title: "Software Development",
+        lead: "Software shaped around how your business works.",
+        items: ["Custom business tools and dashboards", "Workflow automation", "APIs and system integrations"],
+      },
+      {
+        title: "Website Development",
+        lead: "A professional online presence on every device.",
+        items: ["Corporate websites and landing pages", "Responsive design for every screen", "Content management and SEO basics"],
+      },
+    ],
+  },
+  {
+    image: "/images/services/iot/iot-smart-automation.png",
+    position: "28% 50%",
+    groups: [
+      {
+        title: "IoT & Smart Automation",
+        lead: "Monitor and automate equipment, sites and farms remotely.",
+        items: [
+          "Smart door, gate, home and office automation",
+          "Smart agriculture and automated irrigation",
+          "Soil moisture, water level and climate monitoring",
+          "Industrial IoT and remote equipment monitoring",
+          "Energy monitoring, dashboards and alerts",
+        ],
+      },
+      {
+        title: "Digital Marketing",
+        lead: "Help the right customers find your business.",
+        items: ["SEO and search engine marketing", "Social media marketing and ads", "Email marketing and lead generation"],
+      },
+      {
+        title: "Content Writing",
+        lead: "Clear, professional writing for web and print.",
+        items: ["Website, SEO and blog content", "Business profiles and marketing copy", "Editing and proofreading"],
+      },
+    ],
+  },
+];
+
+/* ── Shared CSS ───────────────────────────────────────────────────────────────── */
+const css = (pageW, pageH) => `
+  ${[500, 600, 700, 800].map((w) => `@font-face { font-family: "Plus Jakarta Sans"; font-weight: ${w}; src: url("fonts/plus-jakarta-sans-latin-${w}-normal.woff2") format("woff2"); }`).join("\n  ")}
+  @page { size: ${pageW}mm ${pageH}mm; margin: 0; }
+  :root { --midnight:#041426; --navy:#071f38; --navy2:#0b2a4a; --blue:#0a6fd1; --bright:#087fe5; --cyan:#20b8ff; --mist:#afc2d6; --paper:#f4f8fc; --ink:#06182c; --slate:#4a5e75; --line:#dde6f0; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: ${pageW}mm; height: ${pageH}mm; }
+  body { font-family: "Plus Jakarta Sans", Arial, sans-serif; color: var(--ink); background: #fff; position: relative; overflow: hidden;
+         -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .contact, .phone { font-variant-ligatures: none; font-feature-settings: "liga" 0, "clig" 0; }
+`;
+
+/* Panel geometry on a print side (page includes bleed). Panel k spans [BLEED + (k-1)*PANEL_W, BLEED + k*PANEL_W]. */
+const panelBox = (k) => {
+  const left = BLEED + (k - 1) * PANEL_W - (k === 1 ? BLEED : 0);
+  const width = PANEL_W + (k === 1 || k === 4 ? BLEED : 0);
+  return `left:${left}mm; width:${width}mm; top:0; height:${PANEL_H + 2 * BLEED}mm;`;
+};
+/* Content area inside a panel, offset so the safe margin is measured from the trim/fold lines. */
+const safeBox = (k) => `left:${(k === 1 ? BLEED : 0) + SAFE}mm; right:${(k === 4 ? BLEED : 0) + SAFE}mm; top:${BLEED + SAFE}mm; bottom:${BLEED + SAFE}mm;`;
+
+const guides = (labels, folds) =>
+  !PREVIEW
+    ? ""
+    : `
+  <div class="g-trim"></div>
+  ${[1, 2, 3].map((i) => `<div class="g-fold" style="left:${BLEED + i * PANEL_W}mm"><span>${folds[i - 1]}</span></div>`).join("")}
+  ${labels.map((l, i) => `<div class="g-label" style="left:${BLEED + i * PANEL_W + PANEL_W / 2}mm">${l}</div>`).join("")}
+  ${PROVISIONAL ? `<div class="g-prov">PREVIEW · PROVISIONAL SIZE ${SHEET_W} × ${PANEL_H} mm · NOT FOR PRINT</div>` : ""}`;
+
+const guideCss = `
+  .g-trim { position:absolute; left:${BLEED}mm; top:${BLEED}mm; width:${SHEET_W}mm; height:${PANEL_H}mm; outline:.3mm dashed rgba(255,0,128,.85); z-index:50; pointer-events:none; }
+  .g-fold { position:absolute; top:0; bottom:0; width:0; border-left:.45mm dashed #ff0080; z-index:50; }
+  .g-fold span { position:absolute; top:${BLEED + 1}mm; left:1mm; background:#ff0080; color:#fff; font-size:6pt; font-weight:700; padding:.4mm 1.2mm; border-radius:.6mm; white-space:nowrap; }
+  .g-label { position:absolute; bottom:${BLEED + 1}mm; transform:translateX(-50%); background:rgba(255,0,128,.92); color:#fff; font-size:7pt; font-weight:800; padding:.6mm 2mm; border-radius:1mm; z-index:50; white-space:nowrap; }
+  .g-prov { position:absolute; left:50%; top:${BLEED + 7}mm; transform:translateX(-50%); background:#ff0080; color:#fff; font-size:7pt; font-weight:800; padding:.8mm 3mm; border-radius:1mm; z-index:51; letter-spacing:.04em; }
+`;
+
+/* ── OUTSIDE (side A) ─────────────────────────────────────────────────────────── */
+const contactList = `
+  <div class="phone">${icon(Phone, 15)}<span>${company.phone}</span></div>
+  <ul class="contact">
+    ${company.emails.map((e) => `<li>${icon(Mail)}<span>${esc(e)}</span></li>`).join("")}
+    <li>${icon(Globe)}<span>${company.web}</span></li>
+  </ul>`;
+
+const outside = `<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><title>Brochure outside</title><style>
+${css(SHEET_W + 2 * BLEED, PANEL_H + 2 * BLEED)}
+${guideCss}
+  .panel { position:absolute; overflow:hidden; }
+  .safe { position:absolute; display:flex; flex-direction:column; }
+  .dark { color:#fff; background: radial-gradient(70% 50% at 100% 0%, rgba(32,184,255,.25), transparent 60%), linear-gradient(170deg, var(--navy2), var(--navy) 45%, var(--midnight)); }
+  .grid-bg::after { content:""; position:absolute; inset:0; opacity:.45; background-image: linear-gradient(rgba(130,180,230,.07) 1px, transparent 1px), linear-gradient(90deg, rgba(130,180,230,.07) 1px, transparent 1px); background-size: 7mm 7mm; }
+  .kicker { font-size:7.5pt; font-weight:700; color:var(--cyan); letter-spacing:.02em; }
+  .rule { width:14mm; height:.8mm; border-radius:1mm; background:linear-gradient(90deg,var(--cyan),var(--bright)); }
+  h2 { font-size:16pt; font-weight:800; line-height:1.12; letter-spacing:-.01em; }
+  p { font-size:8.4pt; line-height:1.55; color:var(--slate); font-weight:500; }
+
+  /* P4 front cover */
+  .cover { background:var(--midnight); color:#fff; }
+  .cover .photo { position:absolute; inset:0; background:url("${img("/images/hero/shakoor-headquarters-blue-hour.png")}") 80% 50% / cover no-repeat; }
+  .cover .shade { position:absolute; inset:0; background: linear-gradient(180deg, rgba(4,20,38,.99) 0%, rgba(4,20,38,.98) 46%, rgba(4,20,38,.5) 64%, rgba(4,20,38,.3) 75%, rgba(4,20,38,.95) 100%); }
+  .cover .safe { z-index:2; align-items:center; text-align:center; }
+  .cover img.logo { width:48mm; height:auto; margin-top:14mm; filter: drop-shadow(0 2mm 4mm rgba(0,0,0,.45)); }
+  .cover .name { margin-top:9mm; font-size:15pt; font-weight:800; letter-spacing:.05em; line-height:1.2; }
+  .cover .tagline { margin-top:4mm; font-size:9pt; color:var(--mist); font-weight:500; line-height:1.45; max-width:80mm; }
+  .cover .rule { margin:6mm auto 0; }
+  .cover .pillars { margin-top:auto; width:100%; display:grid; grid-template-columns:1fr 1fr; gap:2.4mm; }
+  .cover .pillars div { border:.3mm solid rgba(130,180,230,.35); background:rgba(4,20,38,.55); border-radius:2mm; padding:2.6mm 2mm; font-size:7.6pt; font-weight:700; }
+
+  /* P3 introduction, P2 overview */
+  .light { background:var(--paper); }
+  .light .photo { height:78mm; margin:-${SAFE}mm -${SAFE}mm 0; flex:none; overflow:hidden; }
+  .light .photo img { width:100%; height:100%; object-fit:cover; display:block; }
+  .intro .safe { padding-top:0; }
+  .promise { margin-top:auto; background:var(--navy); color:#fff; border-radius:2.4mm; padding:4mm; }
+  .promise b { display:block; font-size:10pt; font-weight:800; line-height:1.25; }
+  .promise span { display:block; margin-top:1.6mm; font-size:7.8pt; color:var(--mist); line-height:1.45; font-weight:500; }
+  .values { margin-top:5mm; display:grid; gap:2.6mm; }
+  .values div { border-left:.8mm solid var(--cyan); padding-left:2.6mm; }
+  .values b { display:block; font-size:8.4pt; font-weight:800; color:var(--ink); }
+  .values span { display:block; font-size:7.8pt; color:var(--slate); line-height:1.45; font-weight:500; }
+  .ov { margin-top:5mm; flex:1; display:grid; grid-auto-rows:1fr; gap:2.4mm; }
+  .ov div { background:#fff; border:.3mm solid var(--line); border-radius:2.4mm; padding:3mm 3.4mm; display:flex; align-items:center; gap:3.4mm; }
+  .ov i { flex:none; width:11mm; height:11mm; border-radius:2.4mm; display:grid; place-items:center; background:linear-gradient(135deg,var(--navy2),var(--navy)); color:var(--cyan); }
+  .ov i svg { width:5.6mm; height:5.6mm; }
+  .ov p { color:var(--ink); }
+  .ov b { display:block; font-size:10pt; font-weight:800; }
+  .ov span { display:block; font-size:8.3pt; line-height:1.35; color:var(--slate); font-weight:500; margin-top:.4mm; }
+  .steps { counter-reset:s; display:grid; grid-template-columns:1fr 1fr; gap:2mm 3mm; }
+  .steps li { list-style:none; counter-increment:s; display:flex; align-items:center; gap:2mm; font-size:7.8pt; font-weight:700; }
+  .steps li::before { content:counter(s); flex:none; width:5.2mm; height:5.2mm; border-radius:50%; background:var(--navy); color:var(--cyan); font-size:7pt; display:grid; place-items:center; }
+
+  /* P1 back cover */
+  .back .safe { justify-content:space-between; }
+  .back img.logo { width:22mm; height:auto; }
+  .back .name { margin-top:3mm; font-size:10pt; font-weight:800; letter-spacing:.05em; line-height:1.25; }
+  .back h3 { font-size:15pt; font-weight:800; line-height:1.15; }
+  .back p { color:var(--mist); margin-top:3mm; }
+  .phone { display:flex; align-items:center; justify-content:center; gap:2.4mm; padding:3.4mm; border-radius:2.4mm; background:linear-gradient(135deg,var(--blue),var(--bright)); font-size:14pt; font-weight:800; color:#fff; }
+  .phone svg { width:5mm; height:5mm; }
+  .contact { list-style:none; margin-top:4mm; display:grid; gap:2.4mm; }
+  .contact li { display:flex; align-items:center; gap:2.2mm; font-size:8.6pt; font-weight:600; color:#fff; white-space:nowrap; }
+  .contact svg { width:3.8mm; height:3.8mm; color:var(--cyan); flex:none; }
+</style></head><body>
+  <section class="panel back dark grid-bg" style="${panelBox(1)}">
+    <div class="safe" style="${safeBox(1)}; z-index:2">
+      <div>
+        <img class="logo" src="${img("/images/brand/shakoor-logo.png")}" alt="">
+        <div class="name">${company.name1}<br>${company.name2}</div>
+      </div>
+      <div>
+        <div class="kicker">Get in touch</div>
+        <h3 style="margin-top:2mm">Contact us for business enquiries &amp; custom solutions</h3>
+        <p>Tell us about your site, your team and what you need. We'll recommend a practical next step, usually starting with a consultation or site assessment.</p>
+      </div>
+      <div>${contactList}</div>
+    </div>
+  </section>
+
+  <section class="panel light" style="${panelBox(2)}">
+    <div class="safe" style="${safeBox(2)}">
+      <div class="kicker">What we do</div>
+      <h2 style="margin-top:2mm">Integrated solutions from one team</h2>
+      <div class="ov">${overview.map(([t, s, I]) => `<div><i>${icon(I, 18)}</i><p><b>${esc(t)}</b><span>${esc(s)}</span></p></div>`).join("")}</div>
+      <div class="kicker" style="margin-top:6mm; margin-bottom:3mm">How we work</div>
+      <ol class="steps">${steps.map((s) => `<li>${esc(s)}</li>`).join("")}</ol>
+    </div>
+  </section>
+
+  <section class="panel light intro" style="${panelBox(3)}">
+    <div class="safe" style="${safeBox(3)}; top:${BLEED}mm">
+      <div class="photo" style="margin-top:0"><img src="${img("/images/industries/corporate-office.png")}" alt="" style="object-position:55% 45%"></div>
+      <div class="kicker" style="margin-top:6mm">Who we are</div>
+      <h2 style="margin-top:2mm">Your partner in security &amp; IT solutions</h2>
+      <p style="margin-top:3mm; color:var(--ink); font-weight:600">${esc(intro.lead)}</p>
+      <p style="margin-top:3mm">${esc(intro.body)}</p>
+      <div class="values">${intro.values.map(([t, s]) => `<div><b>${esc(t)}</b><span>${esc(s)}</span></div>`).join("")}</div>
+      <div class="promise"><b>One partner, from consultation to ongoing support</b><span>Security, business technology, software and IT, planned to work together.</span></div>
+    </div>
+  </section>
+
+  <section class="panel cover" style="${panelBox(4)}">
+    <div class="photo"></div><div class="shade"></div>
+    <div class="safe" style="${safeBox(4)}">
+      <img class="logo" src="${img("/images/brand/shakoor-logo.png")}" alt="SHAKOOR logo">
+      <div class="name">${company.name1}<br>${company.name2}</div>
+      <div class="rule"></div>
+      <div class="tagline">${esc(company.tagline)}</div>
+      <div class="pillars"><div>Security systems</div><div>Business technology</div><div>IoT &amp; automation</div><div>Digital services</div></div>
+    </div>
+  </section>
+  ${guides(["P1 · BACK COVER", "P2 · OVERVIEW", "P3 · INTRODUCTION", "P4 · FRONT COVER"], ["FOLD 1 · MOUNTAIN", "FOLD 2 · VALLEY", "FOLD 3 · MOUNTAIN"])}
+</body></html>`;
+
+/* ── INSIDE (side B) ──────────────────────────────────────────────────────────── */
+const insidePanels = inside
+  .map(
+    (p, i) => `
+  <section class="panel" style="${panelBox(i + 1)}">
+    <div class="photo" style="margin-left:${i === 0 ? 0 : 0}"><img src="${img(p.image)}" alt="" style="object-position:${p.position}"></div>
+    <div class="safe inside-safe" style="${safeBox(i + 1)}; top:${BLEED + 112}mm">
+      ${p.groups
+        .map(
+          (g, gi) => `
+        <div class="group${gi ? " next" : ""}">
+          <h3>${esc(g.title)}</h3>
+          ${g.lead ? `<p class="lead">${esc(g.lead)}</p>` : ""}
+          <ul>${g.items.map((it) => `<li>${esc(it)}</li>`).join("")}</ul>
+        </div>`,
+        )
+        .join("")}
+      ${p.callout ? `<div class="callout"><b>${esc(p.callout[0])}</b><span>${esc(p.callout[1])}</span></div>` : ""}
+      <div class="foot">${esc(company.web)}</div>
+    </div>
+  </section>`,
+  )
+  .join("");
+
+const insideHtml = `<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><title>Brochure inside</title><style>
+${css(SHEET_W + 2 * BLEED, PANEL_H + 2 * BLEED)}
+${guideCss}
+  body { background: var(--paper); }
+  .panel { position:absolute; overflow:hidden; }
+  .panel:nth-of-type(even) { background:#fff; }
+  .photo { position:absolute; left:0; right:0; top:0; height:${BLEED + 104}mm; overflow:hidden; background:var(--navy); }
+  .photo img { width:100%; height:100%; object-fit:cover; display:block; }
+  .photo::after { content:""; position:absolute; inset:auto 0 0 0; height:14mm; background:linear-gradient(transparent, rgba(4,20,38,.35)); }
+  .safe { position:absolute; display:flex; flex-direction:column; }
+  .inside-safe { justify-content:space-between; }
+  .group.next { margin-top:6.5mm; padding-top:6mm; border-top:.3mm solid var(--line); }
+  h3 { font-size:13.5pt; font-weight:800; line-height:1.15; padding-left:2.6mm; border-left:1mm solid var(--cyan); }
+  .lead { margin-top:2.4mm; font-size:9pt; line-height:1.5; color:var(--ink); font-weight:600; }
+  ul { list-style:none; margin-top:3mm; display:grid; gap:2.2mm; }
+  li { position:relative; padding-left:3.6mm; font-size:9pt; line-height:1.4; color:var(--slate); font-weight:500; }
+  li::before { content:""; position:absolute; left:0; top:1.7mm; width:1.4mm; height:1.4mm; border-radius:.35mm; background:var(--blue); }
+  .callout { background:var(--navy); color:#fff; border-radius:2.4mm; padding:4mm; }
+  .callout b { display:block; font-size:10pt; font-weight:800; line-height:1.25; }
+  .callout span { display:block; margin-top:1.6mm; font-size:8.2pt; color:var(--mist); line-height:1.45; font-weight:500; }
+  .foot { font-size:7pt; font-weight:700; color:var(--slate); opacity:.75; }
+  .band { position:absolute; left:0; right:0; bottom:0; height:${BLEED + 2.5}mm; background:linear-gradient(90deg,var(--navy),var(--blue),var(--cyan)); }
+</style></head><body>
+  ${insidePanels}
+  <div class="band"></div>
+  ${guides(["P5 · SECURITY & CCTV", "P6 · ACCESS, ATTENDANCE & POS", "P7 · IT, SOFTWARE & WEB", "P8 · IoT, MARKETING & CONTENT"], ["FOLD 3 · VALLEY", "FOLD 2 · MOUNTAIN", "FOLD 1 · VALLEY"])}
+</body></html>`;
+
+/* ── FOLDING PROOF ────────────────────────────────────────────────────────────── */
+const strip = (title, cells, folds, note, dark) => `
+  <div class="strip-wrap">
+    <div class="strip-title">${title}</div>
+    <div class="strip">
+      ${cells.map(([n, t, sub, hl]) => `<div class="cell${hl ? " hl" : ""}${dark ? " dk" : ""}"><b>${n}</b><span>${t}</span><em>${sub}</em></div>`).join("")}
+      ${folds.map((f, i) => `<div class="fold" style="left:${(i + 1) * 25}%"><span>${f}</span></div>`).join("")}
+    </div>
+    <div class="note">${note}</div>
+  </div>`;
+
+const proof = `<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><title>Folding proof</title><style>
+${css(SHEET_W + 2 * BLEED, PANEL_H + 2 * BLEED)}
+  body { background:#fff; padding:12mm 16mm; }
+  h1 { font-size:20pt; font-weight:800; } .sub { margin-top:2mm; font-size:9.5pt; color:var(--slate); font-weight:500; }
+  .row { display:grid; grid-template-columns:1fr 1fr; gap:10mm; margin-top:8mm; }
+  .strip-wrap { margin-top:6mm; } .strip-title { font-size:10pt; font-weight:800; margin-bottom:2.5mm; }
+  .strip { position:relative; display:grid; grid-template-columns:repeat(4,1fr); height:25mm; border:.4mm solid var(--ink); }
+  .cell { padding:2.5mm; border-right:.2mm solid var(--line); display:flex; flex-direction:column; gap:.6mm; background:var(--paper); }
+  .cell.dk { background:#e8f0f8; } .cell.hl { background:var(--navy); color:#fff; }
+  .cell b { font-size:12pt; font-weight:800; } .cell span { font-size:8pt; font-weight:700; line-height:1.25; } .cell em { font-style:normal; font-size:7pt; color:var(--slate); }
+  .cell.hl em { color:var(--mist); }
+  .fold { position:absolute; top:-3mm; bottom:-3mm; border-left:.6mm dashed #ff0080; }
+  .fold span { position:absolute; bottom:-5.5mm; left:-15mm; width:30mm; text-align:center; font-size:6.8pt; font-weight:800; color:#ff0080; }
+  .note { margin-top:12mm; font-size:7.6pt; color:var(--slate); font-weight:500; }
+  .box { border:.3mm solid var(--line); border-radius:2mm; padding:5mm; background:var(--paper); }
+  .box h3 { font-size:10.5pt; font-weight:800; margin-bottom:2.5mm; }
+  .box li { font-size:8.2pt; line-height:1.55; margin-left:4mm; color:var(--ink); font-weight:500; }
+  .stack { display:flex; flex-direction:column; gap:1.2mm; margin-top:2mm; }
+  .stack div { font-size:8pt; font-weight:700; padding:1.6mm 3mm; border-radius:1mm; background:#fff; border:.3mm solid var(--line); }
+  .stack div.t { background:var(--navy); color:#fff; } .stack div.b { background:#e8f0f8; }
+  .zig { margin-top:3mm; }
+  .side { margin-top:7mm; border:.3mm solid var(--line); border-radius:2mm; padding:5mm 6mm; display:grid; grid-template-columns:1fr 1.15fr; gap:8mm; align-items:center; }
+  .side h3 { font-size:10.5pt; font-weight:800; margin-bottom:2mm; } .side p { font-size:8.2pt; line-height:1.55; color:var(--slate); font-weight:500; }
+  .side svg { width:100%; height:42mm; display:block; }
+  .warn { margin-top:6mm; padding:4mm 5mm; border-radius:2mm; background:#fff4e5; border:.3mm solid #f5b041; font-size:8.4pt; line-height:1.5; }
+  .warn b { font-weight:800; }
+</style></head><body>
+  <h1>Folding proof — 8-panel Z-fold (accordion) brochure</h1>
+  <div class="sub">SHAKOOR Integrated Solutions (Pvt.) Ltd. · one sheet, printed both sides, 4 equal panels per side, 3 folds · ${PROVISIONAL ? `<b>provisional size ${SHEET_W} × ${PANEL_H} mm (${PANEL_W} mm panels) — awaiting printer's K4 specification</b>` : `${SHEET_W} × ${PANEL_H} mm`}</div>
+
+  ${strip("Side A — OUTSIDE (print side 1), as viewed", [["P1", "Back cover", "Contact & enquiries"], ["P2", "Solutions overview", "Services + how we work"], ["P3", "Company introduction", "Who we are"], ["P4", "FRONT COVER", "Logo, name, tagline", true]], ["FOLD 1 · MOUNTAIN", "FOLD 2 · VALLEY", "FOLD 3 · MOUNTAIN"], "Mountain = fold peak toward you on this side; valley = fold dips away from you on this side.", false)}
+
+  ${strip("Side B — INSIDE (print side 2), as viewed after turning the sheet over left-to-right", [["P5", "Security & CCTV", "behind P4 (front cover)"], ["P6", "Access, attendance & POS", "behind P3"], ["P7", "IT, software & web", "behind P2"], ["P8", "IoT, marketing & content", "behind P1 (back cover)"]], ["FOLD 3 · VALLEY", "FOLD 2 · MOUNTAIN", "FOLD 1 · VALLEY"], "Each fold is the opposite type on this side. Fully opened, the inside reads left to right: P5 → P6 → P7 → P8.", true)}
+
+  <div class="row">
+    <div class="box">
+      <h3>Duplex (two-sided) printing</h3>
+      <ul>
+        <li>Turn the sheet on its <b>short edge</b> (left ↔ right), keeping the top edge at the top.</li>
+        <li>Back-to-back pairs: <b>P4 ↔ P5</b>, <b>P3 ↔ P6</b>, <b>P2 ↔ P7</b>, <b>P1 ↔ P8</b>.</li>
+        <li>Fold lines on both sides must line up exactly; panels are equal width (standard for accordion folds).</li>
+        <li>Folding direction: P1|P2 mountain, P2|P3 valley, P3|P4 mountain (seen from the outside).</li>
+      </ul>
+      <h3 style="margin-top:4mm">Folded stack (top to bottom)</h3>
+      <div class="stack">
+        <div class="t">P4 — FRONT COVER (face up)</div>
+        <div>P5 + P6 — revealed when the cover is opened</div>
+        <div>P3 + P2 — next spread (introduction, then overview)</div>
+        <div>P7 + P8 — next spread</div>
+        <div class="b">P1 — BACK COVER (face down)</div>
+      </div>
+    </div>
+    <div class="box">
+      <h3>Reading sequence</h3>
+      <ul>
+        <li><b>Closed:</b> front cover P4 on top, back cover P1 underneath.</li>
+        <li><b>Paging through like a booklet:</b> P4 → P5|P6 → P3|P2 → P7|P8 → P1.</li>
+        <li><b>Fully opened, inside up:</b> all four service panels P5 → P8 in one row.</li>
+        <li><b>Fully opened, outside up:</b> P1 back cover · P2 overview · P3 introduction · P4 front cover.</li>
+      </ul>
+      <div class="warn">
+        <b>To confirm with the printing agency before the print PDF is made:</b><br>
+        1. Exact K4 sheet size (width × height) and whether panels stay equal width.<br>
+        2. Paper stock and weight (e.g. glossy art paper, gsm) and whether creasing is used.<br>
+        3. Bleed (3 mm assumed) and whether crop / fold marks are required.<br>
+        4. Duplex turn: short edge (assumed here) or long edge.<br>
+        5. Colour: whether they accept RGB PDF and convert to CMYK, or require a CMYK/PDF-X file.
+      </div>
+    </div>
+  </div>
+
+  <div class="side">
+    <div>
+      <h3>Side view while folding (looking at the top edge)</h3>
+      <p>The sheet zig-zags like an accordion. Each segment is one panel: each label gives the outside-face panel first and the inside-face panel second. Mountain and valley folds alternate, so all four panels stack flat with the front cover P4 on top.</p>
+      <p style="margin-top:2mm">When fully folded the brochure measures one panel: <b>${PANEL_W} × ${PANEL_H} mm</b> (provisional).</p>
+    </div>
+    <svg viewBox="0 0 560 165" xmlns="http://www.w3.org/2000/svg" font-family="Plus Jakarta Sans, Arial" font-weight="700">
+      <polyline points="20,120 150,40 280,120 410,40 540,120" fill="none" stroke="#071f38" stroke-width="7" stroke-linejoin="round"/>
+      <polyline points="20,120 150,40 280,120 410,40 540,120" fill="none" stroke="#20b8ff" stroke-width="2" stroke-linejoin="round" transform="translate(0,-5)"/>
+      ${[[150, 40, "FOLD 1", "MOUNTAIN", -16], [280, 120, "FOLD 2", "VALLEY", 26], [410, 40, "FOLD 3", "MOUNTAIN", -16]].map(([x, y, a, b, dy]) => `<circle cx="${x}" cy="${y}" r="6" fill="#ff0080"/><text x="${x}" y="${y + dy}" text-anchor="middle" font-size="11" fill="#ff0080">${a} · ${b}</text>`).join("")}
+      ${[[85, "P1 / P8"], [215, "P2 / P7"], [345, "P3 / P6"], [475, "P4 / P5"]].map(([x, t]) => `<rect x="${x - 30}" y="69" width="60" height="20" rx="10" fill="#fff" stroke="#dde6f0"/><text x="${x}" y="83" text-anchor="middle" font-size="12" fill="#06182c">${t}</text>`).join("")}
+      <text x="560" y="162" text-anchor="end" font-size="10" fill="#4a5e75" font-weight="500">P1 / P8 = outside face / inside face of the same panel</text>
+    </svg>
+  </div>
+</body></html>`;
+
+fs.writeFileSync(path.join(__dirname, "outside.html"), outside);
+fs.writeFileSync(path.join(__dirname, "inside.html"), insideHtml);
+fs.writeFileSync(path.join(__dirname, "proof.html"), proof);
+console.log(`Brochure built: ${SHEET_W} × ${PANEL_H} mm sheet, ${PANEL_W} mm panels${PROVISIONAL ? " (PROVISIONAL)" : ""}, guides ${PREVIEW ? "ON" : "OFF"}.`);
