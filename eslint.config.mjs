@@ -12,6 +12,8 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Offline Node (CommonJS) scripts that render print and social assets; not part of the app.
+    "print/**",
   ]),
 ]);
 
