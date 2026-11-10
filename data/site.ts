@@ -38,6 +38,13 @@ export const site = {
   social: [
     { label: "LinkedIn", href: "https://www.linkedin.com/company/shakoor-integrated-solutions/" },
   ] as { label: string; href: string }[],
+
+  /**
+   * Google AdSense publisher ID (from the AdSense dashboard, Account → Account information).
+   * Used for the AdSense script and account meta tag in app/layout.tsx and for /ads.txt.
+   * Set to null to remove AdSense from the site.
+   */
+  adsensePublisherId: "pub-5214881961419367" as string | null,
 };
 
 export const mainNav = [

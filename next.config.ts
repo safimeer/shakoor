@@ -15,14 +15,31 @@ import type { NextConfig } from "next";
  * endpoint). 'unsafe-inline' scripts are required because Next.js streams page data in inline
  * <script> tags; a nonce-based policy would force every page to render per request.
  * Applied to production builds only — development needs 'unsafe-eval' for hot reloading.
+ *
+ * Google AdSense (see adsensePublisherId in data/site.ts) adds Google's ad-serving, ad-quality
+ * and consent-message hosts below. Ad creatives are images from many advertiser CDNs, so img-src
+ * allows any HTTPS image. Ads render inside Google iframes, which frame-src permits.
  */
+const googleAds = [
+  "https://pagead2.googlesyndication.com",
+  "https://*.googlesyndication.com",
+  "https://*.doubleclick.net",
+  "https://*.googleadservices.com",
+  "https://*.googletagservices.com",
+  "https://*.adtrafficquality.google",
+  "https://*.google.com",
+  "https://*.gstatic.com",
+].join(" ");
+
 const contentSecurityPolicy = [
   "default-src 'self'",
-  "script-src 'self' 'unsafe-inline'",
-  "style-src 'self' 'unsafe-inline'",
-  "img-src 'self' data: blob:",
-  "font-src 'self'",
-  "connect-src 'self'",
+  `script-src 'self' 'unsafe-inline' ${googleAds}`,
+  "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
+  "img-src 'self' data: blob: https:",
+  "font-src 'self' https://fonts.gstatic.com",
+  `connect-src 'self' ${googleAds}`,
+  `frame-src ${googleAds}`,
+  `fenced-frame-src ${googleAds}`,
   "manifest-src 'self'",
   "worker-src 'self' blob:",
   "object-src 'none'",
@@ -38,7 +55,8 @@ const securityHeaders = [
   { key: "X-Content-Type-Options", value: "nosniff" },
   { key: "X-Frame-Options", value: "SAMEORIGIN" },
   { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
-  { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=(), browsing-topics=()" },
+  // browsing-topics is left at the browser default so AdSense can use Chrome's Topics API for ad relevance.
+  { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=()" },
   // One year, apex and www only. Add includeSubDomains (and consider preload) only after every
   // subdomain of the domain is confirmed to serve HTTPS — browsers then refuse plain HTTP for all of them.
   { key: "Strict-Transport-Security", value: "max-age=31536000" },

@@ -5,9 +5,11 @@ import { LegalPage } from "@/components/layout/LegalPage";
 
 export const metadata: Metadata = {
   title: "Privacy policy",
-  description: `How ${site.name} handles information submitted through this website.`,
+  description: `How ${site.name} handles information submitted through this website, and how advertising cookies are used.`,
   alternates: { canonical: "/privacy" },
 };
+
+const externalLink = "font-semibold text-blue underline underline-offset-2";
 
 // TODO(company): have this draft reviewed by a legal adviser before launch.
 export default function PrivacyPage() {
@@ -34,6 +36,35 @@ export default function PrivacyPage() {
         Enquiries are sent to our team by email through an email delivery provider. Your details are not stored in a
         database on this website.
       </p>
+      {site.adsensePublisherId ? (
+        <>
+          <h2>Advertising and cookies</h2>
+          <p>
+            This website shows advertisements served by Google AdSense. Third-party vendors, including Google, use cookies
+            and similar technologies to serve ads based on your previous visits to this website and other websites, and to
+            measure how ads perform.
+          </p>
+          <p>
+            Google&apos;s use of advertising cookies enables it and its partners to serve ads to you based on your visits to
+            this and other sites on the internet. You can learn more in{" "}
+            <a href="https://policies.google.com/technologies/partner-sites" rel="noopener noreferrer" target="_blank" className={externalLink}>
+              how Google uses information from sites that use its services
+            </a>
+            .
+          </p>
+          <p>
+            You can turn off personalised advertising in{" "}
+            <a href="https://myadcenter.google.com/" rel="noopener noreferrer" target="_blank" className={externalLink}>
+              Google&apos;s My Ad Center
+            </a>
+            , or opt out of personalised advertising from other participating vendors at{" "}
+            <a href="https://www.aboutads.info/choices/" rel="noopener noreferrer" target="_blank" className={externalLink}>
+              www.aboutads.info
+            </a>
+            . You can also block or delete cookies in your browser settings.
+          </p>
+        </>
+      ) : null}
       <h2>Your choices</h2>
       <p>
         You can ask us to update or delete the details you sent by contacting us through the{" "}
