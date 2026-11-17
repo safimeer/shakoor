@@ -120,6 +120,17 @@ async function ProjectContent({ params }: { params: PageProps<"/portfolio/[slug]
             ) : null}
             <h2 className="mt-6 text-sm font-semibold text-slate-ink">Category</h2>
             <p className="mt-2 font-semibold text-ink">{category}</p>
+            {project.prototypeUrl ? (
+              // A static file under /public, not a Next.js route, so a plain link is used.
+              <a
+                href={project.prototypeUrl}
+                target="_blank"
+                rel="noopener"
+                className="mt-8 inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-xl border border-blue px-6 font-semibold text-blue hover:bg-blue hover:text-white"
+              >
+                View interactive prototype <ArrowRight aria-hidden="true" className="size-4" />
+              </a>
+            ) : null}
             <Link href={`/contact?service=${project.service}#enquiry`} className="mt-8 inline-flex min-h-12 w-full items-center justify-center rounded-xl bg-blue px-6 font-semibold text-white hover:bg-blue-deep">
               Discuss a similar project
             </Link>

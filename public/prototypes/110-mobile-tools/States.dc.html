@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>110 Mobile Tools — alternate states</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap">
+<style>
+body{margin:0;background:#F4F6FA}
+a{color:#1A5FD6}
+.r,.r *{box-sizing:border-box}
+.r{font-family:Inter,system-ui,sans-serif;color:#0F172A;font-size:15px;line-height:1.5;background:#F4F6FA}
+.h{font-family:'Space Grotesk',Inter,sans-serif;letter-spacing:-0.01em;margin:0}
+.wrap{max-width:1280px;margin:0 auto;padding:0 32px}
+.st{display:flex;flex-direction:column;gap:12px}
+.lab{display:flex;align-items:center;gap:8px}
+.n{width:28px;height:28px;border-radius:8px;background:#0B1F3A;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px}
+.ph{background:#fff;border:1px solid #E2E8F0;border-radius:24px;padding:14px;display:flex;flex-direction:column;gap:10px;min-height:440px;box-shadow:0 8px 24px rgba(11,31,58,.06)}
+.bar{display:flex;justify-content:space-between;align-items:center;font-size:13px;font-weight:700;color:#0B1F3A;padding-bottom:8px;border-bottom:1px solid #E2E8F0}
+.btn{display:flex;align-items:center;justify-content:center;min-height:46px;border-radius:10px;font-weight:600;font-size:14px;border:0;font-family:inherit}
+.bp{background:#1A5FD6;color:#fff}.bs{background:#fff;color:#0B1F3A;border:1.5px solid #CBD5E1}.bd{background:#E2E8F0;color:#64748B}.bw{background:#1E7A46;color:#fff}
+.img{background:#EEF2F7;border:1.5px dashed #B6C2D2;border-radius:10px;display:flex;align-items:center;justify-content:center;color:#475569;font-size:11px}
+.in{height:44px;border:1.5px solid #CBD5E1;border-radius:10px;padding:0 10px;display:flex;align-items:center;font-size:14px;color:#0F172A;background:#fff}
+.ine{border-color:#B42318;background:#FDECEA}
+.err{color:#B42318;font-size:12px}
+.m{color:#475569}
+.why{font-size:13px;color:#334155}
+</style>
+</helmet>
+<div class="r" style="padding-bottom: 48px">
+  <div style="background: #F08A24; color: #0B1F3A; font-size: 12px; font-weight: 700; text-align: center; padding: 4px 12px">PROPOSED CONCEPT · state mockups</div>
+  <div class="wrap" style="padding-top: 28px; display: flex; flex-direction: column; gap: 8px">
+    <div style="font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: #1A5FD6">Stage 4</div>
+    <h1 class="h" style="font-size: 34px">Alternate states</h1>
+    <p class="m" style="margin: 0; max-width: 800px">How each screen responds when something isn't straightforward. Shown at mobile size; desktop uses the same messages. Each state also works in the interactive screens (numbers in brackets).</p>
+  </div>
+  <div class="wrap" style="padding-top: 24px; display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 28px">
+
+    <div class="st">
+      <div class="lab"><span class="n">A</span><strong>Out of stock</strong><span class="m" style="font-size: 13px">(05)</span></div>
+      <div class="ph">
+        <div class="bar"><span>←</span><span>110 Mobile Tools</span><span>Cart</span></div>
+        <div class="img" style="height: 150px; opacity: .6">[Product image]</div>
+        <strong>Fast Charger with Cable [Model TBC]</strong>
+        <strong style="color: #0B1F3A">PKR [Price]</strong>
+        <span style="align-self: flex-start; background: #E2E8F0; color: #334155; font-size: 12px; font-weight: 700; padding: 3px 8px; border-radius: 6px">Out of stock</span>
+        <div style="background: #F1F5F9; border-radius: 10px; padding: 10px; font-size: 13px">Leave your number and we'll tell you when it's back.</div>
+        <div class="in">03XX XXXXXXX</div>
+        <div class="btn bp">Notify me</div>
+        <div class="btn bd">Add to Cart (unavailable)</div>
+      </div>
+      <span class="why">Add to Cart is disabled; customers can request a restock alert or ask for an alternative.</span>
+    </div>
+
+    <div class="st">
+      <div class="lab"><span class="n">B</span><strong>Invalid or unavailable coupon</strong><span class="m" style="font-size: 13px">(06, 13)</span></div>
+      <div class="ph">
+        <div class="bar"><span>←</span><span>Cart</span><span></span></div>
+        <div style="display: flex; gap: 10px; align-items: center"><div class="img" style="width: 56px; height: 56px">[Img]</div><span style="font-size: 14px; flex: 1">Hot Air Rework Station [TBC] × 1</span></div>
+        <div style="display: flex; gap: 8px"><div class="in ine" style="flex: 1">OLDCODE20</div><div class="btn bs" style="padding: 0 14px">Apply</div></div>
+        <div class="err" role="alert">“OLDCODE20” is invalid or not available. Check the code or its terms.</div>
+        <div style="display: flex; justify-content: space-between; font-size: 14px; border-top: 1px solid #E2E8F0; padding-top: 10px"><span class="m">Subtotal</span><span>PKR [Subtotal]</span></div>
+        <div style="display: flex; justify-content: space-between; font-size: 14px"><span class="m">Discount</span><span>—</span></div>
+        <div class="btn bp" style="margin-top: auto">Proceed to checkout</div>
+      </div>
+      <span class="why">The cart and totals stay unchanged; the customer can still check out.</span>
+    </div>
+
+    <div class="st">
+      <div class="lab"><span class="n">C</span><strong>Missing checkout information</strong><span class="m" style="font-size: 13px">(07, 13)</span></div>
+      <div class="ph">
+        <div class="bar"><span>←</span><span>Checkout</span><span></span></div>
+        <div style="background: #FDECEA; border: 1px solid #F3B8B2; border-radius: 10px; padding: 10px; font-size: 13px; color: #7A1A12"><strong>Missing information:</strong> mobile number, city.</div>
+        <span style="font-size: 12px; font-weight: 600">Full name *</span><div class="in">Sample Customer</div>
+        <span style="font-size: 12px; font-weight: 600">Mobile number *</span><div class="in ine"></div><span class="err">Enter a mobile number so the courier can reach you.</span>
+        <span style="font-size: 12px; font-weight: 600">City *</span><div class="in ine m">Select city</div><span class="err">Select your city.</span>
+        <div class="btn" style="background: #0B1F3A; color: #FFFFFF">Place order</div>
+      </div>
+      <span class="why">A summary at the top plus a message under each field; entered details are kept.</span>
+    </div>
+
+    <div class="st">
+      <div class="lab"><span class="n">D</span><strong>Payment not completed</strong><span class="m" style="font-size: 13px">(07 · card)</span></div>
+      <div class="ph">
+        <div class="bar"><span></span><span>Payment</span><span></span></div>
+        <div style="width: 56px; height: 56px; border-radius: 999px; background: #FDECEA; color: #B42318; display: flex; align-items: center; justify-content: center; font-size: 28px; font-weight: 700; align-self: center">!</div>
+        <strong class="h" style="font-size: 20px; text-align: center">Payment not completed</strong>
+        <span style="font-size: 14px; text-align: center" class="m">No money has been taken. Your order #110-[Order no.] is saved as “Pending payment”.</span>
+        <div class="btn bp">Try again</div>
+        <div class="btn bs">Choose another method</div>
+        <div class="btn bw">Get help on WhatsApp</div>
+      </div>
+      <span class="why">Shown when the card provider returns a failed or cancelled payment.</span>
+    </div>
+
+    <div class="st">
+      <div class="lab"><span class="n">E</span><strong>Awaiting payment verification</strong><span class="m" style="font-size: 13px">(08, 14)</span></div>
+      <div class="ph">
+        <div class="bar"><span></span><span>Order #110-[Order no.]</span><span></span></div>
+        <span style="align-self: flex-start; background: #FFF1E0; color: #8A4200; font-size: 12px; font-weight: 700; padding: 3px 8px; border-radius: 6px">Awaiting payment verification</span>
+        <span style="font-size: 14px">You chose <strong>Bank Transfer</strong>. Send PKR [Total] to:</span>
+        <div style="background: #F4F6FA; border-radius: 10px; padding: 10px; font-size: 13px">Account title: [TBC]<br>Bank / wallet: [TBC]<br>Account no. / IBAN: [TBC]</div>
+        <span style="font-size: 13px" class="m">Then share the receipt. We start packing once the payment is checked.</span>
+        <div class="btn bw">Send receipt on WhatsApp</div>
+        <div class="btn bs">Track order</div>
+      </div>
+      <span class="why">Used for Bank Transfer and manual Easypaisa / JazzCash payments.</span>
+    </div>
+
+    <div class="st">
+      <div class="lab"><span class="n">F</span><strong>Order successfully placed</strong><span class="m" style="font-size: 13px">(08, 14)</span></div>
+      <div class="ph">
+        <div class="bar"><span></span><span>110 Mobile Tools</span><span></span></div>
+        <div style="width: 56px; height: 56px; border-radius: 999px; background: #E3F4EA; color: #1E7A46; display: flex; align-items: center; justify-content: center; font-size: 28px; font-weight: 700; align-self: center">✓</div>
+        <strong class="h" style="font-size: 20px; text-align: center">Thank you — order placed</strong>
+        <span style="text-align: center; font-size: 14px">Order <strong>#110-[Order no.]</strong></span>
+        <span class="m" style="text-align: center; font-size: 13px">Estimated delivery: [estimated delivery]. Not a guaranteed date.</span>
+        <div class="btn bp">Track order</div>
+        <div class="btn bs">Continue shopping</div>
+      </div>
+      <span class="why">Confirmation page plus message by SMS / WhatsApp / email [to be confirmed].</span>
+    </div>
+
+    <div class="st">
+      <div class="lab"><span class="n">G</span><strong>No search results</strong><span class="m" style="font-size: 13px">(04)</span></div>
+      <div class="ph">
+        <div class="bar"><span>←</span><span>Search</span><span></span></div>
+        <div class="in" style="border-color: #1A5FD6">XZ-9000</div>
+        <strong class="h" style="font-size: 19px; text-align: center; margin-top: 12px">No products found for “XZ-9000”</strong>
+        <span class="m" style="font-size: 13px; text-align: center">Check the spelling, try a shorter part number, or send us the model number.</span>
+        <div class="btn bp">Browse categories</div>
+        <div class="btn bw">Ask on WhatsApp</div>
+        <span class="m" style="font-size: 12px; text-align: center">Popular: solder · power supply · IC</span>
+      </div>
+      <span class="why">Never a dead end: browse, popular searches, or ask the team.</span>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script data-dc-script data-props='{"$preview":{"width":1280,"height":1600}}'>window.__dcComponent = (function () {
+class Component extends DCLogic {
+  renderVals() {
+    return {};
+  }
+}
+return Component;
+})();</script>
+</body>
+</html>

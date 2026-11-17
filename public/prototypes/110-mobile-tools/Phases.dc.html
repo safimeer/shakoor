@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>110 Mobile Tools — project phase dashboard</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap">
+<style>
+body{margin:0;background:#F4F6FA}
+a{color:#1A5FD6}a:hover{color:#0B1F3A}
+.r,.r *{box-sizing:border-box}
+.r{font-family:Inter,system-ui,sans-serif;color:#0F172A;font-size:14px;line-height:1.5;background:#F4F6FA}
+.h{font-family:'Space Grotesk',Inter,sans-serif;letter-spacing:-0.01em;margin:0}
+.wrap{max-width:1280px;margin:0 auto;padding:0 32px}
+.card{background:#fff;border:1px solid #E2E8F0;border-radius:14px}
+.in{width:100%;height:40px;border:1.5px solid #CBD5E1;border-radius:8px;padding:0 10px;font:inherit;background:#fff;color:#0F172A}
+.lbl{display:block;font-size:12px;font-weight:600;color:#334155;margin-bottom:4px}
+.m{color:#475569}
+.tbc{display:inline-block;background:#FFF7E6;color:#7A3E00;border:1px dashed #D08A3A;border-radius:6px;padding:0 6px;font-size:11px;font-weight:600}
+.st{display:inline-flex;align-items:center;height:26px;padding:0 10px;border-radius:6px;font-size:12px;font-weight:700}
+.s0{background:#E2E8F0;color:#334155}.s1{background:#E6EEFC;color:#123E8C}.s2{background:#FFF1E0;color:#8A4200}.s3{background:#E3F4EA;color:#14532D}
+.ck{display:flex;gap:10px;align-items:flex-start;font-size:14px;min-height:30px}
+.ck input{width:18px;height:18px;margin-top:2px;accent-color:#1A5FD6;flex:none}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:40px;padding:0 14px;border-radius:8px;font-weight:600;font-size:13px;text-decoration:none;border:1px solid #CBD5E1;background:#fff;color:#0B1F3A}
+.seg{flex:1;height:10px;border-radius:999px}
+.act{border-color:#1A5FD6;box-shadow:0 0 0 2px #CFE0FB}
+</style>
+</helmet>
+<div class="r" style="padding-bottom: 48px">
+  <div style="background: #F08A24; color: #0B1F3A; font-size: 12px; font-weight: 700; text-align: center; padding: 4px 12px">PROPOSED CONCEPT · dates and durations are editable placeholders</div>
+  <div class="wrap" style="padding-top: 28px; display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; flex-wrap: wrap">
+    <div><div style="font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: #1A5FD6">Stage 6 · Client-facing</div><h1 class="h" style="font-size: 34px">110 Mobile Tools — website project progress</h1><p class="m" style="margin: 4px 0 0">Four phases. Each ends with a client review; the next phase starts only after approval.</p></div>
+    <a href="Main.dc.html" class="btn">← Screen index</a>
+  </div>
+
+  <div class="wrap" style="padding-top: 20px">
+    <div class="card" style="padding: 18px; display: flex; flex-direction: column; gap: 10px">
+      <div style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px"><strong>Overall: {{doneCount}} of 4 phases complete</strong><span class="m">Current phase: <strong style="color: #0F172A">{{current}}</strong></span></div>
+      <div style="display: flex; gap: 6px">
+        <sc-for list="{{phases}}" as="p" hint-placeholder-count="4"><span class="seg" style="{{p.segStyle}}"></span></sc-for>
+      </div>
+      <div style="display: flex; gap: 16px; flex-wrap: wrap; font-size: 12px" class="m"><span><span class="st s0">Not Started</span></span><span><span class="st s1">In Progress</span></span><span><span class="st s2">In Review</span></span><span><span class="st s3">Complete</span></span><span>Project start: <span class="tbc">[To be agreed]</span></span><span>Target launch: <span class="tbc">[To be agreed]</span></span></div>
+    </div>
+  </div>
+
+  <div class="wrap" style="padding-top: 20px; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; align-items: start">
+    <sc-for list="{{phases}}" as="p" hint-placeholder-count="4">
+      <section class="card {{p.actCls}}" style="padding: 18px; display: flex; flex-direction: column; gap: 12px">
+        <div style="display: flex; justify-content: space-between; align-items: center; gap: 8px"><span style="font-size: 12px; font-weight: 700; color: #1A5FD6">PHASE {{p.n}}</span><span class="st {{p.cls}}">{{p.status}}</span></div>
+        <h2 class="h" style="font-size: 19px">{{p.name}}</h2>
+        <p class="m" style="margin: 0; font-size: 13px">{{p.scope}}</p>
+        <div><label class="lbl">Status</label><select class="in" value="{{p.status}}" onChange="{{p.setStatus}}"><option>Not Started</option><option>In Progress</option><option>In Review</option><option>Complete</option></select></div>
+        <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px">
+          <div><label class="lbl">Est. start</label><input class="in" placeholder="[dd/mm/yyyy]" value="{{p.start}}" onChange="{{p.setStart}}"></div>
+          <div><label class="lbl">Est. end</label><input class="in" placeholder="[dd/mm/yyyy]" value="{{p.end}}" onChange="{{p.setEnd}}"></div>
+        </div>
+        <div><label class="lbl">Estimated duration</label><input class="in" placeholder="[To be confirmed]" value="{{p.dur}}" onChange="{{p.setDur}}"></div>
+        <div style="border-top: 1px solid #E2E8F0; padding-top: 10px; display: flex; flex-direction: column; gap: 4px">
+          <span style="font-size: 12px; font-weight: 700; color: #334155">Deliverables · {{p.doneItems}}/{{p.totalItems}}</span>
+          <sc-for list="{{p.items}}" as="d" hint-placeholder-count="4">
+            <label class="ck"><input type="checkbox" checked="{{d.on}}" onChange="{{d.toggle}}"><span>{{d.label}}</span></label>
+          </sc-for>
+        </div>
+        <div style="background: #F3F7FE; border: 1px solid #BCD0F3; border-radius: 10px; padding: 10px; font-size: 13px"><strong>Client review:</strong> {{p.review}}</div>
+      </section>
+    </sc-for>
+  </div>
+</div>
+</x-dc>
+<script data-dc-script data-props='{"$preview":{"width":1280,"height":1500}}'>window.__dcComponent = (function () {
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    const D = [
+      ['Discovery & Planning', 'Requirements, audience, product range, site map, checkout/payment/shipping decisions.', ['Requirements and goals agreed', 'Audience and product range confirmed', 'Site map and wireframes', 'Checkout, payment and shipping decisions'], 'approve scope and site structure before design starts.'],
+      ['UX/UI Design', 'Design system, customer screens, mobile layouts, prototype, client design review.', ['Design system', 'Customer screens (desktop)', 'Mobile layouts', 'Clickable prototype'], 'approve the visual design before the store build.'],
+      ['WordPress + WooCommerce Build', 'Store setup, catalog, cart, checkout, approved payment/shipping configuration, admin dashboard.', ['Store setup on staging', 'Catalog and product data', 'Cart and checkout', 'Approved payment and shipping setup', 'Admin dashboard'], 'review shopping and order flows on the staging site.'],
+      ['QA, Launch & Handover', 'Responsive review, checkout journey review, client approval, launch, training and handover.', ['Responsive review', 'Checkout journey review', 'Client launch approval', 'Launch', 'Admin training and handover notes'], 'written approval to launch, then handover walkthrough.']
+    ];
+    this.state = { ph: D.map(d => ({ name: d[0], scope: d[1], items: d[2].map(l => ({ label: l, on: false })), review: d[3], status: 'Not Started', start: '', end: '', dur: '' })) };
+  }
+  renderVals() {
+    const ph = this.state.ph;
+    const clsOf = { 'Not Started': 's0', 'In Progress': 's1', 'In Review': 's2', 'Complete': 's3' };
+    const colOf = { 'Not Started': '#E2E8F0', 'In Progress': '#1A5FD6', 'In Review': '#F08A24', 'Complete': '#1E7A46' };
+    const set = (i, patch) => this.setState({ ph: ph.map((p, j) => j === i ? Object.assign({}, p, patch) : p) });
+    const cur = ph.find(p => p.status !== 'Complete');
+    return {
+      doneCount: ph.filter(p => p.status === 'Complete').length,
+      current: cur ? cur.name + ' (' + cur.status + ')' : 'All phases complete',
+      phases: ph.map((p, i) => ({
+        n: i + 1, name: p.name, scope: p.scope, review: p.review, status: p.status, cls: clsOf[p.status],
+        segStyle: { background: colOf[p.status] },
+        actCls: p.status === 'In Progress' ? 'act' : '',
+        start: p.start, end: p.end, dur: p.dur,
+        setStatus: e => set(i, { status: e.target.value }),
+        setStart: e => set(i, { start: e.target.value }),
+        setEnd: e => set(i, { end: e.target.value }),
+        setDur: e => set(i, { dur: e.target.value }),
+        doneItems: p.items.filter(x => x.on).length, totalItems: p.items.length,
+        items: p.items.map((x, k) => ({ label: x.label, on: x.on, toggle: () => set(i, { items: p.items.map((y, m) => m === k ? { label: y.label, on: !y.on } : y) }) }))
+      }))
+    };
+  }
+}
+return Component;
+})();</script>
+</body>
+</html>

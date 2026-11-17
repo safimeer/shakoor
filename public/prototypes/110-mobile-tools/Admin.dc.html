@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>110 Mobile Tools — admin dashboard concept</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap">
+<style>
+body{margin:0;background:#F1F3F7}
+a{color:#1A5FD6}a:hover{color:#0B1F3A}
+.r,.r *{box-sizing:border-box}
+.r{font-family:Inter,system-ui,sans-serif;color:#0F172A;font-size:14px;line-height:1.5;background:#F1F3F7}
+.h{font-family:'Space Grotesk',Inter,sans-serif;letter-spacing:-0.01em;margin:0}
+.card{background:#fff;border:1px solid #E2E8F0;border-radius:12px}
+.sec{padding:18px;display:flex;flex-direction:column;gap:12px}
+.mi{display:flex;align-items:center;gap:10px;min-height:40px;padding:0 14px;border-radius:8px;color:#C7D6EC;text-decoration:none;font-weight:500}
+.mi:hover{background:#13294A;color:#fff}
+.mion{background:#1A5FD6;color:#fff}
+.kpi{padding:16px;display:flex;flex-direction:column;gap:4px}
+.kv{font-family:'Space Grotesk',Inter,sans-serif;font-size:26px;font-weight:700;color:#0B1F3A}
+.smp{display:inline-block;background:#EEF2F7;color:#334155;border-radius:6px;padding:0 6px;font-size:11px;font-weight:600}
+.tbc{display:inline-block;background:#FFF7E6;color:#7A3E00;border:1px dashed #D08A3A;border-radius:6px;padding:0 6px;font-size:11px;font-weight:600}
+.m{color:#475569}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{text-align:left;font-size:12px;color:#475569;font-weight:600;padding:8px 10px;border-bottom:1px solid #E2E8F0;white-space:nowrap}
+td{padding:10px;border-bottom:1px solid #F1F5F9;white-space:nowrap}
+.st{display:inline-flex;align-items:center;height:22px;padding:0 8px;border-radius:6px;font-size:11px;font-weight:700}
+.s-pend{background:#FFF1E0;color:#8A4200}.s-hold{background:#FEF3C7;color:#713F12}.s-proc{background:#E6EEFC;color:#123E8C}.s-done{background:#E3F4EA;color:#14532D}.s-can{background:#E2E8F0;color:#334155}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:36px;padding:0 12px;border-radius:8px;font-weight:600;font-size:13px;text-decoration:none;border:1px solid #CBD5E1;background:#fff;color:#0B1F3A;font-family:inherit;cursor:pointer}
+.bp{background:#1A5FD6;color:#fff;border-color:#1A5FD6}
+.tw{overflow-x:auto}
+.g{display:grid;gap:16px}
+.chip{display:inline-flex;align-items:center;min-height:30px;padding:0 10px;border-radius:999px;background:#F1F5F9;font-size:12px;font-weight:600}
+.tg{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid #F1F5F9}
+.on{color:#14532D;font-weight:600;font-size:12px}.off{color:#475569;font-weight:600;font-size:12px}
+</style>
+</helmet>
+<div class="r" style="display: flex; flex-wrap: wrap; min-height: 100%">
+  <nav aria-label="Admin menu" style="flex: 1 1 220px; max-width: 240px; background: #0B1F3A; padding: 16px 10px; display: flex; flex-direction: column; gap: 2px">
+    <div style="display: flex; align-items: center; gap: 10px; padding: 4px 10px 16px"><span style="width: 34px; height: 34px; border-radius: 8px; background: #1A5FD6; color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 12px">110</span><span style="color: #FFFFFF; font-weight: 700">110 Mobile Tools</span></div>
+    <a class="mi mion" href="#dash">Dashboard</a>
+    <a class="mi" href="#orders">Orders</a>
+    <a class="mi" href="#products">Products</a>
+    <a class="mi" href="#products">Categories</a>
+    <a class="mi" href="#people">Customers</a>
+    <a class="mi" href="#people">Wholesale inquiries</a>
+    <a class="mi" href="#coupons">Coupons and promotions</a>
+    <a class="mi" href="#settings">Payments</a>
+    <a class="mi" href="#settings">Shipping</a>
+    <a class="mi" href="#reports">Reports</a>
+    <a class="mi" href="#content">Pages and content</a>
+    <div style="margin-top: auto; padding: 16px 10px 4px; color: #8FA6C7; font-size: 12px">WordPress + WooCommerce admin, customised for 110 Mobile Tools</div>
+  </nav>
+
+  <main style="flex: 999 1 640px; min-width: 0; padding: 20px 24px 40px; display: flex; flex-direction: column; gap: 16px">
+    <div style="background: #F08A24; color: #0B1F3A; font-size: 12px; font-weight: 700; padding: 8px 12px; border-radius: 8px">PROPOSED CONCEPT · ALL NUMBERS, NAMES AND ORDERS ARE ILLUSTRATIVE PLACEHOLDERS — NOT REAL BUSINESS RESULTS</div>
+    <div id="dash" style="display: flex; justify-content: space-between; align-items: flex-end; gap: 12px; flex-wrap: wrap">
+      <div><div style="font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: #1A5FD6">Stage 5 · Store owner view</div><h1 class="h" style="font-size: 28px">Dashboard</h1></div>
+      <div style="display: flex; gap: 8px"><a class="btn" href="Main.dc.html">← Screen index</a><button type="button" class="btn bp">+ Add product</button></div>
+    </div>
+
+    <div class="g" style="grid-template-columns: repeat(auto-fit, minmax(180px, 1fr))">
+      <div class="card kpi"><span class="m">Orders today</span><span class="kv">12</span><span class="smp">Sample</span></div>
+      <div class="card kpi"><span class="m">Sales this month</span><span class="kv">PKR 000,000</span><span class="smp">Sample</span></div>
+      <div class="card kpi"><span class="m">Awaiting payment verification</span><span class="kv">3</span><span class="smp">Sample</span></div>
+      <div class="card kpi"><span class="m">Low or out of stock</span><span class="kv">7</span><span class="smp">Sample</span></div>
+      <div class="card kpi"><span class="m">New wholesale inquiries</span><span class="kv">2</span><span class="smp">Sample</span></div>
+    </div>
+
+    <div class="g" style="grid-template-columns: repeat(auto-fit, minmax(380px, 1fr))">
+      <section class="card sec">
+        <div style="display: flex; justify-content: space-between"><strong class="h" style="font-size: 17px">Orders, last 7 days</strong><span class="smp">Illustrative chart</span></div>
+        <div style="display: flex; align-items: flex-end; gap: 12px; height: 160px; padding: 0 4px; border-bottom: 1px solid #CBD5E1">
+          <div style="flex: 1; height: 40%; background: #1A5FD6; border-radius: 4px 4px 0 0"></div>
+          <div style="flex: 1; height: 55%; background: #1A5FD6; border-radius: 4px 4px 0 0"></div>
+          <div style="flex: 1; height: 35%; background: #1A5FD6; border-radius: 4px 4px 0 0"></div>
+          <div style="flex: 1; height: 70%; background: #1A5FD6; border-radius: 4px 4px 0 0"></div>
+          <div style="flex: 1; height: 60%; background: #1A5FD6; border-radius: 4px 4px 0 0"></div>
+          <div style="flex: 1; height: 85%; background: #1A5FD6; border-radius: 4px 4px 0 0"></div>
+          <div style="flex: 1; height: 50%; background: #F08A24; border-radius: 4px 4px 0 0"></div>
+        </div>
+        <div style="display: flex; gap: 12px; font-size: 11px; color: #475569; padding: 0 4px"><span style="flex: 1; text-align: center">Mon</span><span style="flex: 1; text-align: center">Tue</span><span style="flex: 1; text-align: center">Wed</span><span style="flex: 1; text-align: center">Thu</span><span style="flex: 1; text-align: center">Fri</span><span style="flex: 1; text-align: center">Sat</span><span style="flex: 1; text-align: center">Today</span></div>
+      </section>
+      <section class="card sec">
+        <strong class="h" style="font-size: 17px">Needs attention</strong>
+        <div class="tg"><span>Bank transfers to verify</span><span class="st s-hold">3 sample</span></div>
+        <div class="tg"><span>Orders to pack</span><span class="st s-proc">5 sample</span></div>
+        <div class="tg"><span>Products out of stock</span><span class="st s-can">4 sample</span></div>
+        <div class="tg"><span>Wholesale inquiries to answer</span><span class="st s-pend">2 sample</span></div>
+        <div class="tg" style="border: 0"><span>Failed card payments</span><span class="st s-can">1 sample</span></div>
+      </section>
+    </div>
+
+    <section id="orders" class="card sec">
+      <div style="display: flex; justify-content: space-between; align-items: center; gap: 8px; flex-wrap: wrap"><strong class="h" style="font-size: 17px">Orders</strong><div style="display: flex; gap: 6px; flex-wrap: wrap"><span class="chip">All</span><span class="chip">Pending payment</span><span class="chip">On hold</span><span class="chip">Processing</span><span class="chip">Completed</span></div></div>
+      <div class="tw"><table>
+        <thead><tr><th>Order</th><th>Customer</th><th>Date</th><th>Payment</th><th>Delivery</th><th>Status</th><th>Total</th><th></th></tr></thead>
+        <tbody>
+          <tr><td>#110-0005</td><td>Sample Customer A</td><td>[Date]</td><td>Bank Transfer</td><td>Standard</td><td><span class="st s-hold">On hold · verify payment</span></td><td>PKR 0,000</td><td><button type="button" class="btn">View</button></td></tr>
+          <tr><td>#110-0004</td><td>Sample Shop B</td><td>[Date]</td><td>Cash on Delivery</td><td>Express</td><td><span class="st s-proc">Processing</span></td><td>PKR 0,000</td><td><button type="button" class="btn">View</button></td></tr>
+          <tr><td>#110-0003</td><td>Sample Institute C</td><td>[Date]</td><td>Card</td><td>Standard</td><td><span class="st s-pend">Pending payment</span></td><td>PKR 0,000</td><td><button type="button" class="btn">View</button></td></tr>
+          <tr><td>#110-0002</td><td>Sample Customer D</td><td>[Date]</td><td>JazzCash</td><td>Standard</td><td><span class="st s-done">Completed</span></td><td>PKR 0,000</td><td><button type="button" class="btn">View</button></td></tr>
+          <tr><td>#110-0001</td><td>Sample Customer E</td><td>[Date]</td><td>Easypaisa</td><td>Pickup</td><td><span class="st s-can">Cancelled</span></td><td>PKR 0,000</td><td><button type="button" class="btn">View</button></td></tr>
+        </tbody>
+      </table></div>
+      <span class="m" style="font-size: 12px">Sample rows. Status changes can send customer emails/messages where supported <span class="tbc">TBC</span></span>
+    </section>
+
+    <section id="products" class="card sec">
+      <div style="display: flex; justify-content: space-between; align-items: center; gap: 8px; flex-wrap: wrap"><strong class="h" style="font-size: 17px">Products, stock and pricing</strong><div style="display: flex; gap: 6px"><button type="button" class="btn">Import CSV</button><button type="button" class="btn bp">+ Add product</button></div></div>
+      <div class="tw"><table>
+        <thead><tr><th>Product</th><th>SKU</th><th>Category</th><th>Stock</th><th>Regular price</th><th>Sale price</th><th>Status</th><th></th></tr></thead>
+        <tbody>
+          <tr><td>Hot Air Rework Station [Model TBC]</td><td>[SKU]</td><td>Rework Stations</td><td>[Qty]</td><td>PKR [Price]</td><td>PKR [Sale]</td><td><span class="st s-done">In stock</span></td><td><button type="button" class="btn">Edit</button></td></tr>
+          <tr><td>Precision Screwdriver Set [Model TBC]</td><td>[SKU]</td><td>Repair Tools</td><td>[Qty]</td><td>PKR [Price]</td><td>—</td><td><span class="st s-pend">Low stock</span></td><td><button type="button" class="btn">Edit</button></td></tr>
+          <tr><td>Fast Charger with Cable [Model TBC]</td><td>[SKU]</td><td>Chargers</td><td>0</td><td>PKR [Price]</td><td>—</td><td><span class="st s-can">Out of stock</span></td><td><button type="button" class="btn">Edit</button></td></tr>
+          <tr><td>Power Management IC [Part no. TBC]</td><td>[SKU]</td><td>ICs</td><td>[Qty]</td><td>PKR [Price]</td><td>—</td><td><span class="st s-done">In stock</span></td><td><button type="button" class="btn">Edit</button></td></tr>
+        </tbody>
+      </table></div>
+      <div style="display: flex; gap: 6px; flex-wrap: wrap; align-items: center"><span class="m" style="font-size: 12px">Categories:</span><span class="chip">Repair Tools</span><span class="chip">ICs</span><span class="chip">Sockets &amp; Connectors</span><span class="chip">Flash Tools</span><span class="chip">Soldering</span><span class="chip">Microscopes</span><span class="chip">Rework Stations</span><span class="chip">Power Supplies</span><span class="chip">Chargers</span><span class="tbc">Final list TBC</span></div>
+    </section>
+
+    <div class="g" style="grid-template-columns: repeat(auto-fit, minmax(380px, 1fr))">
+      <section id="people" class="card sec">
+        <strong class="h" style="font-size: 17px">Customers and wholesale inquiries</strong>
+        <div class="tw"><table>
+          <thead><tr><th>From</th><th>Type</th><th>Request</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td>Sample Shop F</td><td>Repair shop</td><td>[Items × quantities]</td><td><span class="st s-pend">New</span></td></tr>
+            <tr><td>Sample Institute G</td><td>Training institute</td><td>[Items × quantities]</td><td><span class="st s-proc">Quoted</span></td></tr>
+            <tr><td>Sample Trader H</td><td>Wholesaler</td><td>[Items × quantities]</td><td><span class="st s-done">Converted to order</span></td></tr>
+          </tbody>
+        </table></div>
+        <span class="m" style="font-size: 12px">Customer list, order history and wholesale tagging. Wholesale pricing rules <span class="tbc">TBC</span></span>
+      </section>
+      <section id="coupons" class="card sec">
+        <div style="display: flex; justify-content: space-between; align-items: center"><strong class="h" style="font-size: 17px">Coupons and promotions</strong><button type="button" class="btn bp">+ Create coupon</button></div>
+        <div class="tw"><table>
+          <thead><tr><th>Code</th><th>Discount</th><th>Limits</th><th>Expires</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td>SAMPLE10</td><td>10% (sample)</td><td>[Min order / uses]</td><td>[Date]</td><td><span class="st s-done">Active</span></td></tr>
+            <tr><td>[CODE]</td><td>[Amount]</td><td>[Rules]</td><td>[Date]</td><td><span class="st s-can">Draft</span></td></tr>
+          </tbody>
+        </table></div>
+        <span class="m" style="font-size: 12px">Sale prices, scheduled sales and home-page promotion slot are managed here.</span>
+      </section>
+    </div>
+
+    <div class="g" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr))">
+      <section id="settings" class="card sec">
+        <div style="display: flex; justify-content: space-between; align-items: center"><strong class="h" style="font-size: 17px">Payment settings</strong><a class="btn" href="Payments.dc.html">Configure</a></div>
+        <div class="tg"><span>Cash on Delivery</span><span class="off">Awaiting client confirmation</span></div>
+        <div class="tg"><span>Bank Transfer</span><span class="off">Awaiting client confirmation</span></div>
+        <div class="tg"><span>Easypaisa</span><span class="off">Awaiting client confirmation</span></div>
+        <div class="tg"><span>JazzCash</span><span class="off">Awaiting client confirmation</span></div>
+        <div class="tg" style="border: 0"><span>Debit / Credit Card</span><span class="off">Provider account needed</span></div>
+      </section>
+      <section class="card sec">
+        <div style="display: flex; justify-content: space-between; align-items: center"><strong class="h" style="font-size: 17px">Shipping settings</strong><a class="btn" href="Payments.dc.html">Configure</a></div>
+        <div class="tg"><span>Zones / cities</span><span class="off">[TBC]</span></div>
+        <div class="tg"><span>Standard Courier</span><span class="off">[fee] · [time]</span></div>
+        <div class="tg"><span>Express Courier</span><span class="off">[fee] · [time]</span></div>
+        <div class="tg"><span>Store pickup</span><span class="off">Only if confirmed</span></div>
+        <div class="tg" style="border: 0"><span>Free delivery threshold</span><span class="off">[TBC]</span></div>
+      </section>
+      <section id="reports" class="card sec">
+        <strong class="h" style="font-size: 17px">Reports</strong>
+        <div class="tg"><span>Sales by date range</span><button type="button" class="btn">Open</button></div>
+        <div class="tg"><span>Top products and categories</span><button type="button" class="btn">Open</button></div>
+        <div class="tg"><span>Orders by payment method</span><button type="button" class="btn">Open</button></div>
+        <div class="tg" style="border: 0"><span>Stock report and export</span><button type="button" class="btn">Open</button></div>
+      </section>
+      <section id="content" class="card sec">
+        <strong class="h" style="font-size: 17px">Pages and content</strong>
+        <div class="tg"><span>Home page sections and banners</span><span class="off">Draft</span></div>
+        <div class="tg"><span>About · Contact · FAQs</span><span class="off">Awaiting client copy</span></div>
+        <div class="tg"><span>Shipping &amp; Returns</span><span class="off">Awaiting client policy</span></div>
+        <div class="tg" style="border: 0"><span>Privacy · Terms</span><span class="off">Awaiting client text</span></div>
+      </section>
+    </div>
+  </main>
+</div>
+</x-dc>
+<script data-dc-script data-props='{"$preview":{"width":1440,"height":2100}}'>window.__dcComponent = (function () {
+class Component extends DCLogic {
+  renderVals() {
+    return {};
+  }
+}
+return Component;
+})();</script>
+</body>
+</html>

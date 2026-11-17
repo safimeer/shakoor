@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>110 Mobile Tools — cart (desktop)</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap">
+<style>
+body{margin:0;background:#F4F6FA}
+a{color:#1A5FD6}a:hover{color:#0B1F3A}
+.r,.r *{box-sizing:border-box}
+.r{font-family:Inter,system-ui,sans-serif;color:#0F172A;font-size:15px;line-height:1.5;background:#F4F6FA}
+.h{font-family:'Space Grotesk',Inter,sans-serif;letter-spacing:-0.01em;margin:0}
+.wrap{max-width:1280px;margin:0 auto;padding:0 32px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:0 22px;border-radius:10px;font-weight:600;font-size:15px;text-decoration:none;border:0;cursor:pointer;font-family:inherit;white-space:nowrap}
+.bp{background:#1A5FD6;color:#fff}.bp:hover{background:#144CB0;color:#fff}
+.bs{background:#fff;color:#0B1F3A;border:1.5px solid #CBD5E1}.bs:hover{border-color:#0B1F3A;color:#0B1F3A}
+.card{background:#fff;border:1px solid #E2E8F0;border-radius:14px}
+.badge{display:inline-flex;align-items:center;height:24px;padding:0 8px;border-radius:6px;font-size:12px;font-weight:600;white-space:nowrap}
+.b-in{background:#E3F4EA;color:#14532D}
+.ph{display:flex;align-items:center;justify-content:center;flex-direction:column;gap:6px;background:#EEF2F7;border:1.5px dashed #B6C2D2;border-radius:12px;color:#475569;font-size:12px;font-weight:500;text-align:center}
+.in{width:100%;height:48px;border:1.5px solid #CBD5E1;border-radius:10px;padding:0 12px;font:inherit;background:#fff;color:#0F172A}
+.m{color:#475569}
+.tbc{display:inline-block;background:#FFF7E6;color:#7A3E00;border:1px dashed #D08A3A;border-radius:6px;padding:0 6px;font-size:12px;font-weight:600}
+.smp{display:inline-block;background:#EEF2F7;color:#334155;border-radius:6px;padding:0 6px;font-size:11px;font-weight:600}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:#0B1F3A}
+.tile{width:40px;height:40px;border-radius:10px;background:#0B1F3A;color:#fff;display:flex;align-items:center;justify-content:center;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:14px}
+.qb{width:40px;height:44px;border:0;background:#fff;font-size:20px;cursor:pointer;color:#0B1F3A;font-family:inherit}
+.lnk{background:none;border:0;font:inherit;font-size:14px;font-weight:600;color:#1A5FD6;cursor:pointer;min-height:44px;padding:0}
+.sr{display:flex;justify-content:space-between;gap:12px;font-size:15px}
+.steps{display:flex;gap:8px;align-items:center;font-size:13px;font-weight:600;color:#475569;flex-wrap:wrap}
+.stp{display:inline-flex;align-items:center;gap:6px}
+.dot{width:24px;height:24px;border-radius:999px;display:inline-flex;align-items:center;justify-content:center;font-size:12px;background:#E2E8F0;color:#334155}
+.don{background:#1A5FD6;color:#fff}
+.fl{color:#C7D6EC;text-decoration:none}.fl:hover{color:#fff}
+</style>
+</helmet>
+<div class="r">
+  <div style="background: #F08A24; color: #0B1F3A; font-size: 12px; font-weight: 700; text-align: center; padding: 4px 12px">PROPOSED CONCEPT — NOT A LIVE WEBSITE · amounts are sample values for the demo</div>
+  <header style="background: #FFFFFF; border-bottom: 1px solid #E2E8F0">
+    <div class="wrap" style="display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap; padding-top: 12px; padding-bottom: 12px">
+      <a href="Home.dc.html" class="logo"><span class="tile">110</span><span class="h" style="font-size: 20px; font-weight: 700">110 Mobile Tools</span></a>
+      <div class="steps"><span class="stp"><span class="dot don">1</span>Cart</span><span aria-hidden="true">—</span><span class="stp"><span class="dot">2</span>Checkout</span><span aria-hidden="true">—</span><span class="stp"><span class="dot">3</span>Confirmation</span></div>
+      <a href="InfoPages.dc.html" style="font-weight: 600; text-decoration: none">Need help? WhatsApp [Number]</a>
+    </div>
+  </header>
+
+  <div class="wrap" style="padding-top: 24px">
+    <h1 class="h" style="font-size: 32px">Your cart</h1>
+  </div>
+
+  <sc-if value="{{hasItems}}" hint-placeholder-val="{{true}}">
+    <div class="wrap" style="padding-top: 16px; display: flex; flex-wrap: wrap; gap: 24px; align-items: flex-start">
+      <main style="flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column; gap: 12px">
+        <sc-for list="{{lines}}" as="l" hint-placeholder-count="2">
+          <div class="card" style="padding: 16px; display: flex; gap: 16px; align-items: center; flex-wrap: wrap">
+            <a href="Product.dc.html" class="ph" style="width: 96px; height: 96px; flex: none; text-decoration: none">[Image]</a>
+            <div style="flex: 1 1 220px; display: flex; flex-direction: column; gap: 4px">
+              <a href="Product.dc.html" style="font-weight: 600; color: #0F172A; text-decoration: none">{{l.name}}</a>
+              <span class="m" style="font-size: 13px">{{l.variant}}</span>
+              <span class="badge b-in" style="align-self: flex-start">In stock</span>
+            </div>
+            <div style="display: flex; align-items: center; border: 1.5px solid #CBD5E1; border-radius: 10px; overflow: hidden">
+              <button type="button" class="qb" onClick="{{l.dec}}" aria-label="Decrease quantity">−</button>
+              <span style="width: 40px; text-align: center; font-weight: 700">{{l.qty}}</span>
+              <button type="button" class="qb" onClick="{{l.inc}}" aria-label="Increase quantity">+</button>
+            </div>
+            <div style="width: 150px; text-align: right; display: flex; flex-direction: column; align-items: flex-end">
+              <strong>PKR {{l.total}}</strong>
+              <span class="m" style="font-size: 12px">PKR {{l.unit}} each <span class="smp">sample</span></span>
+              <button type="button" class="lnk" style="color: #B42318" onClick="{{l.remove}}">Remove</button>
+            </div>
+          </div>
+        </sc-for>
+        <sc-if value="{{removedName}}" hint-placeholder-val="{{false}}">
+          <div role="status" class="card" style="padding: 12px 16px; display: flex; justify-content: space-between; align-items: center; gap: 12px; font-size: 14px"><span>Removed <strong>{{removedName}}</strong>.</span><button type="button" class="lnk" onClick="{{undo}}">Undo</button></div>
+        </sc-if>
+        <a href="Shop.dc.html" style="font-weight: 600">← Continue shopping</a>
+      </main>
+
+      <aside class="card" style="flex: 1 1 340px; max-width: 420px; padding: 20px; display: flex; flex-direction: column; gap: 14px" aria-label="Order summary">
+        <h2 class="h" style="font-size: 20px">Order summary</h2>
+        <div>
+          <label for="cp" style="display: block; font-size: 13px; font-weight: 600; color: #334155; margin-bottom: 6px">Coupon code</label>
+          <div style="display: flex; gap: 8px">
+            <input id="cp" class="in" value="{{code}}" onChange="{{setCode}}" placeholder="Enter code" style="{{couponBorder}}">
+            <button type="button" class="btn bs" onClick="{{apply}}">Apply</button>
+          </div>
+          <sc-if value="{{couponBad}}" hint-placeholder-val="{{false}}"><div role="alert" style="color: #B42318; font-size: 13px; margin-top: 6px">“{{tried}}” is invalid or not available. Check the code or its terms.</div></sc-if>
+          <sc-if value="{{couponOk}}" hint-placeholder-val="{{false}}"><div role="status" style="color: #14532D; font-size: 13px; margin-top: 6px">Sample coupon applied: 10% off. <button type="button" class="lnk" style="min-height: 0; font-size: 13px" onClick="{{removeCoupon}}">Remove</button></div></sc-if>
+          <div class="m" style="font-size: 12px; margin-top: 6px">Demo: try SAMPLE10 (works) or any other code (invalid). Real coupons <span class="tbc">[To be confirmed]</span></div>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 8px; padding-top: 12px; border-top: 1px solid #E2E8F0">
+          <div class="sr"><span class="m">Subtotal ({{count}} items)</span><span>PKR {{subtotal}}</span></div>
+          <sc-if value="{{couponOk}}" hint-placeholder-val="{{false}}"><div class="sr"><span class="m">Discount (SAMPLE10)</span><span style="color: #14532D">− PKR {{discount}}</span></div></sc-if>
+          <div class="sr"><span class="m">Estimated delivery</span><span>PKR {{delivery}} <span class="smp">sample</span></span></div>
+          <div class="m" style="font-size: 12px">Final delivery charge depends on city and method chosen at checkout <span class="tbc">[Rates to be confirmed]</span></div>
+          <div class="sr" style="font-weight: 700; font-size: 18px; padding-top: 8px; border-top: 1px solid #E2E8F0"><span>Estimated total</span><span>PKR {{total}}</span></div>
+        </div>
+        <a href="Checkout.dc.html" class="btn bp" style="width: 100%">Proceed to checkout</a>
+        <a href="InfoPages.dc.html" class="btn bs" style="width: 100%">Ask about wholesale quantities</a>
+      </aside>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{empty}}" hint-placeholder-val="{{false}}">
+    <div class="wrap" style="padding-top: 16px">
+      <div class="card" style="padding: 48px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 12px">
+        <h2 class="h" style="font-size: 24px">Your cart is empty</h2>
+        <p class="m" style="margin: 0">Find tools and parts by category or search by model number.</p>
+        <div style="display: flex; gap: 12px"><a href="Shop.dc.html" class="btn bp">Browse categories</a><button type="button" class="btn bs" onClick="{{reset}}">Restore sample cart</button></div>
+      </div>
+    </div>
+  </sc-if>
+
+  <footer style="background: #0B1F3A; color: #C7D6EC; margin-top: 56px; padding: 28px 0; font-size: 14px">
+    <div class="wrap" style="display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap"><strong style="color: #FFFFFF">110 Mobile Tools</strong><span style="display: flex; gap: 20px; flex-wrap: wrap"><a class="fl" href="InfoPages.dc.html">Shipping &amp; Returns</a><a class="fl" href="InfoPages.dc.html">Privacy &amp; Terms</a><a class="fl" href="InfoPages.dc.html">Contact</a></span><span>[Phone] · [Email]</span></div>
+  </footer>
+</div>
+</x-dc>
+<script data-dc-script data-props='{"sampleDelivery":{"editor":"int","default":200,"section":"Sample values"},"$preview":{"width":1280,"height":1400}}'>window.__dcComponent = (function () {
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { lines: this.start(), code: '', tried: '', coupon: '', removed: null };
+  }
+  start() {
+    return [
+      { id: 'a', name: 'Hot Air Rework Station [Model TBC]', variant: 'Plug type [TBC]', unit: 1000, qty: 1 },
+      { id: 'b', name: 'Solder Paste / Flux [Type TBC]', variant: 'Size [TBC]', unit: 500, qty: 2 }
+    ];
+  }
+  renderVals() {
+    const s = this.state;
+    const f = n => Math.round(n).toLocaleString('en-US');
+    const setQty = (id, d) => this.setState({ lines: s.lines.map(l => l.id === id ? Object.assign({}, l, { qty: Math.max(1, l.qty + d) }) : l) });
+    const lines = s.lines.map(l => ({
+      name: l.name, variant: l.variant, qty: l.qty, unit: f(l.unit), total: f(l.unit * l.qty),
+      inc: () => setQty(l.id, 1), dec: () => setQty(l.id, -1),
+      remove: () => this.setState({ lines: s.lines.filter(x => x.id !== l.id), removed: l })
+    }));
+    const sub = s.lines.reduce((a, l) => a + l.unit * l.qty, 0);
+    const ok = s.coupon === 'SAMPLE10';
+    const disc = ok ? sub * 0.1 : 0;
+    const del = s.lines.length ? (this.props.sampleDelivery ?? 200) : 0;
+    const bad = s.tried !== '' && !ok;
+    return {
+      lines,
+      hasItems: s.lines.length > 0,
+      empty: s.lines.length === 0,
+      count: s.lines.reduce((a, l) => a + l.qty, 0),
+      subtotal: f(sub), discount: f(disc), delivery: f(del), total: f(sub - disc + del),
+      code: s.code,
+      tried: s.tried,
+      couponOk: ok,
+      couponBad: bad,
+      couponBorder: bad ? { borderColor: '#B42318', background: '#FDECEA' } : {},
+      setCode: e => this.setState({ code: e.target.value }),
+      apply: () => { const c = s.code.trim().toUpperCase(); this.setState({ tried: c, coupon: c === 'SAMPLE10' ? c : '' }); },
+      removeCoupon: () => this.setState({ coupon: '', tried: '', code: '' }),
+      removedName: s.removed ? s.removed.name : '',
+      undo: () => { if (s.removed) this.setState({ lines: s.lines.concat([s.removed]), removed: null }); },
+      reset: () => this.setState({ lines: this.start(), removed: null })
+    };
+  }
+}
+return Component;
+})();</script>
+</body>
+</html>

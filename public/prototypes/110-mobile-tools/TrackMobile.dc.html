@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>110 Mobile Tools — confirmation and tracking (mobile)</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap">
+<style>
+body{margin:0;background:#F4F6FA}
+a{color:#1A5FD6}a:hover{color:#0B1F3A}
+.r,.r *{box-sizing:border-box}
+.r{font-family:Inter,system-ui,sans-serif;color:#0F172A;font-size:15px;line-height:1.5;background:#F4F6FA}
+.h{font-family:'Space Grotesk',Inter,sans-serif;letter-spacing:-0.01em;margin:0}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:50px;padding:0 18px;border-radius:10px;font-weight:600;font-size:15px;text-decoration:none;border:0;cursor:pointer;font-family:inherit;white-space:nowrap}
+.bp{background:#1A5FD6;color:#fff}.bs{background:#fff;color:#0B1F3A;border:1.5px solid #CBD5E1}.bw{background:#1E7A46;color:#fff}
+.card{background:#fff;border:1px solid #E2E8F0;border-radius:14px;padding:16px;display:flex;flex-direction:column;gap:10px}
+.m{color:#475569}
+.tbc{display:inline-block;background:#FFF7E6;color:#7A3E00;border:1px dashed #D08A3A;border-radius:6px;padding:0 5px;font-size:11px;font-weight:600}
+.tl{display:flex;gap:12px}
+.tdot{width:26px;height:26px;border-radius:999px;flex:none;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700}
+.t-done{background:#1E7A46;color:#fff}.t-now{background:#1A5FD6;color:#fff;box-shadow:0 0 0 4px #CFE0FB}.t-next{background:#E2E8F0;color:#475569}
+.tbar{width:2px;flex:1;min-height:22px;margin:4px auto 0;background:#E2E8F0}
+.tog{flex:1;min-height:44px;border-radius:10px;border:1px solid #CBD5E1;background:#fff;font:inherit;font-size:13px;font-weight:600;cursor:pointer}
+.nav{display:flex;flex-direction:column;align-items:center;gap:2px;font-size:11px;font-weight:600;color:#475569;text-decoration:none;min-height:52px;justify-content:center}
+</style>
+</helmet>
+<div class="r" style="width: 390px; min-height: 1700px; position: relative; display: flex; flex-direction: column">
+  <div style="background: #F08A24; color: #0B1F3A; font-size: 11px; font-weight: 700; text-align: center; padding: 3px 8px">PROPOSED CONCEPT · sample order</div>
+  <header style="background: #FFFFFF; padding: 10px 16px; border-bottom: 1px solid #E2E8F0; display: flex; justify-content: space-between; align-items: center">
+    <a href="HomeMobile.dc.html" class="h" style="font-size: 17px; font-weight: 700; color: #0B1F3A; text-decoration: none; min-height: 44px; display: flex; align-items: center">110 Mobile Tools</a>
+    <a href="InfoPages.dc.html" style="font-size: 14px; font-weight: 600; text-decoration: none; min-height: 44px; display: flex; align-items: center">Help</a>
+  </header>
+
+  <div style="padding: 12px 12px 90px; display: flex; flex-direction: column; gap: 12px">
+    <section class="card" style="align-items: center; text-align: center; border-color: #A7D7B8">
+      <div style="width: 56px; height: 56px; border-radius: 999px; background: #E3F4EA; color: #1E7A46; display: flex; align-items: center; justify-content: center"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 5 5 9-10"></path></svg></div>
+      <h1 class="h" style="font-size: 22px">Order placed</h1>
+      <span>Order <strong>#110-[Order no.]</strong></span>
+      <span class="m" style="font-size: 13px">Confirmation by SMS / WhatsApp / email <span class="tbc">TBC</span></span>
+    </section>
+
+    <section class="card" style="background: #FFF7E6; border-color: #F1C68C">
+      <strong style="color: #5C2E00">Paid by Bank Transfer or wallet?</strong>
+      <span style="font-size: 14px; color: #5C2E00">Send payment to <span class="tbc">[Account TBC]</span> and share the receipt. Status stays “Awaiting payment verification” until checked.</span>
+      <a href="InfoPages.dc.html" class="btn bw">Send receipt on WhatsApp</a>
+    </section>
+
+    <section class="card">
+      <div style="display: flex; justify-content: space-between; align-items: center"><strong>Track order</strong><span style="font-size: 12px; font-weight: 700; padding: 3px 8px; border-radius: 6px; background: #E6EEFC; color: #123E8C">{{statusNow}}</span></div>
+      <div>
+        <sc-for list="{{steps}}" as="s" hint-placeholder-count="5">
+          <div class="tl">
+            <div style="display: flex; flex-direction: column; align-items: center"><span class="tdot {{s.cls}}">{{s.mark}}</span><sc-if value="{{s.bar}}" hint-placeholder-val="{{true}}"><span class="tbar"></span></sc-if></div>
+            <div style="padding-bottom: 12px"><strong style="font-size: 14px">{{s.name}}</strong><div class="m" style="font-size: 12px">{{s.note}}</div></div>
+          </div>
+        </sc-for>
+      </div>
+      <div style="display: flex; gap: 8px"><button type="button" class="tog" onClick="{{prev}}">← Previous</button><button type="button" class="tog" onClick="{{next}}">Next status →</button></div>
+      <span class="m" style="font-size: 12px">Demo controls. Courier tracking links <span class="tbc">TBC</span></span>
+    </section>
+
+    <section class="card">
+      <strong>Order summary</strong>
+      <div style="display: flex; justify-content: space-between; font-size: 14px"><span class="m">2 products</span><span>PKR 2,000</span></div>
+      <div style="display: flex; justify-content: space-between; font-size: 14px"><span class="m">Standard Courier</span><span>PKR 200</span></div>
+      <div style="display: flex; justify-content: space-between; font-weight: 700"><span>Total</span><span>PKR 2,200</span></div>
+      <span class="m" style="font-size: 12px">Sample values</span>
+    </section>
+
+    <a href="InfoPages.dc.html" class="btn bs">Contact support about this order</a>
+    <a href="HomeMobile.dc.html" class="btn bp">Continue shopping</a>
+  </div>
+
+  <nav aria-label="Main" style="position: absolute; left: 0; right: 0; bottom: 0; background: #FFFFFF; border-top: 1px solid #E2E8F0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); padding-bottom: 6px">
+    <a class="nav" href="HomeMobile.dc.html">Home</a>
+    <a class="nav" href="ShopMobile.dc.html">Categories</a>
+    <a class="nav" href="CheckoutMobile.dc.html">Cart</a>
+    <a class="nav" href="TrackMobile.dc.html" style="color: #1A5FD6">Orders</a>
+  </nav>
+</div>
+</x-dc>
+<script data-dc-script data-props='{"$preview":{"width":390,"height":1700}}'>window.__dcComponent = (function () {
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { at: 1 };
+  }
+  renderVals() {
+    const at = this.state.at;
+    const list = [['Order placed', '[Date / time]'], ['Payment verification', 'Skipped for COD'], ['Packed', 'Ready for dispatch'], ['Shipped', 'Courier [TBC] · tracking [TBC]'], ['Delivered', 'Estimated, not guaranteed']];
+    const labels = ['Order received', 'Awaiting verification', 'Processing', 'Shipped', 'Delivered'];
+    return {
+      steps: list.map((s, i) => ({ name: s[0], note: s[1], bar: i < list.length - 1, cls: i < at ? 't-done' : i === at ? 't-now' : 't-next', mark: i < at ? '✓' : String(i + 1) })),
+      statusNow: labels[at],
+      next: () => this.setState({ at: Math.min(at + 1, 4) }),
+      prev: () => this.setState({ at: Math.max(at - 1, 0) })
+    };
+  }
+}
+return Component;
+})();</script>
+</body>
+</html>

@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>110 Mobile Tools — information pages</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap">
+<style>
+body{margin:0;background:#F4F6FA}
+a{color:#1A5FD6}a:hover{color:#0B1F3A}
+.r,.r *{box-sizing:border-box}
+.r{font-family:Inter,system-ui,sans-serif;color:#0F172A;font-size:15px;line-height:1.6;background:#F4F6FA}
+.h{font-family:'Space Grotesk',Inter,sans-serif;letter-spacing:-0.01em;margin:0;line-height:1.2}
+.wrap{max-width:1280px;margin:0 auto;padding:0 32px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:0 22px;border-radius:10px;font-weight:600;font-size:15px;text-decoration:none;border:0;cursor:pointer;font-family:inherit;white-space:nowrap}
+.bp{background:#1A5FD6;color:#fff}.bp:hover{background:#144CB0;color:#fff}
+.bs{background:#fff;color:#0B1F3A;border:1.5px solid #CBD5E1}.bs:hover{border-color:#0B1F3A;color:#0B1F3A}
+.bw{background:#1E7A46;color:#fff}.bw:hover{background:#17633A;color:#fff}
+.card{background:#fff;border:1px solid #E2E8F0;border-radius:14px}
+.ph{display:flex;align-items:center;justify-content:center;flex-direction:column;gap:6px;background:#EEF2F7;border:1.5px dashed #B6C2D2;border-radius:12px;color:#475569;font-size:12px;font-weight:500;text-align:center}
+.in{width:100%;min-height:46px;border:1.5px solid #CBD5E1;border-radius:10px;padding:10px 12px;font:inherit;background:#fff;color:#0F172A}
+.lbl{display:block;font-size:13px;font-weight:600;color:#334155;margin-bottom:6px}
+.m{color:#475569}
+.tbc{display:inline-block;background:#FFF7E6;color:#7A3E00;border:1px dashed #D08A3A;border-radius:6px;padding:0 6px;font-size:12px;font-weight:600;line-height:1.5}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:#0B1F3A}
+.tile{width:40px;height:40px;border-radius:10px;background:#0B1F3A;color:#fff;display:flex;align-items:center;justify-content:center;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:14px}
+.srch{flex:1;min-width:240px;height:44px;border:1.5px solid #CBD5E1;border-radius:10px;display:flex;align-items:center;gap:10px;padding:0 14px;color:#64748B;text-decoration:none;font-size:14px;background:#fff}
+.tab{min-height:44px;padding:0 16px;border-radius:10px;border:1px solid #CBD5E1;background:#fff;font:inherit;font-weight:600;cursor:pointer;color:#0F172A}
+.tabon{background:#0B1F3A;color:#fff;border-color:#0B1F3A}
+.qa{border-bottom:1px solid #E2E8F0}
+.qb{width:100%;display:flex;justify-content:space-between;align-items:center;gap:12px;min-height:56px;background:none;border:0;font:inherit;font-weight:600;text-align:left;cursor:pointer;color:#0F172A;padding:0}
+.sec{padding:24px;display:flex;flex-direction:column;gap:14px}
+.g2{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
+.fl{color:#C7D6EC;text-decoration:none}.fl:hover{color:#fff}
+</style>
+</helmet>
+<div class="r">
+  <div style="background: #F08A24; color: #0B1F3A; font-size: 12px; font-weight: 700; text-align: center; padding: 4px 12px">PROPOSED CONCEPT — NOT A LIVE WEBSITE · page copy to be written or approved by the client</div>
+  <header style="background: #FFFFFF; border-bottom: 1px solid #E2E8F0">
+    <div class="wrap" style="display: flex; align-items: center; gap: 24px; flex-wrap: wrap; padding-top: 12px; padding-bottom: 12px">
+      <a href="Home.dc.html" class="logo"><span class="tile">110</span><span class="h" style="font-size: 20px; font-weight: 700">110 Mobile Tools</span></a>
+      <a href="Search.dc.html" class="srch">Search tools, ICs, parts or model numbers</a>
+      <a href="Cart.dc.html" class="btn bp" style="min-height: 44px">Cart (2)</a>
+    </div>
+  </header>
+
+  <div class="wrap" style="padding-top: 24px; display: flex; flex-direction: column; gap: 20px">
+    <div role="tablist" aria-label="Information pages" style="display: flex; gap: 8px; flex-wrap: wrap">
+      <sc-for list="{{tabs}}" as="t" hint-placeholder-count="5">
+        <button type="button" role="tab" class="tab {{t.cls}}" onClick="{{t.pick}}">{{t.label}}</button>
+      </sc-for>
+    </div>
+
+    <sc-if value="{{isAbout}}" hint-placeholder-val="{{true}}">
+      <div style="display: flex; flex-wrap: wrap; gap: 24px; align-items: stretch">
+        <section class="card sec" style="flex: 1 1 520px">
+          <h1 class="h" style="font-size: 34px">About 110 Mobile Tools</h1>
+          <p style="margin: 0">[Brand story, history and mission — to be supplied by the client. No details have been assumed.]</p>
+          <h2 class="h" style="font-size: 20px">Who we serve</h2>
+          <div class="g2">
+            <div class="card" style="padding: 14px"><strong>Repair technicians</strong><div class="m" style="font-size: 14px">Tools and parts for daily repair work</div></div>
+            <div class="card" style="padding: 14px"><strong>Repair shops</strong><div class="m" style="font-size: 14px">Restocking and equipment</div></div>
+            <div class="card" style="padding: 14px"><strong>Training institutes</strong><div class="m" style="font-size: 14px">Kits and equipment for students</div></div>
+            <div class="card" style="padding: 14px"><strong>Wholesalers</strong><div class="m" style="font-size: 14px">Bulk quantities by inquiry</div></div>
+          </div>
+          <h2 class="h" style="font-size: 20px">What we sell</h2>
+          <p class="m" style="margin: 0">Repair tools, ICs, sockets and connectors, flash tools, soldering supplies, microscopes, rework stations, power supplies and chargers. <span class="tbc">[Final range to be confirmed]</span></p>
+        </section>
+        <div class="ph" style="flex: 1 1 360px; min-height: 360px">[Store / team photo — client supplied]</div>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{isContact}}" hint-placeholder-val="{{false}}">
+      <div style="display: flex; flex-wrap: wrap; gap: 24px; align-items: flex-start">
+        <section class="card sec" style="flex: 1 1 320px">
+          <h1 class="h" style="font-size: 30px">Contact us</h1>
+          <a href="InfoPages.dc.html" class="btn bw" style="align-self: flex-start">Chat on WhatsApp · [Number]</a>
+          <div><strong>Phone</strong><div class="m">[Phone]</div></div>
+          <div><strong>Email</strong><div class="m">[Email]</div></div>
+          <div><strong>Address</strong><div class="m">[Address]</div></div>
+          <div><strong>Hours</strong><div class="m">[Business hours]</div></div>
+          <div class="ph" style="height: 180px">[Map embed — if the client has a public address]</div>
+        </section>
+        <section class="card sec" style="flex: 2 1 480px">
+          <div role="tablist" style="display: flex; gap: 8px; flex-wrap: wrap">
+            <button type="button" class="tab {{fGeneral}}" onClick="{{pickGeneral}}">General message</button>
+            <button type="button" class="tab {{fWholesale}}" onClick="{{pickWholesale}}">Wholesale / institute inquiry</button>
+          </div>
+          <sc-if value="{{sent}}" hint-placeholder-val="{{false}}">
+            <div role="status" style="padding: 16px; border-radius: 12px; background: #E3F4EA; color: #14532D"><strong>Thanks — your {{formName}} was sent (demo).</strong> The team will reply by phone, WhatsApp or email. Response time <span class="tbc">[To be confirmed]</span> <button type="button" class="tab" style="margin-left: 8px; min-height: 36px" onClick="{{again}}">Send another</button></div>
+          </sc-if>
+          <sc-if value="{{showForm}}" hint-placeholder-val="{{true}}">
+            <div style="display: flex; flex-direction: column; gap: 14px">
+              <div class="g2">
+                <div><label class="lbl" for="c-n">Name *</label><input id="c-n" class="in"></div>
+                <div><label class="lbl" for="c-p">Mobile / WhatsApp *</label><input id="c-p" class="in" inputmode="tel"></div>
+              </div>
+              <sc-if value="{{isWholesale}}" hint-placeholder-val="{{false}}">
+                <div class="g2">
+                  <div><label class="lbl" for="c-b">Business / institute name *</label><input id="c-b" class="in"></div>
+                  <div><label class="lbl" for="c-t">Customer type</label><select id="c-t" class="in"><option>Repair shop</option><option>Training institute</option><option>Wholesaler / reseller</option><option>Other</option></select></div>
+                  <div><label class="lbl" for="c-c">City</label><input id="c-c" class="in"></div>
+                  <div><label class="lbl" for="c-q">Approx. order frequency</label><select id="c-q" class="in"><option>One-time</option><option>Monthly</option><option>Other</option></select></div>
+                </div>
+              </sc-if>
+              <div><label class="lbl" for="c-m">{{msgLabel}}</label><textarea id="c-m" class="in" rows="5" placeholder="{{msgHint}}"></textarea></div>
+              <button type="button" class="btn bp" style="align-self: flex-start" onClick="{{send}}">{{sendLabel}}</button>
+            </div>
+          </sc-if>
+        </section>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{isFaq}}" hint-placeholder-val="{{false}}">
+      <section class="card sec" style="max-width: 860px">
+        <h1 class="h" style="font-size: 30px">Frequently asked questions</h1>
+        <p class="m" style="margin: 0">Questions below are suggestions; answers must come from 110 Mobile Tools' confirmed policies.</p>
+        <div>
+          <sc-for list="{{faqs}}" as="f" hint-placeholder-count="6">
+            <div class="qa">
+              <button type="button" class="qb" onClick="{{f.toggle}}" aria-expanded="{{f.open}}"><span>{{f.q}}</span><span aria-hidden="true" style="font-size: 20px; color: #1A5FD6">{{f.sign}}</span></button>
+              <sc-if value="{{f.open}}" hint-placeholder-val="{{false}}"><p class="m" style="margin: 0 0 16px">{{f.a}}</p></sc-if>
+            </div>
+          </sc-for>
+        </div>
+      </section>
+    </sc-if>
+
+    <sc-if value="{{isShip}}" hint-placeholder-val="{{false}}">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 24px">
+        <section class="card sec">
+          <h1 class="h" style="font-size: 28px">Shipping and delivery</h1>
+          <div><strong>Delivery areas</strong><div class="m">[To be confirmed with client]</div></div>
+          <div><strong>Delivery methods and fees</strong><div class="m">Standard Courier — [estimated delivery] — [fee]<br>Express Courier — [estimated delivery] — [fee]<br>Store pickup — only if confirmed</div></div>
+          <div><strong>Free delivery threshold</strong><div class="m">[If any — to be confirmed]</div></div>
+          <div><strong>Order tracking</strong><div class="m">[Courier tracking / WhatsApp updates — to be confirmed]</div></div>
+          <p class="m" style="margin: 0; font-size: 13px">Delivery times are estimates, not guarantees.</p>
+        </section>
+        <section class="card sec">
+          <h2 class="h" style="font-size: 28px">Returns, refunds and warranty</h2>
+          <div><strong>Return window</strong><div class="m">[To be confirmed]</div></div>
+          <div><strong>Items that can't be returned</strong><div class="m">[e.g. installed or soldered parts — to be confirmed]</div></div>
+          <div><strong>How to request a return</strong><div class="m">[Process — to be confirmed]</div></div>
+          <div><strong>Refund method and timing</strong><div class="m">[To be confirmed]</div></div>
+          <div><strong>Warranty</strong><div class="m">[Per product or brand — to be confirmed]</div></div>
+        </section>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{isLegal}}" hint-placeholder-val="{{false}}">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 24px">
+        <section class="card sec">
+          <h1 class="h" style="font-size: 28px">Privacy Policy</h1>
+          <p class="m" style="margin: 0">[Legal text to be provided or approved by the client]</p>
+          <ol style="margin: 0; padding-left: 20px; color: #334155"><li>Information we collect</li><li>How we use it (orders, delivery, support)</li><li>Payment information and providers</li><li>Cookies and analytics</li><li>Sharing with couriers and service providers</li><li>Your choices and contact</li></ol>
+        </section>
+        <section class="card sec">
+          <h2 class="h" style="font-size: 28px">Terms and Conditions</h2>
+          <p class="m" style="margin: 0">[Legal text to be provided or approved by the client]</p>
+          <ol style="margin: 0; padding-left: 20px; color: #334155"><li>Orders and acceptance</li><li>Pricing and availability</li><li>Payment</li><li>Delivery</li><li>Returns and warranty</li><li>Wholesale terms</li><li>Liability and governing law</li></ol>
+        </section>
+      </div>
+    </sc-if>
+  </div>
+
+  <footer style="background: #0B1F3A; color: #C7D6EC; margin-top: 56px; padding: 28px 0; font-size: 14px">
+    <div class="wrap" style="display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap"><strong style="color: #FFFFFF">110 Mobile Tools</strong><span style="display: flex; gap: 20px; flex-wrap: wrap"><a class="fl" href="Home.dc.html">Home</a><a class="fl" href="Shop.dc.html">Shop</a><a class="fl" href="Confirmation.dc.html">Track order</a></span><span>[Phone] · [Email] · [Address]</span></div>
+  </footer>
+</div>
+</x-dc>
+<script data-dc-script data-props='{"$preview":{"width":1280,"height":2200}}'>window.__dcComponent = (function () {
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { tab: 'contact', form: 'wholesale', sent: false, open: 0 };
+  }
+  renderVals() {
+    const s = this.state;
+    const T = [['about', 'About'], ['contact', 'Contact'], ['faq', 'FAQs'], ['ship', 'Shipping & Returns'], ['legal', 'Privacy & Terms']];
+    const Q = [
+      ['How do I know a part fits my phone model?', 'Check the Compatibility tab on the product page, or send the model number on WhatsApp. [Process to be confirmed]'],
+      ['Which payment methods can I use?', 'Payment methods will be listed once confirmed by 110 Mobile Tools. [To be confirmed]'],
+      ['Is Cash on Delivery available?', '[To be confirmed with client — including any city or order-value limits]'],
+      ['How long does delivery take?', '[Estimated delivery times by method and city — to be confirmed]'],
+      ['Do you offer wholesale or institute pricing?', 'Send a wholesale inquiry with the items and quantities. [Terms to be confirmed]'],
+      ['Can I return or exchange an item?', '[Returns policy — to be confirmed]']
+    ];
+    const w = s.form === 'wholesale';
+    return {
+      tabs: T.map(t => ({ label: t[1], cls: s.tab === t[0] ? 'tabon' : '', pick: () => this.setState({ tab: t[0] }) })),
+      isAbout: s.tab === 'about', isContact: s.tab === 'contact', isFaq: s.tab === 'faq', isShip: s.tab === 'ship', isLegal: s.tab === 'legal',
+      fGeneral: w ? '' : 'tabon', fWholesale: w ? 'tabon' : '',
+      pickGeneral: () => this.setState({ form: 'general', sent: false }),
+      pickWholesale: () => this.setState({ form: 'wholesale', sent: false }),
+      isWholesale: w,
+      msgLabel: w ? 'Items and quantities needed *' : 'Message *',
+      msgHint: w ? 'e.g. product name or part number × quantity' : 'How can we help?',
+      sendLabel: w ? 'Send wholesale inquiry' : 'Send message',
+      formName: w ? 'wholesale inquiry' : 'message',
+      sent: s.sent, showForm: !s.sent,
+      send: () => this.setState({ sent: true }),
+      again: () => this.setState({ sent: false }),
+      faqs: Q.map((q, i) => ({ q: q[0], a: q[1], open: s.open === i, sign: s.open === i ? '−' : '+', toggle: () => this.setState({ open: s.open === i ? -1 : i }) }))
+    };
+  }
+}
+return Component;
+})();</script>
+</body>
+</html>

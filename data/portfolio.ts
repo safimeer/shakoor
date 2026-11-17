@@ -1,9 +1,10 @@
 /**
  * Portfolio entries.
  *
- * Every entry below is DEMONSTRATION content (`demo: true`) that shows how a
- * project page is laid out. None of it describes real work by the company.
- * Replace with genuine projects and set `demo: false` — the "Sample layout"
+ * Entries with `demo: true` are DEMONSTRATION content that shows how a project
+ * page is laid out; they do not describe real work by the company. The
+ * 110 Mobile Tools entry is real concept work (a proposal, not a built store).
+ * Replace samples with genuine projects and set `demo: false` — the "Sample layout"
  * labels disappear automatically. Only add `outcomes` that have been verified.
  */
 
@@ -41,9 +42,47 @@ export type Project = {
   outcomes: string[] | null;
   /** position: optional CSS object-position keeping the subject in frame when cropped. */
   images: { src: string; alt: string; position?: string }[];
+  /** Optional link to a clickable prototype served from /public (opens in a new tab). */
+  prototypeUrl?: string;
 };
 
 export const projects: Project[] = [
+  {
+    slug: "110-mobile-tools-ecommerce-ui-ux",
+    demo: false,
+    title: "110 Mobile Tools — e-commerce UI/UX concept",
+    category: "website",
+    service: "website-development",
+    summary:
+      "Proposed UI/UX concept and clickable prototype for a WordPress + WooCommerce store selling mobile repair tools, ICs and parts.",
+    overview:
+      "A proposed design concept for 110 Mobile Tools, an online store for mobile repair technicians, repair shops, training institutes and wholesalers. It maps the full customer journey on desktop and mobile, plus the store owner's admin view. This is a concept for client review: the store has not been built yet, and product details, prices, fees and policies shown are placeholders.",
+    requirements: [
+      "Mobile-first shopping for technicians ordering between jobs",
+      "Fast product discovery by category, search and part or model number",
+      "Clear product details: specifications, compatibility and stock status",
+      "Configurable payment and delivery options, confirmed with the client",
+      "Wholesale inquiries and WhatsApp support",
+    ],
+    solution: [
+      "Design system in navy, electric blue and a restrained orange accent",
+      "Desktop and mobile screens from home page to order tracking",
+      "Working cart and checkout prototype with delivery and payment selection",
+      "Alternate states: out of stock, invalid coupon, missing details, payment not completed",
+      "WordPress + WooCommerce admin dashboard concept",
+    ],
+    implementation:
+      "Planned in four phases, each ending with a client review: discovery and planning, UX/UI design, the WordPress + WooCommerce build, then QA, launch and handover.",
+    outcomes: null,
+    images: [
+      {
+        src: "/images/portfolio/110-mobile-tools-ui-ux.png",
+        alt: "Home page concept for 110 Mobile Tools with search, product categories and a navy hero banner",
+        position: "50% 0%",
+      },
+    ],
+    prototypeUrl: "/prototypes/110-mobile-tools/Main.dc.html",
+  },
   {
     slug: "sample-warehouse-surveillance",
     demo: true,

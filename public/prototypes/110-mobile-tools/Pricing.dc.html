@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>110 Mobile Tools — pricing and payment dashboard</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap">
+<style>
+body{margin:0;background:#F4F6FA}
+a{color:#1A5FD6}a:hover{color:#0B1F3A}
+.r,.r *{box-sizing:border-box}
+.r{font-family:Inter,system-ui,sans-serif;color:#0F172A;font-size:14px;line-height:1.5;background:#F4F6FA}
+.h{font-family:'Space Grotesk',Inter,sans-serif;letter-spacing:-0.01em;margin:0}
+.wrap{max-width:1280px;margin:0 auto;padding:0 32px}
+.card{background:#fff;border:1px solid #E2E8F0;border-radius:14px}
+.sec{padding:20px;display:flex;flex-direction:column;gap:12px}
+.in{width:100%;height:42px;border:1.5px solid #CBD5E1;border-radius:8px;padding:0 10px;font:inherit;background:#fff;color:#0F172A}
+.m{color:#475569}
+.tbc{display:inline-block;background:#FFF7E6;color:#7A3E00;border:1px dashed #D08A3A;border-radius:6px;padding:0 6px;font-size:11px;font-weight:600}
+.ex{display:inline-block;background:#F08A24;color:#0B1F3A;border-radius:6px;padding:2px 8px;font-size:12px;font-weight:700}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:40px;padding:0 14px;border-radius:8px;font-weight:600;font-size:13px;text-decoration:none;border:1px solid #CBD5E1;background:#fff;color:#0B1F3A;cursor:pointer;font-family:inherit}
+.fr{display:grid;grid-template-columns:minmax(0,1fr) 220px;gap:12px;align-items:center;padding:8px 0;border-bottom:1px solid #F1F5F9}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{text-align:left;font-size:12px;color:#475569;font-weight:600;padding:8px;border-bottom:1px solid #E2E8F0}
+td{padding:8px;border-bottom:1px solid #F1F5F9;vertical-align:middle}
+.tw{overflow-x:auto}
+.mrow{display:grid;grid-template-columns:1.2fr 1.6fr 110px 150px 140px;gap:8px;align-items:center;padding:8px;border-bottom:1px solid #F1F5F9;font-size:13px}
+</style>
+</helmet>
+<div class="r" style="padding-bottom: 48px">
+  <div style="background: #F08A24; color: #0B1F3A; font-size: 12px; font-weight: 700; text-align: center; padding: 4px 12px">PROPOSED CONCEPT · NO PRICES HAVE BEEN AGREED — every amount is a blank field for the agreed terms</div>
+  <div class="wrap" style="padding-top: 28px; display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; flex-wrap: wrap">
+    <div><div style="font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: #1A5FD6">Stage 7</div><h1 class="h" style="font-size: 34px">Pricing and payment — 110 Mobile Tools website</h1><p class="m" style="margin: 4px 0 0">Status: <strong>Draft — awaiting agreement</strong>. Type amounts to see the total and the example schedule update.</p></div>
+    <div style="display: flex; gap: 8px"><button type="button" class="btn" onClick="{{clear}}">Clear all amounts</button><a href="Main.dc.html" class="btn">← Screen index</a></div>
+  </div>
+
+  <div class="wrap" style="padding-top: 20px; display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-start">
+    <div style="flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column; gap: 20px">
+      <section class="card sec">
+        <h2 class="h" style="font-size: 20px">Project fee by phase (PKR)</h2>
+        <sc-for list="{{fees}}" as="f" hint-placeholder-count="4">
+          <div class="fr"><span><strong>{{f.name}}</strong><br><span class="m" style="font-size: 12px">{{f.note}}</span></span><input class="in" inputmode="numeric" placeholder="[Enter amount]" aria-label="{{f.name}} fee" value="{{f.val}}" onChange="{{f.set}}"></div>
+        </sc-for>
+        <div class="fr" style="border: 0; font-size: 16px"><strong>Total project fee</strong><strong style="text-align: right; padding-right: 10px">{{total}}</strong></div>
+      </section>
+
+      <section class="card sec" style="border: 2px dashed #F08A24">
+        <div style="display: flex; justify-content: space-between; align-items: center; gap: 8px; flex-wrap: wrap"><h2 class="h" style="font-size: 20px">Payment schedule / milestones</h2><span class="ex">Example — replace with agreed terms</span></div>
+        <p class="m" style="margin: 0; font-size: 13px">Percentages below are an editable illustration of how a schedule could look, not a proposal of terms. Final schedule: <span class="tbc">[To be agreed]</span></p>
+        <div class="tw"><div style="min-width: 640px">
+          <div class="mrow" style="font-size: 12px; color: #475569; font-weight: 600; border-bottom: 1px solid #E2E8F0"><span>Milestone</span><span>Trigger</span><span>% (example)</span><span>Amount</span><span>Due date</span></div>
+          <sc-for list="{{miles}}" as="s" hint-placeholder-count="4">
+            <div class="mrow"><strong>{{s.name}}</strong><span class="m">{{s.trigger}}</span><input class="in" inputmode="numeric" aria-label="{{s.name}} percent" value="{{s.pct}}" onChange="{{s.set}}"><span>{{s.amount}}</span><input class="in" placeholder="[Date]" aria-label="{{s.name}} due date"></div>
+          </sc-for>
+        </div></div>
+        <div style="font-size: 13px">Schedule adds up to <strong>{{pctTotal}}%</strong><sc-if value="{{pctWarn}}" hint-placeholder-val="{{false}}"><span style="color: #B42318; font-weight: 600"> — should total 100%</span></sc-if></div>
+      </section>
+    </div>
+
+    <div style="flex: 1 1 380px; min-width: 0; display: flex; flex-direction: column; gap: 20px">
+      <section class="card sec">
+        <h2 class="h" style="font-size: 20px">Running and third-party costs</h2>
+        <p class="m" style="margin: 0; font-size: 13px">Usually paid by or passed through to the client. Amounts depend on the providers chosen.</p>
+        <div class="fr"><span>Hosting</span><input class="in" placeholder="[To be confirmed]" aria-label="Hosting cost"></div>
+        <div class="fr"><span>Domain name</span><input class="in" placeholder="[To be confirmed]" aria-label="Domain cost"></div>
+        <div class="fr"><span>Premium plugins / theme licences</span><input class="in" placeholder="[To be confirmed]" aria-label="Plugin cost"></div>
+        <div class="fr"><span>Payment gateway fees</span><input class="in" placeholder="[Per provider]" aria-label="Gateway fees"></div>
+        <div class="fr"><span>SMS / WhatsApp / email services</span><input class="in" placeholder="[If used — TBC]" aria-label="Messaging cost"></div>
+        <div class="fr" style="border: 0"><span>Maintenance and support plan</span><input class="in" placeholder="[To be confirmed]" aria-label="Maintenance cost"></div>
+      </section>
+      <section class="card sec">
+        <h2 class="h" style="font-size: 20px">Maintenance and support (optional)</h2>
+        <div class="fr"><span>Post-launch support period</span><input class="in" placeholder="[To be confirmed]" aria-label="Support period"></div>
+        <div class="fr"><span>Monthly / annual fee</span><input class="in" placeholder="[Enter amount]" aria-label="Maintenance fee"></div>
+        <div class="fr"><span>Response time</span><input class="in" placeholder="[To be confirmed]" aria-label="Response time"></div>
+        <div class="fr" style="border: 0"><span>Change requests rate</span><input class="in" placeholder="[To be confirmed]" aria-label="Change request rate"></div>
+      </section>
+      <section class="card sec" style="background: #0B1F3A; color: #FFFFFF; border-color: #0B1F3A">
+        <strong>Agreement</strong>
+        <span style="font-size: 13px; color: #C7D6EC">Amounts, schedule and terms take effect only once both sides sign the final proposal. No guarantees of sales, rankings or uptime are implied.</span>
+        <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; font-size: 13px"><span>110 Mobile Tools: ____________</span><span>Developer: ____________</span><span>Date: [Date]</span><span>Date: [Date]</span></div>
+      </section>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script data-dc-script data-props='{"$preview":{"width":1280,"height":1600}}'>window.__dcComponent = (function () {
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { fees: ['', '', '', ''], pct: ['25', '25', '25', '25'] };
+  }
+  renderVals() {
+    const s = this.state;
+    const num = v => { const n = parseFloat(String(v).replace(/,/g, '')); return isNaN(n) ? null : n; };
+    const f = n => 'PKR ' + Math.round(n).toLocaleString('en-US');
+    const F = [['Phase 1 — Discovery & Planning', 'Requirements, site map, decisions'], ['Phase 2 — UX/UI Design', 'Design system, screens, prototype'], ['Phase 3 — WordPress + WooCommerce Build', 'Store, catalog, checkout, integrations'], ['Phase 4 — QA, Launch & Handover', 'Testing, launch, training']];
+    const M = [['Deposit', 'Proposal signed, before Phase 1'], ['Milestone 2', 'Phase 1 approved'], ['Milestone 3', 'Phase 2 design approved'], ['Final payment', 'Launch and handover']];
+    const vals = s.fees.map(num);
+    const any = vals.some(v => v !== null);
+    const total = vals.reduce((a, v) => a + (v || 0), 0);
+    const pcts = s.pct.map(num);
+    const pctTotal = pcts.reduce((a, v) => a + (v || 0), 0);
+    return {
+      fees: F.map((x, i) => ({ name: x[0], note: x[1], val: s.fees[i], set: e => this.setState({ fees: s.fees.map((v, j) => j === i ? e.target.value : v) }) })),
+      total: any ? f(total) : '[Enter amount]',
+      miles: M.map((x, i) => ({ name: x[0], trigger: x[1], pct: s.pct[i], amount: any && pcts[i] !== null ? f(total * pcts[i] / 100) : '[Enter amount]', set: e => this.setState({ pct: s.pct.map((v, j) => j === i ? e.target.value : v) }) })),
+      pctTotal: Math.round(pctTotal * 100) / 100,
+      pctWarn: Math.abs(pctTotal - 100) > 0.001,
+      clear: () => this.setState({ fees: ['', '', '', ''] })
+    };
+  }
+}
+return Component;
+})();</script>
+</body>
+</html>

@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>110 Mobile Tools — design system</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap">
+<style>
+body{margin:0;background:#F4F6FA}
+a{color:#1A5FD6}a:hover{color:#0B1F3A}
+.r,.r *{box-sizing:border-box}
+.r{font-family:Inter,system-ui,sans-serif;color:#0F172A;font-size:15px;line-height:1.5;background:#F4F6FA}
+.h{font-family:'Space Grotesk',Inter,sans-serif;letter-spacing:-0.01em;margin:0}
+.wrap{max-width:1280px;margin:0 auto;padding:0 32px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:0 20px;border-radius:10px;font-weight:600;font-size:15px;text-decoration:none;border:0;cursor:pointer;font-family:inherit;white-space:nowrap}
+.bp{background:#1A5FD6;color:#fff}.bs{background:#fff;color:#0B1F3A;border:1.5px solid #CBD5E1}.bo{background:#F08A24;color:#0B1F3A}.bn{background:#0B1F3A;color:#fff}.bd{background:#E2E8F0;color:#64748B;cursor:not-allowed}
+.card{background:#fff;border:1px solid #E2E8F0;border-radius:14px}
+.badge{display:inline-flex;align-items:center;height:24px;padding:0 8px;border-radius:6px;font-size:12px;font-weight:600;white-space:nowrap}
+.b-in{background:#E3F4EA;color:#14532D}.b-low{background:#FFF1E0;color:#8A4200}.b-out{background:#E2E8F0;color:#334155}.b-sale{background:#F08A24;color:#0B1F3A}.b-new{background:#E6EEFC;color:#123E8C}
+.ph{display:flex;align-items:center;justify-content:center;flex-direction:column;gap:6px;background:#EEF2F7;border:1.5px dashed #B6C2D2;border-radius:12px;color:#475569;font-size:12px;font-weight:500;text-align:center}
+.in{width:100%;height:44px;border:1.5px solid #CBD5E1;border-radius:10px;padding:0 12px;font:inherit;background:#fff;color:#0F172A}
+.lbl{display:block;font-size:13px;font-weight:600;color:#334155;margin-bottom:6px}
+.m{color:#475569}
+.tbc{display:inline-block;background:#FFF7E6;color:#7A3E00;border:1px dashed #D08A3A;border-radius:6px;padding:0 6px;font-size:12px;font-weight:600}
+.eyebrow{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#1A5FD6}
+.sec{padding:24px;display:flex;flex-direction:column;gap:16px}
+.sw{display:flex;flex-direction:column;gap:8px;font-size:13px}
+.chip{height:72px;border-radius:12px;border:1px solid #E2E8F0}
+.ic{display:flex;flex-direction:column;align-items:center;gap:6px;font-size:12px;color:#334155;width:76px}
+.icb{width:44px;height:44px;border-radius:10px;background:#F4F6FA;display:flex;align-items:center;justify-content:center;color:#0B1F3A}
+</style>
+</helmet>
+<div class="r" style="padding-bottom: 56px">
+  <div class="concept" style="background: #F08A24; color: #0B1F3A; font-size: 12px; font-weight: 700; text-align: center; padding: 4px 12px">PROPOSED CONCEPT — 110 Mobile Tools design system</div>
+  <div class="wrap" style="padding-top: 32px; display: flex; flex-direction: column; gap: 24px">
+    <div style="display: flex; align-items: flex-end; justify-content: space-between; gap: 16px; flex-wrap: wrap">
+      <div>
+        <div class="eyebrow">Stage 1</div>
+        <h1 class="h" style="font-size: 40px">Design system</h1>
+        <p class="m" style="margin: 4px 0 0">Navy for trust, electric blue for actions, a restrained orange for offers and attention. All screens use these tokens.</p>
+      </div>
+      <a href="Main.dc.html" class="btn bs">← Screen index</a>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 24px">
+      <div class="card sec">
+        <h2 class="h" style="font-size: 20px">Brand / logo placeholder</h2>
+        <div style="display: flex; gap: 16px; align-items: center; flex-wrap: wrap">
+          <div class="ph" style="width: 120px; height: 72px">[Logo]<br>to be supplied</div>
+          <div style="display: flex; align-items: center; gap: 10px">
+            <div style="width: 40px; height: 40px; border-radius: 10px; background: #0B1F3A; color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 14px">110</div>
+            <div class="h" style="font-size: 20px; font-weight: 700; color: #0B1F3A">110 Mobile Tools</div>
+          </div>
+        </div>
+        <p class="m" style="margin: 0; font-size: 13px">Text wordmark used until the client supplies a logo. The "110" tile is a temporary placeholder, not a proposed logo. <span class="tbc">[Logo — to be confirmed]</span></p>
+      </div>
+      <div class="card sec">
+        <h2 class="h" style="font-size: 20px">Typography</h2>
+        <div class="h" style="font-size: 40px; font-weight: 700">Space Grotesk 40</div>
+        <div class="h" style="font-size: 28px; font-weight: 600">Heading 28 / 600</div>
+        <div class="h" style="font-size: 20px; font-weight: 600">Heading 20 / 600</div>
+        <div style="font-size: 16px">Inter 16 — body text for product descriptions</div>
+        <div style="font-size: 14px" class="m">Inter 14 — secondary text, specifications</div>
+        <div style="font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: #1A5FD6">Inter 12 — eyebrow labels</div>
+      </div>
+    </div>
+
+    <div class="card sec">
+      <h2 class="h" style="font-size: 20px">Colour palette</h2>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 16px">
+        <div class="sw"><div class="chip" style="background: #0B1F3A"></div><strong>Navy</strong><span class="m">#0B1F3A · header, text on accent</span></div>
+        <div class="sw"><div class="chip" style="background: #1A5FD6"></div><strong>Electric blue</strong><span class="m">#1A5FD6 · primary actions, links</span></div>
+        <div class="sw"><div class="chip" style="background: #F08A24"></div><strong>Orange accent</strong><span class="m">#F08A24 · sale, offers (navy text)</span></div>
+        <div class="sw"><div class="chip" style="background: #FFFFFF"></div><strong>White</strong><span class="m">#FFFFFF · cards, fields</span></div>
+        <div class="sw"><div class="chip" style="background: #F4F6FA"></div><strong>Ground</strong><span class="m">#F4F6FA · page background</span></div>
+        <div class="sw"><div class="chip" style="background: #0F172A"></div><strong>Ink</strong><span class="m">#0F172A · body text</span></div>
+        <div class="sw"><div class="chip" style="background: #475569"></div><strong>Slate</strong><span class="m">#475569 · secondary text</span></div>
+        <div class="sw"><div class="chip" style="background: #1E7A46"></div><strong>In stock</strong><span class="m">#1E7A46 / #E3F4EA</span></div>
+        <div class="sw"><div class="chip" style="background: #B42318"></div><strong>Error</strong><span class="m">#B42318 / #FDECEA</span></div>
+      </div>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 24px">
+      <div class="card sec">
+        <h2 class="h" style="font-size: 20px">Buttons</h2>
+        <div style="display: flex; gap: 12px; flex-wrap: wrap">
+          <button class="btn bp" type="button">Add to cart</button>
+          <button class="btn bs" type="button">View details</button>
+          <button class="btn bo" type="button">Shop the sale</button>
+          <button class="btn bn" type="button">Place order</button>
+          <button class="btn bd" type="button" disabled="">Out of stock</button>
+        </div>
+        <p class="m" style="margin: 0; font-size: 13px">Minimum height 44 px, radius 10 px. Blue = main action on a screen; orange only for offers.</p>
+        <h2 class="h" style="font-size: 20px; margin-top: 8px">Badges</h2>
+        <div style="display: flex; gap: 8px; flex-wrap: wrap">
+          <span class="badge b-in">In stock</span><span class="badge b-low">Low stock</span><span class="badge b-out">Out of stock</span><span class="badge b-sale">Sale</span><span class="badge b-new">New</span><span class="tbc">[To be confirmed]</span>
+        </div>
+      </div>
+      <div class="card sec">
+        <h2 class="h" style="font-size: 20px">Form fields</h2>
+        <div><label class="lbl" for="ds-a">Full name</label><input id="ds-a" class="in" placeholder="Enter your name"></div>
+        <div><label class="lbl" for="ds-b">Phone (focus)</label><input id="ds-b" class="in" style="border-color: #1A5FD6; box-shadow: 0 0 0 3px #CFE0FB" value="03XX XXXXXXX"></div>
+        <div><label class="lbl" for="ds-c">City (error)</label><input id="ds-c" class="in" style="border-color: #B42318; background: #FDECEA"><div style="color: #B42318; font-size: 13px; margin-top: 4px">Please enter your city.</div></div>
+        <div><label class="lbl" for="ds-d">Sort by</label><select id="ds-d" class="in"><option>Featured</option><option>Price: low to high</option></select></div>
+      </div>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 24px">
+      <div class="card sec">
+        <h2 class="h" style="font-size: 20px">Product card</h2>
+        <div class="card" style="width: 240px; padding: 12px; display: flex; flex-direction: column; gap: 8px">
+          <div class="ph" style="height: 160px; position: relative">[Product image]<span class="badge b-sale" style="position: absolute; top: 8px; left: 8px">Sale</span></div>
+          <div style="font-size: 12px" class="m">Rework Stations</div>
+          <div style="font-weight: 600">Hot Air Rework Station [Model TBC]</div>
+          <div style="display: flex; align-items: center; gap: 8px"><strong style="color: #0B1F3A">PKR [Price]</strong><s class="m" style="font-size: 13px">PKR [Was]</s></div>
+          <span class="badge b-in" style="align-self: flex-start">In stock</span>
+          <button class="btn bp" type="button" style="width: 100%">Add to cart</button>
+        </div>
+      </div>
+      <div class="card sec">
+        <h2 class="h" style="font-size: 20px">Navigation</h2>
+        <div style="background: #FFFFFF; border: 1px solid #E2E8F0; border-radius: 12px; padding: 12px 16px; display: flex; align-items: center; gap: 16px; flex-wrap: wrap">
+          <strong class="h">110 Mobile Tools</strong>
+          <div style="flex: 1; min-width: 160px; height: 40px; border: 1.5px solid #CBD5E1; border-radius: 10px; display: flex; align-items: center; padding: 0 12px; color: #64748B; font-size: 14px">Search tools, ICs, parts…</div>
+          <span style="font-size: 14px; font-weight: 600">Cart (2)</span>
+        </div>
+        <div style="display: flex; gap: 20px; flex-wrap: wrap; font-size: 14px; font-weight: 600"><span style="color: #1A5FD6; border-bottom: 2px solid #1A5FD6; padding-bottom: 4px">Repair Tools</span><span>ICs</span><span>Soldering</span><span>Microscopes</span><span>Power Supplies</span></div>
+        <div style="width: 360px; max-width: 100%; border: 1px solid #E2E8F0; border-radius: 12px; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); text-align: center; font-size: 12px; padding: 8px 0; background: #FFFFFF">
+          <span style="color: #1A5FD6; font-weight: 700">Home</span><span>Categories</span><span>Cart</span><span>Help</span>
+        </div>
+        <p class="m" style="margin: 0; font-size: 13px">Mobile uses a fixed bottom bar; desktop uses a header with category row.</p>
+      </div>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 24px">
+      <div class="card sec">
+        <h2 class="h" style="font-size: 20px">Icons (2 px stroke, 24 grid)</h2>
+        <div style="display: flex; flex-wrap: wrap; gap: 12px">
+          <div class="ic"><div class="icb"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.5-3.5"></path></svg></div>Search</div>
+          <div class="ic"><div class="icb"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4h2l2.4 11h11l2-8H6.2"></path><circle cx="9" cy="20" r="1.5"></circle><circle cx="18" cy="20" r="1.5"></circle></svg></div>Cart</div>
+          <div class="ic"><div class="icb"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"></circle><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"></path></svg></div>Account</div>
+          <div class="ic"><div class="icb"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"></path></svg></div>Chat</div>
+          <div class="ic"><div class="icb"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h11v10H3zM14 9h4l3 3v4h-7"></path><circle cx="7" cy="18" r="2"></circle><circle cx="17" cy="18" r="2"></circle></svg></div>Delivery</div>
+          <div class="ic"><div class="icb"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 4.5-3.4 8-8 9-4.6-1-8-4.5-8-9V6z"></path></svg></div>Secure</div>
+          <div class="ic"><div class="icb"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.6 2.6-2.4-.6-.6-2.4z"></path></svg></div>Tools</div>
+          <div class="ic"><div class="icb"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="6" width="12" height="12" rx="2"></rect><path d="M9 2v4M15 2v4M9 18v4M15 18v4M2 9h4M2 15h4M18 9h4M18 15h4"></path></svg></div>ICs</div>
+          <div class="ic"><div class="icb"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2 4 14h7l-1 8 9-12h-7z"></path></svg></div>Power</div>
+        </div>
+      </div>
+      <div class="card sec">
+        <h2 class="h" style="font-size: 20px">Spacing scale (px)</h2>
+        <div style="display: flex; align-items: flex-end; gap: 14px; flex-wrap: wrap; font-size: 12px" class="m">
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 4px"><div style="width: 4px; height: 4px; background: #1A5FD6"></div>4</div>
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 4px"><div style="width: 8px; height: 8px; background: #1A5FD6"></div>8</div>
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 4px"><div style="width: 12px; height: 12px; background: #1A5FD6"></div>12</div>
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 4px"><div style="width: 16px; height: 16px; background: #1A5FD6"></div>16</div>
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 4px"><div style="width: 24px; height: 24px; background: #1A5FD6"></div>24</div>
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 4px"><div style="width: 32px; height: 32px; background: #1A5FD6"></div>32</div>
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 4px"><div style="width: 48px; height: 48px; background: #1A5FD6"></div>48</div>
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 4px"><div style="width: 64px; height: 64px; background: #1A5FD6"></div>64</div>
+        </div>
+        <p class="m" style="margin: 0; font-size: 13px">Card radius 14 · button/field radius 10 · badge radius 6.</p>
+      </div>
+    </div>
+
+    <div class="card sec">
+      <h2 class="h" style="font-size: 20px">Layout rules</h2>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px">
+        <div style="display: flex; flex-direction: column; gap: 10px">
+          <strong>Desktop · 1280 px max, 12 columns, 24 gutter, 32 margin</strong>
+          <div style="display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 6px; height: 64px">
+            <div style="background: #E6EEFC; border-radius: 4px"></div><div style="background: #E6EEFC; border-radius: 4px"></div><div style="background: #E6EEFC; border-radius: 4px"></div><div style="background: #E6EEFC; border-radius: 4px"></div><div style="background: #E6EEFC; border-radius: 4px"></div><div style="background: #E6EEFC; border-radius: 4px"></div><div style="background: #E6EEFC; border-radius: 4px"></div><div style="background: #E6EEFC; border-radius: 4px"></div><div style="background: #E6EEFC; border-radius: 4px"></div><div style="background: #E6EEFC; border-radius: 4px"></div><div style="background: #E6EEFC; border-radius: 4px"></div><div style="background: #E6EEFC; border-radius: 4px"></div>
+          </div>
+          <span class="m" style="font-size: 13px">Product grid: 4 per row; shop filters: 3 columns + 9 for results; checkout: 7 + 5.</span>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 10px">
+          <strong>Mobile · 390 px reference, 4 columns, 16 margin</strong>
+          <div style="width: 180px; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; height: 64px">
+            <div style="background: #FFF1E0; border-radius: 4px"></div><div style="background: #FFF1E0; border-radius: 4px"></div><div style="background: #FFF1E0; border-radius: 4px"></div><div style="background: #FFF1E0; border-radius: 4px"></div>
+          </div>
+          <span class="m" style="font-size: 13px">2 products per row; filters open in a bottom sheet; sticky Add to cart and checkout buttons; 44 px touch targets.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script data-dc-script data-props='{"$preview":{"width":1280,"height":1900}}'>window.__dcComponent = (function () {
+class Component extends DCLogic {
+  renderVals() {
+    return {};
+  }
+}
+return Component;
+})();</script>
+</body>
+</html>

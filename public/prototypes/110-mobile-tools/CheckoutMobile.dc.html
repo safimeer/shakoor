@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>110 Mobile Tools — cart and checkout (mobile)</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap">
+<style>
+body{margin:0;background:#F4F6FA}
+a{color:#1A5FD6}a:hover{color:#0B1F3A}
+.r,.r *{box-sizing:border-box}
+.r{font-family:Inter,system-ui,sans-serif;color:#0F172A;font-size:15px;line-height:1.5;background:#F4F6FA}
+.h{font-family:'Space Grotesk',Inter,sans-serif;letter-spacing:-0.01em;margin:0}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:50px;padding:0 18px;border-radius:10px;font-weight:600;font-size:15px;text-decoration:none;border:0;cursor:pointer;font-family:inherit;white-space:nowrap}
+.bp{background:#1A5FD6;color:#fff}.bn{background:#0B1F3A;color:#fff}.bs{background:#fff;color:#0B1F3A;border:1.5px solid #CBD5E1}
+.card{background:#fff;border:1px solid #E2E8F0;border-radius:14px;padding:14px;display:flex;flex-direction:column;gap:10px}
+.ph{display:flex;align-items:center;justify-content:center;background:#EEF2F7;border:1.5px dashed #B6C2D2;border-radius:10px;color:#475569;font-size:11px;text-align:center}
+.in{width:100%;height:48px;border:1.5px solid #CBD5E1;border-radius:10px;padding:0 12px;font:inherit;font-size:16px;background:#fff;color:#0F172A}
+.ine{border-color:#B42318;background:#FDECEA}
+.lbl{display:block;font-size:13px;font-weight:600;color:#334155;margin-bottom:4px}
+.err{color:#B42318;font-size:12px;margin-top:3px}
+.m{color:#475569}
+.tbc{display:inline-block;background:#FFF7E6;color:#7A3E00;border:1px dashed #D08A3A;border-radius:6px;padding:0 5px;font-size:11px;font-weight:600}
+.opt{display:flex;gap:10px;align-items:flex-start;padding:12px;border:1.5px solid #CBD5E1;border-radius:12px;background:#fff;font-size:14px}
+.opton{border-color:#1A5FD6;background:#F3F7FE}
+.opt input{width:20px;height:20px;accent-color:#1A5FD6;flex:none;margin-top:1px}
+.qb{width:40px;height:40px;border:0;background:#fff;font-size:18px;cursor:pointer;font-family:inherit;color:#0B1F3A}
+.sr{display:flex;justify-content:space-between;font-size:14px}
+.num{width:24px;height:24px;border-radius:999px;background:#0B1F3A;color:#fff;font-size:12px;display:inline-flex;align-items:center;justify-content:center;margin-right:8px}
+</style>
+</helmet>
+<div class="r" style="width: 390px; min-height: 2300px; position: relative; display: flex; flex-direction: column">
+  <div style="background: #F08A24; color: #0B1F3A; font-size: 11px; font-weight: 700; text-align: center; padding: 3px 8px">PROPOSED CONCEPT · sample amounts</div>
+  <header style="background: #FFFFFF; padding: 4px 8px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #E2E8F0">
+    <a href="ProductMobile.dc.html" aria-label="Back" style="width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; color: #0B1F3A; text-decoration: none; font-size: 22px">←</a>
+    <span class="h" style="font-size: 17px; font-weight: 700">Cart and checkout</span>
+    <span style="width: 44px"></span>
+  </header>
+
+  <sc-if value="{{showErrors}}" hint-placeholder-val="{{false}}">
+    <div role="alert" style="margin: 12px 12px 0; padding: 12px; border-radius: 12px; background: #FDECEA; border: 1px solid #F3B8B2; color: #7A1A12; font-size: 14px"><strong>Missing information:</strong> {{missingList}}</div>
+  </sc-if>
+
+  <div style="padding: 12px 12px 150px; display: flex; flex-direction: column; gap: 12px">
+    <section class="card">
+      <h2 class="h" style="font-size: 17px"><span class="num">1</span>Your items</h2>
+      <sc-for list="{{lines}}" as="l" hint-placeholder-count="2">
+        <div style="display: flex; gap: 10px; align-items: center">
+          <span class="ph" style="width: 64px; height: 64px; flex: none">[Img]</span>
+          <div style="flex: 1; min-width: 0; font-size: 14px"><div style="font-weight: 600">{{l.name}}</div><div class="m">PKR {{l.total}}</div></div>
+          <div style="display: flex; align-items: center; border: 1.5px solid #CBD5E1; border-radius: 10px; overflow: hidden"><button type="button" class="qb" onClick="{{l.dec}}" aria-label="Decrease">−</button><span style="width: 22px; text-align: center; font-weight: 700">{{l.qty}}</span><button type="button" class="qb" onClick="{{l.inc}}" aria-label="Increase">+</button></div>
+        </div>
+      </sc-for>
+      <div style="display: flex; gap: 8px"><input class="in" aria-label="Coupon code" placeholder="Coupon code" value="{{code}}" onChange="{{setCode}}"><button type="button" class="btn bs" onClick="{{apply}}">Apply</button></div>
+      <sc-if value="{{couponBad}}" hint-placeholder-val="{{false}}"><div class="err" role="alert">This coupon is invalid or not available.</div></sc-if>
+    </section>
+
+    <section class="card">
+      <h2 class="h" style="font-size: 17px"><span class="num">2</span>Contact and address</h2>
+      <div><label class="lbl" for="m-n">Full name *</label><input id="m-n" class="in {{eName}}" value="{{name}}" onChange="{{setName}}"><sc-if value="{{errName}}" hint-placeholder-val="{{false}}"><div class="err">Enter your full name.</div></sc-if></div>
+      <div><label class="lbl" for="m-p">Mobile number *</label><input id="m-p" class="in {{ePhone}}" value="{{phone}}" onChange="{{setPhone}}" inputmode="tel" placeholder="03XX XXXXXXX"><sc-if value="{{errPhone}}" hint-placeholder-val="{{false}}"><div class="err">Enter a mobile number.</div></sc-if></div>
+      <div><label class="lbl" for="m-a">Address *</label><input id="m-a" class="in {{eAddr}}" value="{{addr}}" onChange="{{setAddr}}"><sc-if value="{{errAddr}}" hint-placeholder-val="{{false}}"><div class="err">Enter your address.</div></sc-if></div>
+      <div><label class="lbl" for="m-c">City *</label><select id="m-c" class="in {{eCity}}" value="{{city}}" onChange="{{setCity}}"><option value="">Select city</option><option>Karachi</option><option>Lahore</option><option>Islamabad</option><option>Other city</option></select><sc-if value="{{errCity}}" hint-placeholder-val="{{false}}"><div class="err">Select your city.</div></sc-if></div>
+      <button type="button" class="btn bs" style="min-height: 40px; font-size: 13px" onClick="{{fill}}">Demo: fill sample details</button>
+    </section>
+
+    <section class="card">
+      <h2 class="h" style="font-size: 17px"><span class="num">3</span>Delivery</h2>
+      <sc-for list="{{deliveries}}" as="d" hint-placeholder-count="3">
+        <label class="opt {{d.cls}}"><input type="radio" name="m-del" checked="{{d.on}}" onChange="{{d.pick}}"><span style="flex: 1"><strong>{{d.name}}</strong><br><span class="m" style="font-size: 12px">{{d.eta}}</span></span><strong>{{d.fee}}</strong></label>
+      </sc-for>
+      <span class="m" style="font-size: 12px">Fees and times <span class="tbc">TBC</span></span>
+    </section>
+
+    <section class="card">
+      <h2 class="h" style="font-size: 17px"><span class="num">4</span>Payment</h2>
+      <sc-for list="{{payments}}" as="p" hint-placeholder-count="5">
+        <label class="opt {{p.cls}}"><input type="radio" name="m-pay" checked="{{p.on}}" onChange="{{p.pick}}"><span style="flex: 1"><strong>{{p.name}}</strong><br><span class="m" style="font-size: 12px">{{p.sub}}</span></span></label>
+      </sc-for>
+    </section>
+
+    <section class="card">
+      <div class="sr"><span class="m">Subtotal</span><span>PKR {{subtotal}}</span></div>
+      <div class="sr"><span class="m">Delivery</span><span>{{deliveryFee}}</span></div>
+      <div class="sr" style="font-weight: 700; font-size: 17px; border-top: 1px solid #E2E8F0; padding-top: 8px"><span>Total</span><span>PKR {{total}}</span></div>
+    </section>
+  </div>
+
+  <div style="position: absolute; left: 0; right: 0; bottom: 0; background: #FFFFFF; border-top: 1px solid #E2E8F0; padding: 10px 12px 14px; box-shadow: 0 -6px 16px rgba(11,31,58,.08); display: flex; flex-direction: column; gap: 8px">
+    <sc-if value="{{notDone}}" hint-placeholder-val="{{true}}">
+      <button type="button" class="btn bn" style="width: 100%" onClick="{{place}}">Place order · PKR {{total}}</button>
+    </sc-if>
+    <sc-if value="{{done}}" hint-placeholder-val="{{false}}">
+      <div role="status" style="font-size: 13px; color: #14532D"><strong>Order placed (demo).</strong> Status: {{doneStatus}}</div>
+      <a href="TrackMobile.dc.html" class="btn bp" style="width: 100%">View confirmation</a>
+    </sc-if>
+  </div>
+</div>
+</x-dc>
+<script data-dc-script data-props='{"standardFee":{"editor":"int","default":200,"section":"Sample delivery fees (PKR)"},"expressFee":{"editor":"int","default":400,"section":"Sample delivery fees (PKR)"},"$preview":{"width":390,"height":2300}}'>window.__dcComponent = (function () {
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { lines: [{ id: 'a', name: 'Hot Air Rework Station [TBC]', unit: 1000, qty: 1 }, { id: 'b', name: 'Solder Paste / Flux [TBC]', unit: 500, qty: 2 }], code: '', bad: false, name: '', phone: '', addr: '', city: '', delivery: 'standard', payment: 'cod', tried: false, done: false };
+  }
+  renderVals() {
+    const s = this.state;
+    const f = n => Math.round(n).toLocaleString('en-US');
+    const std = this.props.standardFee ?? 200, exp = this.props.expressFee ?? 400;
+    const D = [{ id: 'standard', name: 'Standard Courier', eta: '[estimated delivery]', fee: std }, { id: 'express', name: 'Express Courier', eta: '[estimated delivery]', fee: exp }, { id: 'pickup', name: 'Store pickup (if confirmed)', eta: '[pickup hours]', fee: 0 }];
+    const Pm = [{ id: 'cod', name: 'Cash on Delivery', sub: 'Availability TBC' }, { id: 'bank', name: 'Bank Transfer', sub: 'Awaiting verification until checked' }, { id: 'easypaisa', name: 'Easypaisa', sub: 'Setup TBC' }, { id: 'jazzcash', name: 'JazzCash', sub: 'Setup TBC' }, { id: 'card', name: 'Debit / Credit Card', sub: 'Subject to provider setup' }];
+    const del = D.find(d => d.id === s.delivery);
+    const setQty = (id, d) => this.setState({ lines: s.lines.map(l => l.id === id ? Object.assign({}, l, { qty: Math.max(1, l.qty + d) }) : l) });
+    const sub = s.lines.reduce((a, l) => a + l.unit * l.qty, 0);
+    const missing = [];
+    if (!s.name.trim()) missing.push('name');
+    if (!s.phone.trim()) missing.push('mobile number');
+    if (!s.addr.trim()) missing.push('address');
+    if (!s.city) missing.push('city');
+    const e = c => s.tried && c;
+    return {
+      lines: s.lines.map(l => ({ name: l.name, qty: l.qty, total: f(l.unit * l.qty), inc: () => setQty(l.id, 1), dec: () => setQty(l.id, -1) })),
+      code: s.code, couponBad: s.bad,
+      setCode: ev => this.setState({ code: ev.target.value, bad: false }),
+      apply: () => this.setState({ bad: s.code.trim() !== '' }),
+      name: s.name, phone: s.phone, addr: s.addr, city: s.city,
+      setName: ev => this.setState({ name: ev.target.value }), setPhone: ev => this.setState({ phone: ev.target.value }), setAddr: ev => this.setState({ addr: ev.target.value }), setCity: ev => this.setState({ city: ev.target.value }),
+      errName: e(!s.name.trim()), errPhone: e(!s.phone.trim()), errAddr: e(!s.addr.trim()), errCity: e(!s.city),
+      eName: e(!s.name.trim()) ? 'ine' : '', ePhone: e(!s.phone.trim()) ? 'ine' : '', eAddr: e(!s.addr.trim()) ? 'ine' : '', eCity: e(!s.city) ? 'ine' : '',
+      showErrors: s.tried && missing.length > 0, missingList: missing.join(', ') + '.',
+      deliveries: D.map(d => ({ name: d.name, eta: d.eta, fee: d.fee ? 'PKR ' + f(d.fee) : 'Free', on: d.id === s.delivery, cls: d.id === s.delivery ? 'opton' : '', pick: () => this.setState({ delivery: d.id }) })),
+      payments: Pm.map(p => ({ name: p.name, sub: p.sub, on: p.id === s.payment, cls: p.id === s.payment ? 'opton' : '', pick: () => this.setState({ payment: p.id }) })),
+      subtotal: f(sub), deliveryFee: del.fee ? 'PKR ' + f(del.fee) : 'Free', total: f(sub + del.fee),
+      done: s.done, notDone: !s.done,
+      doneStatus: s.payment === 'cod' ? 'Order received' : s.payment === 'card' ? 'Sent to payment provider' : 'Awaiting payment verification',
+      place: () => this.setState(missing.length ? { tried: true } : { tried: true, done: true }),
+      fill: () => this.setState({ name: 'Sample Customer', phone: '0300 0000000', addr: 'Shop [no.], [Street]', city: 'Lahore' })
+    };
+  }
+}
+return Component;
+})();</script>
+</body>
+</html>

@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>110 Mobile Tools — product detail (mobile)</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap">
+<style>
+body{margin:0;background:#F4F6FA}
+a{color:#1A5FD6}a:hover{color:#0B1F3A}
+.r,.r *{box-sizing:border-box}
+.r{font-family:Inter,system-ui,sans-serif;color:#0F172A;font-size:15px;line-height:1.5;background:#F4F6FA}
+.h{font-family:'Space Grotesk',Inter,sans-serif;letter-spacing:-0.01em;margin:0}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:50px;padding:0 18px;border-radius:10px;font-weight:600;font-size:15px;text-decoration:none;border:0;cursor:pointer;font-family:inherit;white-space:nowrap}
+.bp{background:#1A5FD6;color:#fff}.bs{background:#fff;color:#0B1F3A;border:1.5px solid #CBD5E1}.bw{background:#1E7A46;color:#fff}
+.badge{display:inline-flex;align-items:center;height:24px;padding:0 8px;border-radius:6px;font-size:12px;font-weight:600;white-space:nowrap}
+.b-in{background:#E3F4EA;color:#14532D}.b-sale{background:#F08A24;color:#0B1F3A}
+.ph{display:flex;align-items:center;justify-content:center;flex-direction:column;gap:4px;background:#EEF2F7;border:1.5px dashed #B6C2D2;border-radius:10px;color:#475569;font-size:11px;font-weight:500;text-align:center}
+.m{color:#475569}
+.tbc{display:inline-block;background:#FFF7E6;color:#7A3E00;border:1px dashed #D08A3A;border-radius:6px;padding:0 5px;font-size:11px;font-weight:600}
+.acc{border-top:1px solid #E2E8F0}
+.accb{width:100%;min-height:52px;display:flex;justify-content:space-between;align-items:center;background:none;border:0;font:inherit;font-weight:600;cursor:pointer;padding:0;color:#0F172A}
+.row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #F1F5F9;font-size:14px}
+.qb{width:44px;height:50px;border:0;background:#fff;font-size:20px;cursor:pointer;color:#0B1F3A;font-family:inherit}
+.pc{background:#fff;border:1px solid #E2E8F0;border-radius:12px;padding:8px;display:flex;flex-direction:column;gap:6px;text-decoration:none;color:#0F172A;font-size:13px;width:150px;flex:none}
+</style>
+</helmet>
+<div class="r" style="width: 390px; min-height: 2100px; position: relative; display: flex; flex-direction: column; background: #FFFFFF">
+  <div style="background: #F08A24; color: #0B1F3A; font-size: 11px; font-weight: 700; text-align: center; padding: 3px 8px">PROPOSED CONCEPT — NOT A LIVE WEBSITE</div>
+  <header style="padding: 4px 8px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #E2E8F0">
+    <a href="ShopMobile.dc.html" aria-label="Back to category" style="width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; color: #0B1F3A; text-decoration: none; font-size: 22px">←</a>
+    <span class="h" style="font-size: 16px; font-weight: 700">110 Mobile Tools</span>
+    <a href="CheckoutMobile.dc.html" style="min-height: 44px; display: flex; align-items: center; padding: 0 8px; font-size: 14px; font-weight: 600; text-decoration: none">Cart ({{cartCount}})</a>
+  </header>
+
+  <div class="ph" style="height: 340px; margin: 12px; position: relative; background: #FFFFFF">[Product image — swipe gallery]<span class="badge b-sale" style="position: absolute; top: 10px; left: 10px">Sale</span><span style="position: absolute; bottom: 10px; font-size: 12px">● ○ ○ ○</span></div>
+
+  <div style="padding: 0 16px; display: flex; flex-direction: column; gap: 10px">
+    <span class="m" style="font-size: 12px">Rework Stations · SKU [TBC]</span>
+    <h1 class="h" style="font-size: 22px; line-height: 1.2">Hot Air Rework Station [Model TBC]</h1>
+    <div style="display: flex; align-items: baseline; gap: 10px"><strong class="h" style="font-size: 24px; color: #0B1F3A">PKR [Price]</strong><s class="m">PKR [Was]</s></div>
+    <span class="badge b-in" style="align-self: flex-start">In stock</span>
+    <div style="padding: 12px; border-radius: 10px; background: #F4F6FA; font-size: 13px">Delivery charges and estimated times shown at checkout <span class="tbc">TBC</span></div>
+    <a href="InfoPages.dc.html" class="btn bs" style="min-height: 46px">Ask if it fits — WhatsApp</a>
+  </div>
+
+  <div style="padding: 16px">
+    <div class="acc">
+      <button type="button" class="accb" onClick="{{tSpec}}" aria-expanded="{{oSpec}}"><span>Specifications</span><span aria-hidden="true" style="color: #1A5FD6; font-size: 20px">{{sSpec}}</span></button>
+      <sc-if value="{{oSpec}}" hint-placeholder-val="{{true}}"><div style="padding-bottom: 12px"><div class="row"><span class="m">Power</span><span>[TBC]</span></div><div class="row"><span class="m">Temperature range</span><span>[TBC]</span></div><div class="row"><span class="m">Airflow</span><span>[TBC]</span></div><div class="row"><span class="m">Included</span><span>[TBC]</span></div></div></sc-if>
+    </div>
+    <div class="acc">
+      <button type="button" class="accb" onClick="{{tComp}}" aria-expanded="{{oComp}}"><span>Compatibility</span><span aria-hidden="true" style="color: #1A5FD6; font-size: 20px">{{sComp}}</span></button>
+      <sc-if value="{{oComp}}" hint-placeholder-val="{{false}}"><p class="m" style="margin: 0 0 12px; font-size: 14px">[Device models / board types — from client product data]</p></sc-if>
+    </div>
+    <div class="acc">
+      <button type="button" class="accb" onClick="{{tDesc}}" aria-expanded="{{oDesc}}"><span>Description</span><span aria-hidden="true" style="color: #1A5FD6; font-size: 20px">{{sDesc}}</span></button>
+      <sc-if value="{{oDesc}}" hint-placeholder-val="{{false}}"><p class="m" style="margin: 0 0 12px; font-size: 14px">[Product description — client approved]</p></sc-if>
+    </div>
+    <div class="acc"></div>
+  </div>
+
+  <div style="padding: 0 16px 140px">
+    <h2 class="h" style="font-size: 18px; margin-bottom: 10px">Related products</h2>
+    <div style="display: flex; gap: 10px; overflow-x: auto">
+      <a href="ProductMobile.dc.html" class="pc"><span class="ph" style="height: 100px">[Image]</span><span style="font-weight: 600">Hot Air Nozzle Set [TBC]</span><strong>PKR [Price]</strong></a>
+      <a href="ProductMobile.dc.html" class="pc"><span class="ph" style="height: 100px">[Image]</span><span style="font-weight: 600">Preheater Plate [TBC]</span><strong>PKR [Price]</strong></a>
+      <a href="ProductMobile.dc.html" class="pc"><span class="ph" style="height: 100px">[Image]</span><span style="font-weight: 600">Solder Paste [TBC]</span><strong>PKR [Price]</strong></a>
+    </div>
+  </div>
+
+  <div style="position: absolute; left: 0; right: 0; bottom: 0; background: #FFFFFF; border-top: 1px solid #E2E8F0; padding: 10px 12px 14px; display: flex; flex-direction: column; gap: 8px; box-shadow: 0 -6px 16px rgba(11,31,58,.08)">
+    <sc-if value="{{added}}" hint-placeholder-val="{{false}}"><div role="status" style="display: flex; justify-content: space-between; align-items: center; font-size: 13px; color: #14532D; background: #E3F4EA; border-radius: 8px; padding: 8px 10px"><strong>Added {{qty}} to cart</strong><a href="CheckoutMobile.dc.html" style="color: #14532D; font-weight: 700">View cart →</a></div></sc-if>
+    <div style="display: flex; gap: 10px; align-items: center">
+      <div style="display: flex; align-items: center; border: 1.5px solid #CBD5E1; border-radius: 10px; overflow: hidden">
+        <button type="button" class="qb" onClick="{{dec}}" aria-label="Decrease quantity">−</button>
+        <span style="width: 28px; text-align: center; font-weight: 700">{{qty}}</span>
+        <button type="button" class="qb" onClick="{{inc}}" aria-label="Increase quantity">+</button>
+      </div>
+      <button type="button" class="btn bp" style="flex: 1" onClick="{{add}}">Add to Cart</button>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script data-dc-script data-props='{"$preview":{"width":390,"height":2100}}'>window.__dcComponent = (function () {
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { qty: 1, added: false, open: 'spec' };
+  }
+  renderVals() {
+    const s = this.state;
+    const t = k => () => this.setState({ open: s.open === k ? '' : k });
+    return {
+      qty: s.qty, added: s.added, cartCount: s.added ? 2 + s.qty : 2,
+      inc: () => this.setState({ qty: Math.min(s.qty + 1, 99), added: false }),
+      dec: () => this.setState({ qty: Math.max(s.qty - 1, 1), added: false }),
+      add: () => this.setState({ added: true }),
+      oSpec: s.open === 'spec', oComp: s.open === 'comp', oDesc: s.open === 'desc',
+      sSpec: s.open === 'spec' ? '−' : '+', sComp: s.open === 'comp' ? '−' : '+', sDesc: s.open === 'desc' ? '−' : '+',
+      tSpec: t('spec'), tComp: t('comp'), tDesc: t('desc')
+    };
+  }
+}
+return Component;
+})();</script>
+</body>
+</html>

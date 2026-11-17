@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>110 Mobile Tools — checkout (desktop)</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap">
+<style>
+body{margin:0;background:#F4F6FA}
+a{color:#1A5FD6}a:hover{color:#0B1F3A}
+.r,.r *{box-sizing:border-box}
+.r{font-family:Inter,system-ui,sans-serif;color:#0F172A;font-size:15px;line-height:1.5;background:#F4F6FA}
+.h{font-family:'Space Grotesk',Inter,sans-serif;letter-spacing:-0.01em;margin:0}
+.wrap{max-width:1280px;margin:0 auto;padding:0 32px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:0 22px;border-radius:10px;font-weight:600;font-size:15px;text-decoration:none;border:0;cursor:pointer;font-family:inherit;white-space:nowrap}
+.bp{background:#1A5FD6;color:#fff}.bp:hover{background:#144CB0;color:#fff}
+.bn{background:#0B1F3A;color:#fff}.bn:hover{background:#13294A;color:#fff}
+.bs{background:#fff;color:#0B1F3A;border:1.5px solid #CBD5E1}.bs:hover{border-color:#0B1F3A;color:#0B1F3A}
+.card{background:#fff;border:1px solid #E2E8F0;border-radius:14px}
+.ph{display:flex;align-items:center;justify-content:center;background:#EEF2F7;border:1.5px dashed #B6C2D2;border-radius:10px;color:#475569;font-size:11px;text-align:center}
+.in{width:100%;height:46px;border:1.5px solid #CBD5E1;border-radius:10px;padding:0 12px;font:inherit;background:#fff;color:#0F172A}
+.ine{border-color:#B42318;background:#FDECEA}
+.lbl{display:block;font-size:13px;font-weight:600;color:#334155;margin-bottom:6px}
+.err{color:#B42318;font-size:13px;margin-top:4px}
+.m{color:#475569}
+.tbc{display:inline-block;background:#FFF7E6;color:#7A3E00;border:1px dashed #D08A3A;border-radius:6px;padding:0 6px;font-size:12px;font-weight:600}
+.smp{display:inline-block;background:#EEF2F7;color:#334155;border-radius:6px;padding:0 6px;font-size:11px;font-weight:600}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:#0B1F3A}
+.tile{width:40px;height:40px;border-radius:10px;background:#0B1F3A;color:#fff;display:flex;align-items:center;justify-content:center;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:14px}
+.opt{display:flex;gap:12px;align-items:flex-start;padding:14px 16px;border:1.5px solid #CBD5E1;border-radius:12px;cursor:pointer;background:#fff}
+.opton{border-color:#1A5FD6;background:#F3F7FE;box-shadow:0 0 0 2px #CFE0FB}
+.opt input{width:20px;height:20px;margin-top:2px;accent-color:#1A5FD6;flex:none}
+.sr{display:flex;justify-content:space-between;gap:12px}
+.steps{display:flex;gap:8px;align-items:center;font-size:13px;font-weight:600;color:#475569;flex-wrap:wrap}
+.stp{display:inline-flex;align-items:center;gap:6px}
+.dot{width:24px;height:24px;border-radius:999px;display:inline-flex;align-items:center;justify-content:center;font-size:12px;background:#E2E8F0;color:#334155}
+.don{background:#1A5FD6;color:#fff}
+.sec{padding:20px;display:flex;flex-direction:column;gap:14px}
+.g2{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
+.note{padding:12px 14px;border-radius:10px;background:#F4F6FA;font-size:14px;color:#334155}
+.fl{color:#C7D6EC;text-decoration:none}.fl:hover{color:#fff}
+</style>
+</helmet>
+<div class="r">
+  <div style="background: #F08A24; color: #0B1F3A; font-size: 12px; font-weight: 700; text-align: center; padding: 4px 12px">PROPOSED CONCEPT — NOT A LIVE WEBSITE · fees and totals are sample values; methods to be confirmed</div>
+  <header style="background: #FFFFFF; border-bottom: 1px solid #E2E8F0">
+    <div class="wrap" style="display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap; padding-top: 12px; padding-bottom: 12px">
+      <a href="Home.dc.html" class="logo"><span class="tile">110</span><span class="h" style="font-size: 20px; font-weight: 700">110 Mobile Tools</span></a>
+      <div class="steps"><span class="stp"><span class="dot don">✓</span>Cart</span><span aria-hidden="true">—</span><span class="stp"><span class="dot don">2</span>Checkout</span><span aria-hidden="true">—</span><span class="stp"><span class="dot">3</span>Confirmation</span></div>
+      <span style="display: inline-flex; align-items: center; gap: 6px; font-size: 13px" class="m"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"></rect><path d="M8 11V7a4 4 0 0 1 8 0v4"></path></svg>Secure checkout (SSL)</span>
+    </div>
+  </header>
+
+  <div class="wrap" style="padding-top: 24px; display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap">
+    <h1 class="h" style="font-size: 32px">Checkout</h1>
+    <div style="display: flex; gap: 8px; flex-wrap: wrap"><button type="button" class="btn bs" style="min-height: 40px; font-size: 13px" onClick="{{fill}}">Demo: fill sample details</button><button type="button" class="btn bs" style="min-height: 40px; font-size: 13px" onClick="{{resetAll}}">Demo: reset</button></div>
+  </div>
+
+  <sc-if value="{{showErrors}}" hint-placeholder-val="{{false}}">
+    <div class="wrap" style="padding-top: 16px"><div role="alert" style="padding: 14px 16px; border-radius: 12px; background: #FDECEA; border: 1px solid #F3B8B2; color: #7A1A12"><strong>Please complete the highlighted fields:</strong> {{missingList}}</div></div>
+  </sc-if>
+
+  <div class="wrap" style="padding-top: 16px; display: flex; flex-wrap: wrap; gap: 24px; align-items: flex-start">
+    <main style="flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column; gap: 16px">
+      <section class="card sec" aria-labelledby="s1">
+        <h2 id="s1" class="h" style="font-size: 20px">1. Contact details</h2>
+        <div class="g2">
+          <div><label class="lbl" for="f-name">Full name *</label><input id="f-name" class="in {{eName}}" value="{{name}}" onChange="{{setName}}" autocomplete="name"><sc-if value="{{errName}}" hint-placeholder-val="{{false}}"><div class="err">Enter your full name.</div></sc-if></div>
+          <div><label class="lbl" for="f-phone">Mobile number *</label><input id="f-phone" class="in {{ePhone}}" value="{{phone}}" onChange="{{setPhone}}" inputmode="tel" placeholder="03XX XXXXXXX" autocomplete="tel"><sc-if value="{{errPhone}}" hint-placeholder-val="{{false}}"><div class="err">Enter a mobile number so the courier can reach you.</div></sc-if></div>
+          <div><label class="lbl" for="f-email">Email (for order updates)</label><input id="f-email" class="in" inputmode="email" placeholder="Optional" autocomplete="email"></div>
+          <div><label class="lbl" for="f-biz">Shop / institute name</label><input id="f-biz" class="in" placeholder="Optional"></div>
+        </div>
+      </section>
+
+      <section class="card sec" aria-labelledby="s2">
+        <h2 id="s2" class="h" style="font-size: 20px">2. Delivery address</h2>
+        <div><label class="lbl" for="f-addr">Street address *</label><input id="f-addr" class="in {{eAddr}}" value="{{addr}}" onChange="{{setAddr}}" placeholder="House / shop no., street, area" autocomplete="street-address"><sc-if value="{{errAddr}}" hint-placeholder-val="{{false}}"><div class="err">Enter your delivery address.</div></sc-if></div>
+        <div class="g2">
+          <div><label class="lbl" for="f-city">City *</label><select id="f-city" class="in {{eCity}}" value="{{city}}" onChange="{{setCity}}"><option value="">Select city</option><option>Karachi</option><option>Lahore</option><option>Islamabad</option><option>Rawalpindi</option><option>Other city</option></select><sc-if value="{{errCity}}" hint-placeholder-val="{{false}}"><div class="err">Select your city.</div></sc-if><div class="m" style="font-size: 12px; margin-top: 4px">Serviceable cities <span class="tbc">[To be confirmed]</span></div></div>
+          <div><label class="lbl" for="f-note">Order notes</label><input id="f-note" class="in" placeholder="Optional — landmark or delivery instructions"></div>
+        </div>
+      </section>
+
+      <section class="card sec" aria-labelledby="s3">
+        <h2 id="s3" class="h" style="font-size: 20px">3. Delivery method</h2>
+        <sc-for list="{{deliveries}}" as="d" hint-placeholder-count="3">
+          <label class="opt {{d.cls}}">
+            <input type="radio" name="delivery" checked="{{d.on}}" onChange="{{d.pick}}">
+            <span style="flex: 1; display: flex; flex-direction: column; gap: 2px">
+              <strong>{{d.name}}</strong>
+              <span class="m" style="font-size: 14px">Estimated delivery: {{d.eta}}</span>
+              <span class="m" style="font-size: 12px">{{d.note}}</span>
+            </span>
+            <span style="font-weight: 700; white-space: nowrap">{{d.fee}}</span>
+          </label>
+        </sc-for>
+        <div class="m" style="font-size: 12px">Delivery times are estimates only. Couriers, fees and times <span class="tbc">[To be confirmed with client]</span></div>
+      </section>
+
+      <section class="card sec" aria-labelledby="s4">
+        <h2 id="s4" class="h" style="font-size: 20px">4. Payment method</h2>
+        <sc-for list="{{payments}}" as="p" hint-placeholder-count="5">
+          <label class="opt {{p.cls}}">
+            <input type="radio" name="payment" checked="{{p.on}}" onChange="{{p.pick}}">
+            <span style="flex: 1; display: flex; flex-direction: column; gap: 2px">
+              <strong>{{p.name}}</strong>
+              <span class="m" style="font-size: 13px">{{p.sub}}</span>
+            </span>
+            <span class="tbc">{{p.tag}}</span>
+          </label>
+        </sc-for>
+        <div class="note"><strong>{{payTitle}}:</strong> {{payDetail}}</div>
+      </section>
+    </main>
+
+    <aside class="card" style="flex: 1 1 340px; max-width: 440px; padding: 20px; display: flex; flex-direction: column; gap: 14px" aria-label="Order summary">
+      <div style="display: flex; justify-content: space-between; align-items: center"><h2 class="h" style="font-size: 20px">Order summary</h2><a href="Cart.dc.html" style="font-size: 14px; font-weight: 600">Edit cart</a></div>
+      <div style="display: flex; gap: 12px; align-items: center"><span class="ph" style="width: 56px; height: 56px; flex: none">[Img]</span><span style="flex: 1; font-size: 14px">Hot Air Rework Station [Model TBC] × 1</span><span style="font-size: 14px">PKR 1,000</span></div>
+      <div style="display: flex; gap: 12px; align-items: center"><span class="ph" style="width: 56px; height: 56px; flex: none">[Img]</span><span style="flex: 1; font-size: 14px">Solder Paste / Flux [Type TBC] × 2</span><span style="font-size: 14px">PKR 1,000</span></div>
+      <div style="display: flex; flex-direction: column; gap: 8px; padding-top: 12px; border-top: 1px solid #E2E8F0; font-size: 15px">
+        <div class="sr"><span class="m">Subtotal</span><span>PKR {{subtotal}}</span></div>
+        <div class="sr"><span class="m">Delivery · {{deliveryName}}</span><span>{{deliveryFee}}</span></div>
+        <div class="sr"><span class="m">Payment · {{payName}}</span><span>{{payFee}}</span></div>
+        <div class="sr" style="font-weight: 700; font-size: 20px; padding-top: 10px; border-top: 1px solid #E2E8F0"><span>Total</span><span>PKR {{total}}</span></div>
+        <span class="smp" style="align-self: flex-end">Sample values — updates live</span>
+      </div>
+      <label style="display: flex; gap: 10px; font-size: 13px; align-items: flex-start"><input type="checkbox" style="width: 18px; height: 18px; accent-color: #1A5FD6"><span>I agree to the <a href="InfoPages.dc.html">Terms</a>, <a href="InfoPages.dc.html">Shipping &amp; Returns</a> and <a href="InfoPages.dc.html">Privacy Policy</a>.</span></label>
+
+      <sc-if value="{{stageForm}}" hint-placeholder-val="{{true}}">
+        <button type="button" class="btn bn" style="width: 100%; min-height: 52px; font-size: 16px" onClick="{{place}}">Place order · PKR {{total}}</button>
+      </sc-if>
+
+      <sc-if value="{{stageGateway}}" hint-placeholder-val="{{false}}">
+        <div style="padding: 14px; border-radius: 12px; border: 1px solid #BCD0F3; background: #F3F7FE; display: flex; flex-direction: column; gap: 10px">
+          <strong>Payment provider page (simulated)</strong>
+          <span class="m" style="font-size: 13px">In the live store the customer pays on the provider's secure page. Choose an outcome to see each state:</span>
+          <div style="display: flex; gap: 8px; flex-wrap: wrap"><button type="button" class="btn bp" style="flex: 1" onClick="{{paySuccess}}">Payment succeeds</button><button type="button" class="btn bs" style="flex: 1" onClick="{{payFail}}">Payment fails</button></div>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{stageFailed}}" hint-placeholder-val="{{false}}">
+        <div role="alert" style="padding: 14px; border-radius: 12px; border: 1px solid #F3B8B2; background: #FDECEA; color: #7A1A12; display: flex; flex-direction: column; gap: 10px">
+          <strong>Payment not completed</strong>
+          <span style="font-size: 14px">No money has been taken. Your order is saved as “Pending payment”. Try again or choose another payment method.</span>
+          <div style="display: flex; gap: 8px; flex-wrap: wrap"><button type="button" class="btn bp" style="flex: 1" onClick="{{retry}}">Try again</button><button type="button" class="btn bs" style="flex: 1" onClick="{{backToForm}}">Change method</button></div>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{stageDone}}" hint-placeholder-val="{{false}}">
+        <div role="status" style="padding: 14px; border-radius: 12px; border: 1px solid #A7D7B8; background: #E3F4EA; color: #14532D; display: flex; flex-direction: column; gap: 10px">
+          <strong>Order placed (demo) · #110-[Order no.]</strong>
+          <span style="font-size: 14px">Status: <strong>{{doneStatus}}</strong></span>
+          <a href="Confirmation.dc.html" class="btn bp" style="width: 100%">View order confirmation</a>
+        </div>
+      </sc-if>
+      <div class="m" style="font-size: 12px">Need help? <a href="InfoPages.dc.html">WhatsApp [Number]</a></div>
+    </aside>
+  </div>
+
+  <footer style="background: #0B1F3A; color: #C7D6EC; margin-top: 56px; padding: 28px 0; font-size: 14px">
+    <div class="wrap" style="display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap"><strong style="color: #FFFFFF">110 Mobile Tools</strong><span style="display: flex; gap: 20px; flex-wrap: wrap"><a class="fl" href="InfoPages.dc.html">Shipping &amp; Returns</a><a class="fl" href="InfoPages.dc.html">Privacy &amp; Terms</a><a class="fl" href="InfoPages.dc.html">Contact</a></span><span>[Phone] · [Email]</span></div>
+  </footer>
+</div>
+</x-dc>
+<script data-dc-script data-props='{"standardFee":{"editor":"int","default":200,"section":"Sample delivery fees (PKR)"},"expressFee":{"editor":"int","default":400,"section":"Sample delivery fees (PKR)"},"showPickup":{"editor":"boolean","default":true,"section":"Options shown"},"showCard":{"editor":"boolean","default":true,"section":"Options shown"},"$preview":{"width":1280,"height":1900}}'>window.__dcComponent = (function () {
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = this.blank();
+  }
+  blank() {
+    return { name: '', phone: '', addr: '', city: '', delivery: 'standard', payment: 'cod', tried: false, stage: 'form' };
+  }
+  renderVals() {
+    const s = this.state;
+    const pr = this.props;
+    const f = n => Math.round(n).toLocaleString('en-US');
+    const stdFee = pr.standardFee ?? 200;
+    const expFee = pr.expressFee ?? 400;
+    const showPickup = pr.showPickup ?? true;
+    const showCard = pr.showCard ?? true;
+    const dAll = [
+      { id: 'standard', name: 'Standard Courier', eta: '[estimated delivery]', fee: stdFee, note: 'Sample fee — rate [To be confirmed]' },
+      { id: 'express', name: 'Express Courier', eta: '[estimated delivery]', fee: expFee, note: 'Sample fee — availability by city [To be confirmed]' },
+      { id: 'pickup', name: 'Store pickup', eta: '[pickup hours]', fee: 0, note: 'Shown only if the client confirms pickup is available' }
+    ].filter(d => d.id !== 'pickup' || showPickup);
+    const pAll = [
+      { id: 'cod', name: 'Cash on Delivery', sub: 'Pay the courier in cash when the order arrives', tag: 'Availability TBC', title: 'Cash on Delivery', detail: 'Pay when your order arrives. COD limits by city or order value [To be confirmed with client].' },
+      { id: 'bank', name: 'Bank Transfer', sub: 'Transfer to the store account and share the receipt', tag: 'Account TBC', title: 'Bank Transfer', detail: 'Account details appear after you place the order [To be confirmed]. The order stays “Awaiting payment verification” until the transfer is checked.' },
+      { id: 'easypaisa', name: 'Easypaisa', sub: 'Mobile wallet payment', tag: 'Setup TBC', title: 'Easypaisa', detail: 'Manual wallet transfer or gateway integration [To be confirmed]. Manual payments stay “Awaiting payment verification” until checked.' },
+      { id: 'jazzcash', name: 'JazzCash', sub: 'Mobile wallet payment', tag: 'Setup TBC', title: 'JazzCash', detail: 'Manual wallet transfer or gateway integration [To be confirmed]. Manual payments stay “Awaiting payment verification” until checked.' },
+      { id: 'card', name: 'Debit / Credit Card', sub: 'Subject to payment-provider availability and client account setup', tag: 'Provider TBC', title: 'Card payment', detail: 'You will be sent to the payment provider’s secure page. Provider fees and requirements depend on the provider selected.' }
+    ].filter(p => p.id !== 'card' || showCard);
+    const delivery = dAll.find(d => d.id === s.delivery) || dAll[0];
+    const payment = pAll.find(p => p.id === s.payment) || pAll[0];
+    const sub = 2000;
+    const missing = [];
+    if (!s.name.trim()) missing.push('full name');
+    if (!s.phone.trim()) missing.push('mobile number');
+    if (!s.addr.trim()) missing.push('address');
+    if (!s.city) missing.push('city');
+    const show = s.tried && missing.length > 0;
+    const doneStatus = payment.id === 'cod' ? 'Order received — awaiting confirmation' : payment.id === 'card' ? 'Payment received — processing' : 'Awaiting payment verification';
+    return {
+      name: s.name, phone: s.phone, addr: s.addr, city: s.city,
+      setName: e => this.setState({ name: e.target.value }),
+      setPhone: e => this.setState({ phone: e.target.value }),
+      setAddr: e => this.setState({ addr: e.target.value }),
+      setCity: e => this.setState({ city: e.target.value }),
+      errName: s.tried && !s.name.trim(), errPhone: s.tried && !s.phone.trim(), errAddr: s.tried && !s.addr.trim(), errCity: s.tried && !s.city,
+      eName: s.tried && !s.name.trim() ? 'ine' : '', ePhone: s.tried && !s.phone.trim() ? 'ine' : '', eAddr: s.tried && !s.addr.trim() ? 'ine' : '', eCity: s.tried && !s.city ? 'ine' : '',
+      showErrors: show,
+      missingList: missing.join(', ') + '.',
+      deliveries: dAll.map(d => ({ name: d.name, eta: d.eta, note: d.note, fee: d.fee === 0 ? 'Free' : 'PKR ' + f(d.fee), on: d.id === delivery.id, cls: d.id === delivery.id ? 'opton' : '', pick: () => this.setState({ delivery: d.id }) })),
+      payments: pAll.map(p => ({ name: p.name, sub: p.sub, tag: p.tag, on: p.id === payment.id, cls: p.id === payment.id ? 'opton' : '', pick: () => this.setState({ payment: p.id, stage: 'form' }) })),
+      payTitle: payment.title, payDetail: payment.detail, payName: payment.name, payFee: '[Fee, if any — TBC]',
+      deliveryName: delivery.name, deliveryFee: delivery.fee === 0 ? 'Free' : 'PKR ' + f(delivery.fee),
+      subtotal: f(sub), total: f(sub + delivery.fee),
+      stageForm: s.stage === 'form', stageGateway: s.stage === 'gateway', stageFailed: s.stage === 'failed', stageDone: s.stage === 'done',
+      doneStatus,
+      place: () => {
+        if (missing.length) { this.setState({ tried: true }); return; }
+        this.setState({ tried: true, stage: payment.id === 'card' ? 'gateway' : 'done' });
+      },
+      paySuccess: () => this.setState({ stage: 'done' }),
+      payFail: () => this.setState({ stage: 'failed' }),
+      retry: () => this.setState({ stage: 'gateway' }),
+      backToForm: () => this.setState({ stage: 'form' }),
+      fill: () => this.setState({ name: 'Sample Customer', phone: '0300 0000000', addr: 'Shop [no.], [Street], [Area]', city: 'Karachi' }),
+      resetAll: () => this.setState(this.blank())
+    };
+  }
+}
+return Component;
+})();</script>
+</body>
+</html>
