@@ -39,6 +39,7 @@ a{color:#1A5FD6}a:hover{color:#0B1F3A}
 .dot{width:24px;height:24px;border-radius:999px;display:inline-flex;align-items:center;justify-content:center;font-size:12px;background:#E2E8F0;color:#334155}
 .don{background:#1A5FD6;color:#fff}
 .fl{color:#C7D6EC;text-decoration:none}.fl:hover{color:#fff}
+.ibox{position:relative;display:block;overflow:hidden;border-radius:12px;background:#EEF2F7}.pimg{width:100%;height:100%;object-fit:cover;display:block}.ref{position:absolute;right:8px;bottom:8px;background:rgba(11,31,58,.8);color:#fff;font-size:10px;font-weight:600;padding:2px 6px;border-radius:4px;line-height:1.4}.cimg{display:block;width:100%;aspect-ratio:1/1;border-radius:10px;overflow:hidden;background:#EEF2F7}.cimg img{width:100%;height:100%;object-fit:cover;display:block}
 </style>
 </helmet>
 <div class="r">
@@ -60,7 +61,7 @@ a{color:#1A5FD6}a:hover{color:#0B1F3A}
       <main style="flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column; gap: 12px">
         <sc-for list="{{lines}}" as="l" hint-placeholder-count="2">
           <div class="card" style="padding: 16px; display: flex; gap: 16px; align-items: center; flex-wrap: wrap">
-            <a href="Product.dc.html" class="ph" style="width: 96px; height: 96px; flex: none; text-decoration: none">[Image]</a>
+            <a href="Product.dc.html" class="ibox" style="width: 96px; height: 96px; flex: none"><img class="pimg" src="{{l.img}}" alt="{{l.name}}"></a>
             <div style="flex: 1 1 220px; display: flex; flex-direction: column; gap: 4px">
               <a href="Product.dc.html" style="font-weight: 600; color: #0F172A; text-decoration: none">{{l.name}}</a>
               <span class="m" style="font-size: 13px">{{l.variant}}</span>
@@ -132,8 +133,8 @@ class Component extends DCLogic {
   }
   start() {
     return [
-      { id: 'a', name: 'Hot Air Rework Station [Model TBC]', variant: 'Plug type [TBC]', unit: 1000, qty: 1 },
-      { id: 'b', name: 'Solder Paste / Flux [Type TBC]', variant: 'Size [TBC]', unit: 500, qty: 2 }
+      { id: 'a', img: 'img/7639432.jpg', name: 'Hot Air Rework Station [Model TBC]', variant: 'Plug type [TBC]', unit: 1000, qty: 1 },
+      { id: 'b', img: 'img/7286029.jpg', name: 'Solder Paste / Flux [Type TBC]', variant: 'Size [TBC]', unit: 500, qty: 2 }
     ];
   }
   renderVals() {
@@ -141,7 +142,7 @@ class Component extends DCLogic {
     const f = n => Math.round(n).toLocaleString('en-US');
     const setQty = (id, d) => this.setState({ lines: s.lines.map(l => l.id === id ? Object.assign({}, l, { qty: Math.max(1, l.qty + d) }) : l) });
     const lines = s.lines.map(l => ({
-      name: l.name, variant: l.variant, qty: l.qty, unit: f(l.unit), total: f(l.unit * l.qty),
+      name: l.name, img: l.img, variant: l.variant, qty: l.qty, unit: f(l.unit), total: f(l.unit * l.qty),
       inc: () => setQty(l.id, 1), dec: () => setQty(l.id, -1),
       remove: () => this.setState({ lines: s.lines.filter(x => x.id !== l.id), removed: l })
     }));

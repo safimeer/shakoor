@@ -33,6 +33,7 @@ a{color:#1A5FD6}a:hover{color:#0B1F3A}
 .qb{width:40px;height:40px;border:0;background:#fff;font-size:18px;cursor:pointer;font-family:inherit;color:#0B1F3A}
 .sr{display:flex;justify-content:space-between;font-size:14px}
 .num{width:24px;height:24px;border-radius:999px;background:#0B1F3A;color:#fff;font-size:12px;display:inline-flex;align-items:center;justify-content:center;margin-right:8px}
+.ibox{position:relative;display:block;overflow:hidden;border-radius:12px;background:#EEF2F7}.pimg{width:100%;height:100%;object-fit:cover;display:block}.ref{position:absolute;right:8px;bottom:8px;background:rgba(11,31,58,.8);color:#fff;font-size:10px;font-weight:600;padding:2px 6px;border-radius:4px;line-height:1.4}.cimg{display:block;width:100%;aspect-ratio:1/1;border-radius:10px;overflow:hidden;background:#EEF2F7}.cimg img{width:100%;height:100%;object-fit:cover;display:block}
 </style>
 </helmet>
 <div class="r" style="width: 390px; min-height: 2300px; position: relative; display: flex; flex-direction: column">
@@ -52,7 +53,7 @@ a{color:#1A5FD6}a:hover{color:#0B1F3A}
       <h2 class="h" style="font-size: 17px"><span class="num">1</span>Your items</h2>
       <sc-for list="{{lines}}" as="l" hint-placeholder-count="2">
         <div style="display: flex; gap: 10px; align-items: center">
-          <span class="ph" style="width: 64px; height: 64px; flex: none">[Img]</span>
+          <span class="ibox" style="width: 64px; height: 64px; flex: none"><img class="pimg" src="{{l.img}}" alt="{{l.name}}"></span>
           <div style="flex: 1; min-width: 0; font-size: 14px"><div style="font-weight: 600">{{l.name}}</div><div class="m">PKR {{l.total}}</div></div>
           <div style="display: flex; align-items: center; border: 1.5px solid #CBD5E1; border-radius: 10px; overflow: hidden"><button type="button" class="qb" onClick="{{l.dec}}" aria-label="Decrease">−</button><span style="width: 22px; text-align: center; font-weight: 700">{{l.qty}}</span><button type="button" class="qb" onClick="{{l.inc}}" aria-label="Increase">+</button></div>
         </div>
@@ -107,7 +108,7 @@ a{color:#1A5FD6}a:hover{color:#0B1F3A}
 class Component extends DCLogic {
   constructor(props) {
     super(props);
-    this.state = { lines: [{ id: 'a', name: 'Hot Air Rework Station [TBC]', unit: 1000, qty: 1 }, { id: 'b', name: 'Solder Paste / Flux [TBC]', unit: 500, qty: 2 }], code: '', bad: false, name: '', phone: '', addr: '', city: '', delivery: 'standard', payment: 'cod', tried: false, done: false };
+    this.state = { lines: [{ id: 'a', img: 'img/7639432.jpg', name: 'Hot Air Rework Station [TBC]', unit: 1000, qty: 1 }, { id: 'b', img: 'img/7286029.jpg', name: 'Solder Paste / Flux [TBC]', unit: 500, qty: 2 }], code: '', bad: false, name: '', phone: '', addr: '', city: '', delivery: 'standard', payment: 'cod', tried: false, done: false };
   }
   renderVals() {
     const s = this.state;
@@ -125,7 +126,7 @@ class Component extends DCLogic {
     if (!s.city) missing.push('city');
     const e = c => s.tried && c;
     return {
-      lines: s.lines.map(l => ({ name: l.name, qty: l.qty, total: f(l.unit * l.qty), inc: () => setQty(l.id, 1), dec: () => setQty(l.id, -1) })),
+      lines: s.lines.map(l => ({ name: l.name, img: l.img, qty: l.qty, total: f(l.unit * l.qty), inc: () => setQty(l.id, 1), dec: () => setQty(l.id, -1) })),
       code: s.code, couponBad: s.bad,
       setCode: ev => this.setState({ code: ev.target.value, bad: false }),
       apply: () => this.setState({ bad: s.code.trim() !== '' }),

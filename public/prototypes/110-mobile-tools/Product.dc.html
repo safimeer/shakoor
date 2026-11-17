@@ -36,7 +36,7 @@ a{color:#1A5FD6}a:hover{color:#0B1F3A}
 .qb{width:44px;height:48px;border:0;background:#fff;font-size:20px;cursor:pointer;color:#0B1F3A;font-family:inherit}
 .tab{min-height:44px;padding:0 16px;border:0;background:none;font:inherit;font-weight:600;cursor:pointer;color:#475569;border-bottom:2px solid transparent}
 .tabon{color:#1A5FD6;border-bottom-color:#1A5FD6}
-.th{width:72px;height:72px;border-radius:10px;cursor:pointer;font-size:11px;padding:0}
+.th{width:72px;height:72px;border-radius:10px;cursor:pointer;font-size:11px;padding:0;border:2px solid transparent}
 .thon{border:2px solid #1A5FD6;background:#E6EEFC}
 .pc{background:#fff;border:1px solid #E2E8F0;border-radius:14px;padding:12px;display:flex;flex-direction:column;gap:8px;text-decoration:none;color:#0F172A}
 .pc:hover{border-color:#1A5FD6;color:#0F172A}
@@ -44,6 +44,7 @@ a{color:#1A5FD6}a:hover{color:#0B1F3A}
 .tog{min-height:36px;padding:0 12px;border-radius:8px;border:1px solid #CBD5E1;background:#fff;font:inherit;font-size:13px;cursor:pointer}
 .togon{background:#0B1F3A;color:#fff;border-color:#0B1F3A}
 .fl{color:#C7D6EC;text-decoration:none}.fl:hover{color:#fff}
+.ibox{position:relative;display:block;overflow:hidden;border-radius:12px;background:#EEF2F7}.pimg{width:100%;height:100%;object-fit:cover;display:block}.ref{position:absolute;right:8px;bottom:8px;background:rgba(11,31,58,.8);color:#fff;font-size:10px;font-weight:600;padding:2px 6px;border-radius:4px;line-height:1.4}.cimg{display:block;width:100%;aspect-ratio:1/1;border-radius:10px;overflow:hidden;background:#EEF2F7}.cimg img{width:100%;height:100%;object-fit:cover;display:block}
 </style>
 </helmet>
 <div class="r">
@@ -66,10 +67,10 @@ a{color:#1A5FD6}a:hover{color:#0B1F3A}
 
   <div class="wrap" style="padding-top: 16px; display: flex; flex-wrap: wrap; gap: 32px; align-items: flex-start">
     <div style="flex: 1 1 460px; display: flex; flex-direction: column; gap: 12px">
-      <div class="ph" style="height: 460px; background: #FFFFFF; position: relative"><span style="font-size: 14px">{{imageLabel}}</span><span>Client product photo · white background</span><span class="badge b-sale" style="position: absolute; top: 12px; left: 12px">Sale</span></div>
+      <div class="ibox" style="height: 460px"><img class="pimg" src="{{mainImg}}" alt="{{imageLabel}}"><span class="ref">Reference visual — replace with client product photo</span><span class="badge b-sale" style="position: absolute; top: 12px; left: 12px">Sale</span></div>
       <div style="display: flex; gap: 10px">
         <sc-for list="{{thumbs}}" as="t" hint-placeholder-count="4">
-          <button type="button" class="ph th {{t.cls}}" onClick="{{t.pick}}" aria-label="Show {{t.label}}">{{t.label}}</button>
+          <button type="button" class="th ibox {{t.cls}}" onClick="{{t.pick}}" aria-label="Show {{t.label}}"><img class="pimg" src="{{t.img}}" alt=""></button>
         </sc-for>
       </div>
     </div>
@@ -155,10 +156,10 @@ a{color:#1A5FD6}a:hover{color:#0B1F3A}
   <div class="wrap" style="padding-top: 32px">
     <h2 class="h" style="font-size: 24px; margin-bottom: 16px">Related products</h2>
     <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 16px">
-      <a href="Product.dc.html" class="pc"><span class="ph" style="height: 150px">[Product image]</span><span style="font-weight: 600">Hot Air Nozzle Set [Size range TBC]</span><strong>PKR [Price]</strong></a>
-      <a href="Product.dc.html" class="pc"><span class="ph" style="height: 150px">[Product image]</span><span style="font-weight: 600">Infrared Preheater Plate [Model TBC]</span><strong>PKR [Price]</strong></a>
-      <a href="Product.dc.html" class="pc"><span class="ph" style="height: 150px">[Product image]</span><span style="font-weight: 600">Solder Paste / Flux [Type TBC]</span><strong>PKR [Price]</strong></a>
-      <a href="Product.dc.html" class="pc"><span class="ph" style="height: 150px">[Product image]</span><span style="font-weight: 600">Fume Extractor [Model TBC]</span><strong>PKR [Price]</strong></a>
+      <a href="Product.dc.html" class="pc"><span class="ibox" style="height: 150px"><img class="pimg" src="img/7286026.jpg" alt="Hot air nozzle set (reference image)"></span><span style="font-weight: 600">Hot Air Nozzle Set [Size range TBC]</span><strong>PKR [Price]</strong></a>
+      <a href="Product.dc.html" class="pc"><span class="ibox" style="height: 150px"><img class="pimg" src="img/6755066.jpg" alt="Infrared preheater plate (reference image)"></span><span style="font-weight: 600">Infrared Preheater Plate [Model TBC]</span><strong>PKR [Price]</strong></a>
+      <a href="Product.dc.html" class="pc"><span class="ibox" style="height: 150px"><img class="pimg" src="img/7286029.jpg" alt="Solder paste and flux (reference image)"></span><span style="font-weight: 600">Solder Paste / Flux [Type TBC]</span><strong>PKR [Price]</strong></a>
+      <a href="Product.dc.html" class="pc"><span class="ibox" style="height: 150px"><img class="pimg" src="img/6755063.jpg" alt="Fume extractor (reference image)"></span><span style="font-weight: 600">Fume Extractor [Model TBC]</span><strong>PKR [Price]</strong></a>
     </div>
   </div>
 
@@ -176,6 +177,7 @@ class Component extends DCLogic {
   renderVals() {
     const s = this.state;
     const labels = ['Front view', 'Side view', 'Controls', 'In the box'];
+    const gallery = ['img/7639432.jpg', 'img/6755060.jpg', 'img/6755063.jpg', 'img/31862953.jpg'];
     return {
       price: this.props.price ?? 'PKR [Price]',
       wasPrice: this.props.wasPrice ?? 'PKR [Was]',
@@ -191,8 +193,8 @@ class Component extends DCLogic {
       inc: () => this.setState({ qty: Math.min(s.qty + 1, 99), added: false }),
       dec: () => this.setState({ qty: Math.max(s.qty - 1, 1), added: false }),
       add: () => this.setState({ added: true }),
-      imageLabel: '[Product image — ' + labels[s.img] + ']',
-      thumbs: labels.map((label, i) => ({ label, pick: () => this.setState({ img: i }), cls: i === s.img ? 'thon' : '' })),
+      imageLabel: 'Hot air rework station — ' + labels[s.img] + ' (reference image)', mainImg: gallery[s.img],
+      thumbs: labels.map((label, i) => ({ label, img: gallery[i], pick: () => this.setState({ img: i }), cls: i === s.img ? 'thon' : '' })),
       isSpec: s.tab === 'spec', isComp: s.tab === 'comp', isDesc: s.tab === 'desc',
       tabSpec: s.tab === 'spec' ? 'tabon' : '', tabComp: s.tab === 'comp' ? 'tabon' : '', tabDesc: s.tab === 'desc' ? 'tabon' : '',
       showSpec: () => this.setState({ tab: 'spec' }), showComp: () => this.setState({ tab: 'comp' }), showDesc: () => this.setState({ tab: 'desc' })

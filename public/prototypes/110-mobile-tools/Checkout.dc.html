@@ -45,6 +45,7 @@ a{color:#1A5FD6}a:hover{color:#0B1F3A}
 .g2{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
 .note{padding:12px 14px;border-radius:10px;background:#F4F6FA;font-size:14px;color:#334155}
 .fl{color:#C7D6EC;text-decoration:none}.fl:hover{color:#fff}
+.ibox{position:relative;display:block;overflow:hidden;border-radius:12px;background:#EEF2F7}.pimg{width:100%;height:100%;object-fit:cover;display:block}.ref{position:absolute;right:8px;bottom:8px;background:rgba(11,31,58,.8);color:#fff;font-size:10px;font-weight:600;padding:2px 6px;border-radius:4px;line-height:1.4}.cimg{display:block;width:100%;aspect-ratio:1/1;border-radius:10px;overflow:hidden;background:#EEF2F7}.cimg img{width:100%;height:100%;object-fit:cover;display:block}
 </style>
 </helmet>
 <div class="r">
@@ -121,8 +122,8 @@ a{color:#1A5FD6}a:hover{color:#0B1F3A}
 
     <aside class="card" style="flex: 1 1 340px; max-width: 440px; padding: 20px; display: flex; flex-direction: column; gap: 14px" aria-label="Order summary">
       <div style="display: flex; justify-content: space-between; align-items: center"><h2 class="h" style="font-size: 20px">Order summary</h2><a href="Cart.dc.html" style="font-size: 14px; font-weight: 600">Edit cart</a></div>
-      <div style="display: flex; gap: 12px; align-items: center"><span class="ph" style="width: 56px; height: 56px; flex: none">[Img]</span><span style="flex: 1; font-size: 14px">Hot Air Rework Station [Model TBC] × 1</span><span style="font-size: 14px">PKR 1,000</span></div>
-      <div style="display: flex; gap: 12px; align-items: center"><span class="ph" style="width: 56px; height: 56px; flex: none">[Img]</span><span style="flex: 1; font-size: 14px">Solder Paste / Flux [Type TBC] × 2</span><span style="font-size: 14px">PKR 1,000</span></div>
+      <div style="display: flex; gap: 12px; align-items: center"><span class="ibox" style="width: 56px; height: 56px; flex: none"><img class="pimg" src="img/7639432.jpg" alt="Hot air rework station"></span><span style="flex: 1; font-size: 14px">Hot Air Rework Station [Model TBC] × 1</span><span style="font-size: 14px">PKR 1,000</span></div>
+      <div style="display: flex; gap: 12px; align-items: center"><span class="ibox" style="width: 56px; height: 56px; flex: none"><img class="pimg" src="img/7286029.jpg" alt="Solder paste and flux"></span><span style="flex: 1; font-size: 14px">Solder Paste / Flux [Type TBC] × 2</span><span style="font-size: 14px">PKR 1,000</span></div>
       <div style="display: flex; flex-direction: column; gap: 8px; padding-top: 12px; border-top: 1px solid #E2E8F0; font-size: 15px">
         <div class="sr"><span class="m">Subtotal</span><span>PKR {{subtotal}}</span></div>
         <div class="sr"><span class="m">Delivery · {{deliveryName}}</span><span>{{deliveryFee}}</span></div>

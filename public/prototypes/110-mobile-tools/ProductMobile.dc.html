@@ -29,6 +29,7 @@ a{color:#1A5FD6}a:hover{color:#0B1F3A}
 .row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #F1F5F9;font-size:14px}
 .qb{width:44px;height:50px;border:0;background:#fff;font-size:20px;cursor:pointer;color:#0B1F3A;font-family:inherit}
 .pc{background:#fff;border:1px solid #E2E8F0;border-radius:12px;padding:8px;display:flex;flex-direction:column;gap:6px;text-decoration:none;color:#0F172A;font-size:13px;width:150px;flex:none}
+.ibox{position:relative;display:block;overflow:hidden;border-radius:12px;background:#EEF2F7}.pimg{width:100%;height:100%;object-fit:cover;display:block}.ref{position:absolute;right:8px;bottom:8px;background:rgba(11,31,58,.8);color:#fff;font-size:10px;font-weight:600;padding:2px 6px;border-radius:4px;line-height:1.4}.cimg{display:block;width:100%;aspect-ratio:1/1;border-radius:10px;overflow:hidden;background:#EEF2F7}.cimg img{width:100%;height:100%;object-fit:cover;display:block}
 </style>
 </helmet>
 <div class="r" style="width: 390px; min-height: 2100px; position: relative; display: flex; flex-direction: column; background: #FFFFFF">
@@ -39,7 +40,7 @@ a{color:#1A5FD6}a:hover{color:#0B1F3A}
     <a href="CheckoutMobile.dc.html" style="min-height: 44px; display: flex; align-items: center; padding: 0 8px; font-size: 14px; font-weight: 600; text-decoration: none">Cart ({{cartCount}})</a>
   </header>
 
-  <div class="ph" style="height: 340px; margin: 12px; position: relative; background: #FFFFFF">[Product image — swipe gallery]<span class="badge b-sale" style="position: absolute; top: 10px; left: 10px">Sale</span><span style="position: absolute; bottom: 10px; font-size: 12px">● ○ ○ ○</span></div>
+  <div class="ibox" style="height: 340px; margin: 12px"><img class="pimg" src="img/7639432.jpg" alt="Hot air rework station (reference image)"><span class="ref">Reference visual</span><span class="badge b-sale" style="position: absolute; top: 10px; left: 10px">Sale</span><span style="position: absolute; bottom: 10px; font-size: 12px">● ○ ○ ○</span></div>
 
   <div style="padding: 0 16px; display: flex; flex-direction: column; gap: 10px">
     <span class="m" style="font-size: 12px">Rework Stations · SKU [TBC]</span>
@@ -69,9 +70,9 @@ a{color:#1A5FD6}a:hover{color:#0B1F3A}
   <div style="padding: 0 16px 140px">
     <h2 class="h" style="font-size: 18px; margin-bottom: 10px">Related products</h2>
     <div style="display: flex; gap: 10px; overflow-x: auto">
-      <a href="ProductMobile.dc.html" class="pc"><span class="ph" style="height: 100px">[Image]</span><span style="font-weight: 600">Hot Air Nozzle Set [TBC]</span><strong>PKR [Price]</strong></a>
-      <a href="ProductMobile.dc.html" class="pc"><span class="ph" style="height: 100px">[Image]</span><span style="font-weight: 600">Preheater Plate [TBC]</span><strong>PKR [Price]</strong></a>
-      <a href="ProductMobile.dc.html" class="pc"><span class="ph" style="height: 100px">[Image]</span><span style="font-weight: 600">Solder Paste [TBC]</span><strong>PKR [Price]</strong></a>
+      <a href="ProductMobile.dc.html" class="pc"><span class="ibox" style="height: 100px"><img class="pimg" src="img/7286026.jpg" alt="Hot air nozzle set (reference image)"></span><span style="font-weight: 600">Hot Air Nozzle Set [TBC]</span><strong>PKR [Price]</strong></a>
+      <a href="ProductMobile.dc.html" class="pc"><span class="ibox" style="height: 100px"><img class="pimg" src="img/6755063.jpg" alt="Preheater plate (reference image)"></span><span style="font-weight: 600">Preheater Plate [TBC]</span><strong>PKR [Price]</strong></a>
+      <a href="ProductMobile.dc.html" class="pc"><span class="ibox" style="height: 100px"><img class="pimg" src="img/7286029.jpg" alt="Solder paste (reference image)"></span><span style="font-weight: 600">Solder Paste [TBC]</span><strong>PKR [Price]</strong></a>
     </div>
   </div>
 

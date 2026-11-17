@@ -29,6 +29,7 @@ a{color:#1A5FD6}a:hover{color:#0B1F3A}
 .ck input{width:20px;height:20px;accent-color:#1A5FD6}
 .nav{display:flex;flex-direction:column;align-items:center;gap:2px;font-size:11px;font-weight:600;color:#475569;text-decoration:none;min-height:52px;justify-content:center}
 .pill{display:inline-flex;align-items:center;gap:6px;min-height:32px;padding:0 10px;border-radius:999px;background:#E6EEFC;color:#123E8C;font-size:12px;font-weight:600;border:0;font-family:inherit;cursor:pointer}
+.ibox{position:relative;display:block;overflow:hidden;border-radius:12px;background:#EEF2F7}.pimg{width:100%;height:100%;object-fit:cover;display:block}.ref{position:absolute;right:8px;bottom:8px;background:rgba(11,31,58,.8);color:#fff;font-size:10px;font-weight:600;padding:2px 6px;border-radius:4px;line-height:1.4}.cimg{display:block;width:100%;aspect-ratio:1/1;border-radius:10px;overflow:hidden;background:#EEF2F7}.cimg img{width:100%;height:100%;object-fit:cover;display:block}
 </style>
 </helmet>
 <div class="r" style="width: 390px; min-height: 1900px; position: relative; display: flex; flex-direction: column">
@@ -55,7 +56,7 @@ a{color:#1A5FD6}a:hover{color:#0B1F3A}
   <div style="padding: 10px 12px 96px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px">
     <sc-for list="{{items}}" as="p" hint-placeholder-count="6">
       <a href="ProductMobile.dc.html" class="pc">
-        <span class="ph" style="height: 120px; position: relative">[Image]<sc-if value="{{p.sale}}" hint-placeholder-val="{{false}}"><span class="badge b-sale" style="position: absolute; top: 6px; left: 6px">Sale</span></sc-if></span>
+        <span class="ibox" style="height: 120px"><img class="pimg" src="{{p.img}}" alt="{{p.alt}}"><sc-if value="{{p.sale}}" hint-placeholder-val="{{false}}"><span class="badge b-sale" style="position: absolute; top: 6px; left: 6px">Sale</span></sc-if></span>
         <span style="font-weight: 600">{{p.name}}</span>
         <strong style="color: #0B1F3A">PKR [Price]</strong>
         <span class="badge {{p.stockCls}}" style="align-self: flex-start">{{p.stock}}</span>
@@ -96,8 +97,9 @@ class Component extends DCLogic {
     this.state = { sheet: true, inStock: false, sale: false };
   }
   renderVals() {
+    const __img = n => { const t = n.toLowerCase(); if (/microscope/.test(t)) return 'img/35607743.jpg'; if (/rework|hot air|nozzle|preheat|bga|handle/.test(t)) return 'img/7639432.jpg'; if (/soldering station|iron tips|soldering iron/.test(t)) return 'img/6755060.jpg'; if (/solder wire|paste|flux|desoldering|stencil/.test(t)) return 'img/7286029.jpg'; if (/screwdriver|opening tool/.test(t)) return 'img/1819812.jpg'; if (/power supply|test leads|ammeter/.test(t)) return 'img/7639429.jpg'; if (/boot cable|connector/.test(t)) return 'img/6755052.jpg'; if (/programmer|flash/.test(t)) return 'img/6755135.jpg'; if (/charger/.test(t)) return 'img/usb-cable.webp'; if (/charging ic/.test(t)) return 'img/6755138.jpg'; if (/management ic|\bic\b/.test(t)) return 'img/6755145.jpg'; if (/pcb holder/.test(t)) return 'img/6755063.jpg'; if (/fume/.test(t)) return 'img/6755066.jpg'; if (/silicone mat/.test(t)) return 'img/31862953.jpg'; return 'img/6755075.jpg'; };
     const s = this.state;
-    const P = (name, stock, sale) => ({ name, stock, sale: !!sale, stockCls: stock === 'In stock' ? 'b-in' : stock === 'Low stock' ? 'b-low' : 'b-out' });
+    const P = (name, stock, sale) => ({ name, img: __img(name), alt: name + ' (reference image)', stock, sale: !!sale, stockCls: stock === 'In stock' ? 'b-in' : stock === 'Low stock' ? 'b-low' : 'b-out' });
     const all = [
       P('Soldering Station [Model TBC]', 'In stock'),
       P('Solder Wire [Diameter TBC]', 'In stock', true),

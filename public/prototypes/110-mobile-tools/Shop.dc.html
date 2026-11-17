@@ -43,6 +43,7 @@ a{color:#1A5FD6}a:hover{color:#0B1F3A}
 .sl:hover{background:#F4F6FA;color:#1A5FD6}
 .fl{color:#C7D6EC;text-decoration:none}.fl:hover{color:#fff}
 .pg{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:10px;border:1px solid #CBD5E1;background:#fff;color:#0F172A;text-decoration:none;font-weight:600}
+.ibox{position:relative;display:block;overflow:hidden;border-radius:12px;background:#EEF2F7}.pimg{width:100%;height:100%;object-fit:cover;display:block}.ref{position:absolute;right:8px;bottom:8px;background:rgba(11,31,58,.8);color:#fff;font-size:10px;font-weight:600;padding:2px 6px;border-radius:4px;line-height:1.4}.cimg{display:block;width:100%;aspect-ratio:1/1;border-radius:10px;overflow:hidden;background:#EEF2F7}.cimg img{width:100%;height:100%;object-fit:cover;display:block}
 </style>
 </helmet>
 <div class="r">
@@ -107,7 +108,7 @@ a{color:#1A5FD6}a:hover{color:#0B1F3A}
       <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 16px">
         <sc-for list="{{items}}" as="p" hint-placeholder-count="9">
           <a href="Product.dc.html" class="pc">
-            <span class="ph" style="height: 170px; position: relative">[Product image]<sc-if value="{{p.sale}}" hint-placeholder-val="{{false}}"><span class="badge b-sale" style="position: absolute; top: 8px; left: 8px">Sale</span></sc-if></span>
+            <span class="ibox" style="height: 170px"><img class="pimg" src="{{p.img}}" alt="{{p.alt}}"><sc-if value="{{p.sale}}" hint-placeholder-val="{{false}}"><span class="badge b-sale" style="position: absolute; top: 8px; left: 8px">Sale</span></sc-if></span>
             <span style="font-weight: 600">{{p.name}}</span>
             <span style="display: flex; gap: 8px; align-items: center"><strong style="color: #0B1F3A">PKR [Price]</strong><sc-if value="{{p.sale}}" hint-placeholder-val="{{false}}"><s class="m" style="font-size: 13px">PKR [Was]</s></sc-if></span>
             <span class="badge {{p.stockCls}}" style="align-self: flex-start">{{p.stock}}</span>
@@ -134,7 +135,8 @@ class Component extends DCLogic {
     this.state = { inStockOnly: false, saleOnly: false };
   }
   renderVals() {
-    const P = (name, stock, sale) => ({ name, stock, sale: !!sale, stockCls: stock === 'In stock' ? 'b-in' : stock === 'Low stock' ? 'b-low' : 'b-out', btnCls: stock === 'Out of stock' ? 'bs' : 'bp', cta: stock === 'Out of stock' ? 'Notify me' : 'View product' });
+    const __img = n => { const t = n.toLowerCase(); if (/microscope/.test(t)) return 'img/35607743.jpg'; if (/rework|hot air|nozzle|preheat|bga|handle/.test(t)) return 'img/7639432.jpg'; if (/soldering station|iron tips|soldering iron/.test(t)) return 'img/6755060.jpg'; if (/solder wire|paste|flux|desoldering|stencil/.test(t)) return 'img/7286029.jpg'; if (/screwdriver|opening tool/.test(t)) return 'img/1819812.jpg'; if (/power supply|test leads|ammeter/.test(t)) return 'img/7639429.jpg'; if (/boot cable|connector/.test(t)) return 'img/6755052.jpg'; if (/programmer|flash/.test(t)) return 'img/6755135.jpg'; if (/charger/.test(t)) return 'img/usb-cable.webp'; if (/charging ic/.test(t)) return 'img/6755138.jpg'; if (/management ic|\bic\b/.test(t)) return 'img/6755145.jpg'; if (/pcb holder/.test(t)) return 'img/6755063.jpg'; if (/fume/.test(t)) return 'img/6755066.jpg'; if (/silicone mat/.test(t)) return 'img/31862953.jpg'; return 'img/6755075.jpg'; };
+    const P = (name, stock, sale) => ({ name, img: __img(name), alt: name + ' (reference image)', stock, sale: !!sale, stockCls: stock === 'In stock' ? 'b-in' : stock === 'Low stock' ? 'b-low' : 'b-out', btnCls: stock === 'Out of stock' ? 'bs' : 'bp', cta: stock === 'Out of stock' ? 'Notify me' : 'View product' });
     const all = [
       P('Hot Air Rework Station [Model TBC]', 'In stock', true),
       P('2-in-1 Rework + Soldering Station [Model TBC]', 'In stock'),
